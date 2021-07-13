@@ -1,14 +1,13 @@
-import { Layout, Menu } from 'antd';
+import { Layout, Menu } from "antd";
 import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import './LayoutSider.css';
-import { useState } from 'react';
-import LayoutContent from '@/component/layout/LayoutContent';
+} from "@ant-design/icons";
+import "./LayoutSider.css";
+import { useState } from "react";
+import LayoutContent from "@/component/layout/LayoutContent";
 
-import { defaultSiderMap } from '@/layout/LayoutHeaderSider';
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
@@ -26,10 +25,10 @@ export default function LayoutSider(props: LayoutSiderProps) {
       <Layout>
         <Sider width={200}>
           <Menu
-            hidden={props.HeaderNav !== '数据统计'}
+            hidden={props.HeaderNav !== "数据统计"}
             mode="inline"
-            defaultSelectedKeys={['总览']}
-            defaultOpenKeys={['用户']}
+            defaultSelectedKeys={["总览"]}
+            defaultOpenKeys={["用户"]}
             className="menu"
             onClick={(e) => {
               setSiderNav(e.key);
@@ -78,10 +77,10 @@ export default function LayoutSider(props: LayoutSiderProps) {
             </SubMenu>
           </Menu>
           <Menu
-            hidden={props.HeaderNav !== 'nav2'}
+            hidden={props.HeaderNav !== "nav2"}
             mode="inline"
-            defaultSelectedKeys={['subNav2']}
-            defaultOpenKeys={['subNav2']}
+            defaultSelectedKeys={["subNav2"]}
+            defaultOpenKeys={["subNav2"]}
             className="menu"
           >
             <Menu.Item key="subNav2" icon={<UserOutlined />}>
@@ -89,10 +88,10 @@ export default function LayoutSider(props: LayoutSiderProps) {
             </Menu.Item>
           </Menu>
           <Menu
-            hidden={props.HeaderNav !== 'nav3'}
+            hidden={props.HeaderNav !== "nav3"}
             mode="inline"
-            defaultSelectedKeys={['subNav3']}
-            defaultOpenKeys={['subNav3']}
+            defaultSelectedKeys={["subNav3"]}
+            defaultOpenKeys={["subNav3"]}
             className="menu"
           >
             <Menu.Item key="subNav3" icon={<UserOutlined />}>
