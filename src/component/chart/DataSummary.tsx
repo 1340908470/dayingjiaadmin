@@ -109,7 +109,7 @@ export default function DataSummary(props: DataSummaryProps) {
         },
         {
           // @ts-ignore
-          key: "0",
+          key: "9",
           // @ts-ignore
           content: "累计作品数",
           // @ts-ignore
@@ -121,8 +121,8 @@ export default function DataSummary(props: DataSummaryProps) {
 
   return (
     <>
-      <div className={"card-title"}>用户数据概况</div>
       <div className={"chart-card"}>
+        <div className={"card-title"}>用户数据概况</div>
         <Table
           rowClassName={getRowClassName}
           pagination={false}

@@ -5,6 +5,7 @@ interface TestReq {
   Para1: string;
   Para2: number;
 }
+
 interface TestRes {
   Para1: boolean;
 }
@@ -43,12 +44,24 @@ interface DataSummary {
   累计作品数: number;
 }
 
+interface UserAccessByChannel {
+  来源: string;
+  访问次数: number;
+  占比: number;
+}
+
+interface FromInviter {
+  特邀影家: string;
+  amount: number;
+  占比: number;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
   PhotoTypes: "analytics/phototype" as EndPoint<DateRangeReq, PhotoTypesRes>,
-  PhotoTags: "analytics/phototag" as EndPoint<DateRangeReq, PhotoType[]>,
-  UserAccesses: "analytics/useraccess" as EndPoint<DateRangeReq, DayAmount[]>,
+  PhotoTag: "analytics/phototag" as EndPoint<DateRangeReq, PhotoType[]>,
+  UserAccess: "analytics/useraccess" as EndPoint<DateRangeReq, DayAmount[]>,
   NewPhotoByDay: "analytics/newphotobyday" as EndPoint<
     DateRangeReq,
     DayAmount[]
@@ -58,4 +71,9 @@ export default {
     DayAmount[]
   >,
   DataSummary: "analytics/datasummary" as EndPoint<DateRangeReq, DataSummary>,
+  UserAccessByChannel: "analytics/useraccessbychannel" as EndPoint<
+    DateRangeReq,
+    UserAccessByChannel[]
+  >,
+  FromInviter: "analytics/frominviter" as EndPoint<DateRangeReq, FromInviter[]>,
 };

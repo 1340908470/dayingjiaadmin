@@ -16,7 +16,7 @@ export default function UserAccess(props: UserAccessProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.UserAccesses, {
+    call(analytics.UserAccess, {
       begin: props.begin,
       end: props.end,
     }).then((r) => {
@@ -38,8 +38,8 @@ export default function UserAccess(props: UserAccessProps) {
   };
   return (
     <>
-      <div className={"card-title"}>用户访问次数</div>
       <div className={"chart-card"}>
+        <div className={"card-title"}>用户访问次数</div>
         <Area {...config} />
       </div>
     </>

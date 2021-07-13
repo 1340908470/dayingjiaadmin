@@ -65,11 +65,10 @@ export default function NewPhotoByDay(props: NewPhotoByDayProps) {
   // @ts-ignore
   return (
     <div>
-      <div className={"card-title"}>新增作品数</div>{" "}
       <div className={"chart-card"}>
-        {" "}
-        <Area {...config} />{" "}
-      </div>{" "}
+        <div className={"card-title"}>新增作品数</div>
+        <Area {...config} />
+      </div>
     </div>
   );
 }

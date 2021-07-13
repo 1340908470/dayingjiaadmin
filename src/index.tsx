@@ -8,6 +8,7 @@ import zhCN from "antd/es/locale/zh_CN"; // 引入中文包
 
 import { hasLogged } from "@/util/client";
 import LayoutLogin from "@/layout/LayoutLogin";
+
 export default function Index() {
   if (hasLogged()) {
     return (

@@ -38,8 +38,8 @@ export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
   };
   return (
     <>
-      <div className={"card-title"}>新增用户注册数</div>
       <div className={"chart-card"}>
+        <div className={"card-title"}>新增用户注册数</div>
         <Area {...config} />
       </div>
     </>

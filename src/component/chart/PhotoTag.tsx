@@ -17,7 +17,7 @@ export default function PhotoTag(props: PhotoTypeProps) {
   }, [props]);
 
   const asyncFetch = () => {
-    call(pandect.PhotoTags, {
+    call(pandect.PhotoTag, {
       begin: props.begin,
       end: props.end,
     }).then((r) => {
