@@ -116,6 +116,35 @@ interface UserDevice {
   新用户设备机型分布: NewUserDevice[];
 }
 
+interface UserPhoto {
+  作品数量: number;
+  用户数: number;
+  占比: number;
+}
+
+interface AccessTime {
+  访问时长: string;
+  访问次数: number;
+  占比: number;
+}
+
+interface AccessDepth {
+  来源: string;
+  访问次数: number;
+  占比: number;
+}
+
+interface UserAccessData {
+  访问时间: AccessTime[];
+  访问深度: AccessDepth[];
+}
+
+interface UserPhotoReq {
+  begin: string;
+  end: string;
+  split: string;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -143,4 +172,9 @@ export default {
     UserProvince
   >,
   UserDevice: "analytics/userdevice" as EndPoint<DateRangeReq, UserDevice>,
+  UserPhoto: "analytics/userphotos" as EndPoint<UserPhotoReq, UserPhoto[]>,
+  UserAccessData: "analytics/useraccessdata" as EndPoint<
+    DateRangeReq,
+    UserAccessData
+  >,
 };

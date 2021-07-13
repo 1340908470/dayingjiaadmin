@@ -9,6 +9,7 @@ import "./LayoutContent.css";
 import { call } from "@/util/client";
 import SourceAnalysis from "@/pages/SourceAnalysis";
 import UserPortrait from "@/pages/UserPortrait";
+import BehaviorAnalysis from "@/pages/BehaviorAnalysis";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -53,6 +54,9 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "用户画像"}>
               <UserPortrait />
+            </div>
+            <div hidden={props.SiderNav !== "行为分析"}>
+              <BehaviorAnalysis />
             </div>
           </div>
         </Content>
