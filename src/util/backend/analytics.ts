@@ -56,6 +56,66 @@ interface FromInviter {
   占比: number;
 }
 
+interface ActiveUserGender {
+  amount: string;
+  name: string;
+}
+
+interface NewUserGender {
+  amount: string;
+  name: string;
+}
+
+interface UserGender {
+  活跃用户性别分布: ActiveUserGender[];
+  新用户性别分布: NewUserGender[];
+}
+
+interface ActiveUserAge {
+  amount: string;
+  name: string;
+}
+
+interface NewUserAge {
+  amount: string;
+  name: string;
+}
+
+interface UserAge {
+  活跃用户年龄分布: ActiveUserAge[];
+  新用户年龄分布: NewUserAge[];
+}
+
+interface ActiveUserProvince {
+  amount: string;
+  name: string;
+}
+
+interface NewUserProvince {
+  amount: string;
+  name: string;
+}
+
+interface UserProvince {
+  活跃用户地区分布: ActiveUserProvince[];
+  新用户地区分布: NewUserProvince[];
+}
+
+interface ActiveUUserDevice {
+  amount: string;
+  name: string;
+}
+
+interface NewUserDevice {
+  amount: string;
+  name: string;
+}
+
+interface UserDevice {
+  活跃用户设备机型分布: ActiveUUserDevice[];
+  新用户设备机型分布: NewUserDevice[];
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -76,4 +136,11 @@ export default {
     UserAccessByChannel[]
   >,
   FromInviter: "analytics/frominviter" as EndPoint<DateRangeReq, FromInviter[]>,
+  UserGender: "analytics/usergender" as EndPoint<DateRangeReq, UserGender>,
+  UserAge: "analytics/userage" as EndPoint<DateRangeReq, UserAge>,
+  UserProvince: "analytics/userprovince" as EndPoint<
+    DateRangeReq,
+    UserProvince
+  >,
+  UserDevice: "analytics/userdevice" as EndPoint<DateRangeReq, UserDevice>,
 };

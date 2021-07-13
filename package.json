@@ -28,7 +28,10 @@
     "@umijs/preset-react": "1.x",
     "ant-design": "^1.0.0",
     "base-64": "^1.0.0",
+    "echarts": "^5.1.2",
+    "echarts-for-react": "^3.0.1",
     "http-proxy-middleware": "^2.0.1",
+    "react-echarts-map-china": "^0.1.9",
     "react-to-print": "^2.12.6",
     "umi": "^3.5.0"
   },
