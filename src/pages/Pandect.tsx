@@ -3,12 +3,12 @@
  * */
 
 import "./Default.css";
-import { Col, Row, Typography } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Filter, { DateRange } from "@/component/Filter";
-import PhotoTag from "@/component/chart/PhotoTag";
-import PhotoTypes from "@/component/chart/PhotoTypes";
-const { Title } = Typography;
+import UserAccess from "@/component/chart/UserAccess";
+import DataSummary from "@/component/chart/DataSummary";
+import RegisteredUserByDay from "@/component/chart/RegisteredUserByDay";
+import NewPhotoByDay from "@/component/chart/NewPhotoByDay";
 
 export default function Pandect() {
   const [date, setDate] = useState({} as DateRange);
@@ -21,10 +21,16 @@ export default function Pandect() {
   }
 
   return (
-    <div className={"card"}>
+    <div
+      style={{
+        minHeight: "1000px",
+      }}
+    >
       <Filter Title={"总览"} setDateRange={setDateRange} />
-      <PhotoTypes begin={date.StartTime} end={date.EndTime} />
-      <PhotoTag begin={date.StartTime} end={date.EndTime} />
+      <DataSummary begin={date.StartTime} end={date.EndTime} />
+      <UserAccess begin={date.StartTime} end={date.EndTime} />
+      <RegisteredUserByDay begin={date.StartTime} end={date.EndTime} />
+      <NewPhotoByDay begin={date.StartTime} end={date.EndTime} />
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function LayoutSider(props: LayoutSiderProps) {
 
   return (
     <>
-      <Layout>
+      <Layout style={{ backgroundColor: "red" }}>
         <Sider width={200}>
           <Menu
             hidden={props.HeaderNav !== "数据统计"}

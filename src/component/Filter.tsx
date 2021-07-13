@@ -27,16 +27,21 @@ export default function Filter(props: FilterProps) {
       date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
     }
     if (type === "上个月") {
-      date = now;
+      date = new Date(now);
       date.setMonth(now.getMonth() - 1);
     }
     const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDate();
+    const month = ("0" + date.getMonth()).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
 
+    console.log(now);
     const startTime = year + "-" + month + "-" + day;
     const endTime =
-      now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
+      now.getFullYear() +
+      "-" +
+      ("0" + now.getMonth()).slice(-2) +
+      "-" +
+      ("0" + now.getDate()).slice(-2);
 
     setDateRange({
       StartTime: startTime,

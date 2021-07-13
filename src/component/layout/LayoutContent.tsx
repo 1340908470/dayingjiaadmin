@@ -1,11 +1,11 @@
-import { Breadcrumb, Layout, Button } from 'antd';
-import Pandect from '@/pages/Pandect';
-import ReactToPrint from 'react-to-print';
-import { useRef } from 'react';
-import { DownloadOutlined } from '@ant-design/icons';
+import { Breadcrumb, Layout, Button } from "antd";
+import Pandect from "@/pages/Pandect";
+import ReactToPrint from "react-to-print";
+import { useRef } from "react";
+import { DownloadOutlined } from "@ant-design/icons";
 const { Content } = Layout;
-import './LayoutContent.css';
-import { call } from '@/util/client';
+import "./LayoutContent.css";
+import { call } from "@/util/client";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -16,8 +16,8 @@ export default function LayoutContent(props: LayoutContentProps) {
   const contentRef = useRef(null);
   return (
     <>
-      <Layout style={{ padding: '0 24px 24px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
+      <Layout style={{ padding: "0 24px 24px", backgroundColor: "#F5F5F5" }}>
+        <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>{props.HeaderNav}</Breadcrumb.Item>
           <Breadcrumb.Item>{props.SiderNav}</Breadcrumb.Item>
           <ReactToPrint
@@ -42,7 +42,7 @@ export default function LayoutContent(props: LayoutContentProps) {
           }}
         >
           <div ref={contentRef}>
-            <div hidden={props.SiderNav !== '总览'}>
+            <div hidden={props.SiderNav !== "总览"}>
               <Pandect />
             </div>
           </div>

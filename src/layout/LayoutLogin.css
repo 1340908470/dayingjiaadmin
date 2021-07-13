@@ -19,3 +19,12 @@
     align-self: center;
     border-radius: 22px;
 }
+
+.footer {
+    height: 70px;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 18px;
+}

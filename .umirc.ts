@@ -13,5 +13,8 @@ export default defineConfig({
       secure: false,
     },
   },
+  theme: {
+    "primary-color": "#FF3E3E",
+  },
   fastRefresh: {},
 });

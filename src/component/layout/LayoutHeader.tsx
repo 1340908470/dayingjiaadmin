@@ -3,6 +3,7 @@ import { Header } from "antd/es/layout/layout";
 import "./LayoutHeader.css";
 import { UserOutlined } from "@ant-design/icons";
 import { logout } from "@/util/client";
+import logo from "@/wwwroot/img/logo2.png";
 
 interface LayoutHeaderProps {
   HandleNavState: (navState: string) => void;
@@ -24,9 +25,12 @@ export default function LayoutHeader(props: LayoutHeaderProps) {
       <Header className="header">
         <div className="logo">
           <Image
-            className="logo-img"
             preview={false}
-            src="https://img1.baidu.com/it/u=917297805,3450343040&fm=26&fmt=auto&gp=0.jpg"
+            height={40}
+            width={95}
+            style={{ marginTop: "15px", marginLeft: "-10px" }}
+            src={logo}
+            alt={logo}
           />
         </div>
         <div style={{ float: "right" }}>
@@ -46,7 +50,9 @@ export default function LayoutHeader(props: LayoutHeaderProps) {
           defaultSelectedKeys={["数据统计"]}
           onClick={(e) => props.HandleNavState(e.key)}
         >
-          <Menu.Item key="数据统计">数据统计</Menu.Item>
+          <Menu.Item style={{ marginLeft: "90px" }} key="数据统计">
+            数据统计
+          </Menu.Item>
         </Menu>
       </Header>
     </>

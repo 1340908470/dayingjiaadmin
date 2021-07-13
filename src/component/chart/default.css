@@ -2,3 +2,22 @@
     padding: 20px;
     background-color: white;
 }
+.card-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.chart-card {
+    padding: 20px;
+    margin-bottom: 40px;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.1);
+}
+
+.table-odd {
+    background-color: #F2F2F2;
+}
+
+.table-even {
+
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import "antd/dist/antd.css";
+import "antd/dist/antd.less";
 import LayoutHeaderSider from "./layout/LayoutHeaderSider";
 import "./index.less";
 import "moment/locale/zh-cn";
