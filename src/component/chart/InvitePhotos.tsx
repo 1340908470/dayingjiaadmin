@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
+// @ts-nocheck
 import { call } from "@/util/client";
 
 interface PhotoTypeProps {

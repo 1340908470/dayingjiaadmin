@@ -147,6 +147,28 @@ interface UserPhotoReq {
 
 interface InvitePhoto {}
 
+interface VisitUvNew {
+  key: number;
+  value: number;
+}
+
+interface VisitUv {
+  key: number;
+  value: number;
+}
+
+// 开始、结束时间一样，举例：20210531
+interface DailyRetainReq {
+  begin_date: string;
+  end_date: string;
+}
+
+interface DailyRetain {
+  ref_date: string; // 日期举例：20210531
+  visit_uv_new: VisitUvNew[];
+  visit_uv: VisitUv[];
+}
+
 interface PhotoEquipment {
   name: string;
   amount: number;
@@ -188,4 +210,5 @@ export default {
     DateRangeReq,
     PhotoEquipment[]
   >,
+  DailyRetain: "analytics/dailyretain" as EndPoint<DailyRetainReq, DailyRetain>,
 };

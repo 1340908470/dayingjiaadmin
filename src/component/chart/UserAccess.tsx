@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Area, Bar } from "@ant-design/charts";
 import { call } from "@/util/client";
@@ -20,10 +21,8 @@ export default function UserAccess(props: UserAccessProps) {
       begin: props.begin,
       end: props.end,
     }).then((r) => {
-      // @ts-ignore
       setData(r);
       // if (data.length === 0) {
-      //     // @ts-ignore
       //     setData(r)
       // }
     });

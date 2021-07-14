@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
@@ -24,9 +25,7 @@ export default function ActiveUserProvince(props: ActiveUserProvinceProps) {
       begin: props.begin,
       end: props.end,
     }).then((r) => {
-      // @ts-ignore
       let tmpData = [];
-      // @ts-ignore
       let tmpDataTable = [];
 
       let sum = 0;
@@ -52,9 +51,7 @@ export default function ActiveUserProvince(props: ActiveUserProvinceProps) {
           });
         });
       }
-      // @ts-ignore
       setData(tmpData);
-      // @ts-ignore
       setTableData(tmpDataTable);
     });
   };
@@ -126,7 +123,6 @@ export default function ActiveUserProvince(props: ActiveUserProvinceProps) {
 
   const [tableData, setTableData] = useState([]);
 
-  // @ts-ignore}
   return (
     <div className={"chart-card"}>
       <div className={"card-title"}>活跃用户地区分布</div>

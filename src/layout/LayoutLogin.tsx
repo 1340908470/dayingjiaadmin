@@ -64,7 +64,6 @@ export default function LayoutLogin() {
               </Form.Item>
 
               <Form.Item
-                style={{ marginTop: "-10px" }}
                 name="password"
                 rules={[{ required: true, message: "请输入密码!" }]}
               >

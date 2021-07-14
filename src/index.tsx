@@ -8,19 +8,21 @@ import zhCN from "antd/es/locale/zh_CN"; // 引入中文包
 
 import { hasLogged } from "@/util/client";
 import LayoutLogin from "@/layout/LayoutLogin";
+import { AliveScope } from "react-activation";
 
 export default function Index() {
   if (hasLogged()) {
     return (
       <ConfigProvider locale={zhCN}>
-        <LayoutHeaderSider />
+        <AliveScope>
+          <LayoutHeaderSider />
+        </AliveScope>
       </ConfigProvider>
     );
   } else {
     return (
       <>
-        {" "}
-        <LayoutLogin />{" "}
+        <LayoutLogin />
       </>
     );
   }

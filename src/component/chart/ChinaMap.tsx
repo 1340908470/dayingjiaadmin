@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { Component } from "react";
 import * as Echarts from "echarts";
 import china from "../../wwwroot/mapJSON/china.json";
@@ -18,17 +19,14 @@ export default class ChinaMap extends Component {
   }
 
   LoadMap(cd: any) {
-    // @ts-ignore
     let myChart = Echarts.init(
       document.getElementById(this.props.uid) as HTMLElement
     );
 
-    // @ts-ignore
     let cityData = cd;
 
     let name = "china";
     let data = china;
-    // @ts-ignore
     Echarts.registerMap(name, data);
 
     let option = {
@@ -79,7 +77,6 @@ export default class ChinaMap extends Component {
   }
 
   componentDidMount() {
-    // @ts-ignore
     this.LoadMap(this.props.cityData);
   }
 
