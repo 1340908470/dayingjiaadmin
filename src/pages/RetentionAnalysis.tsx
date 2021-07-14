@@ -3,14 +3,11 @@
  * */
 
 import "./Default.css";
-import { useEffect, useState } from "react";
-import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
-import UserPhotos from "@/component/chart/UserPhotos";
-import UserAccessTime from "@/component/chart/UserAccessTime";
-import UserAccessDepth from "@/component/chart/UserAccessDepth";
-import DataSummary from "@/component/chart/DataSummary";
-import NewDailyRetain from "@/component/chart/NewDailyRetain";
+import { useState } from "react";
+import { DateRange } from "@/component/Filter/DateRangeFilter";
 import SingleDateFilter from "@/component/Filter/SingleDateFilter";
+import ActiveDailyRetain from "@/component/chart/ActiveDailyRetain";
+import NewDailyRetain from "@/component/chart/NewDailyRetain";
 
 export default function RetentionAnalysis() {
   const [date, setDate] = useState({} as DateRange);
@@ -29,6 +26,7 @@ export default function RetentionAnalysis() {
       }}
     >
       <SingleDateFilter Title={"留存分析"} setDateRange={setDateRange} />
+      <ActiveDailyRetain begin={date.StartTime} end={date.EndTime} />
       <NewDailyRetain begin={date.StartTime} end={date.EndTime} />
     </div>
   );

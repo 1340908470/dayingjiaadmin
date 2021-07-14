@@ -145,7 +145,16 @@ interface UserPhotoReq {
   split: string;
 }
 
-interface InvitePhoto {}
+interface InvitePhotoReq {
+  stage: string;
+  begin: string;
+  end: string;
+}
+
+interface InvitePhoto {
+  name: string;
+  data: number;
+}
 
 interface VisitUvNew {
   key: number;
@@ -211,4 +220,8 @@ export default {
     PhotoEquipment[]
   >,
   DailyRetain: "analytics/dailyretain" as EndPoint<DailyRetainReq, DailyRetain>,
+  InvitePhoto: "analytics/invitephotos" as EndPoint<
+    InvitePhotoReq,
+    InvitePhoto[]
+  >,
 };

@@ -47,7 +47,7 @@ export async function call<P, Q>(
   Options?: CallOptions
 ): Promise<Q> {
   // console.log(localStorage.getItem("jwt"));
-  console.log("req: " + endpoint);
+  // console.log("req: " + endpoint);
 
   let fetchOptions = {
     method: "",
