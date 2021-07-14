@@ -237,6 +237,39 @@ interface PageShareReq {
   end: string;
 }
 
+interface CircleTrend {
+  amount: number;
+  date: string;
+}
+interface NewMemberNum {
+  amount: number;
+  group_id: number;
+  name: string;
+}
+interface NewWorksNum {
+  amount: number;
+  group_id: number;
+  name: string;
+}
+interface CircleMemberNum {
+  amount: number;
+  group_id: number;
+  name: string;
+}
+
+interface GroupData {
+  新增圈子数: number;
+  累计圈子数: number;
+  新增分享至圈子的作品数: number;
+  累计分享至圈子的作品数: number;
+  新增加入圈子的人数: number;
+  累计加入圈子的人数: number;
+  圈子作品发布趋势: CircleTrend[];
+  新增成员数TOP10: NewMemberNum[];
+  新增作品数TOP10: NewWorksNum;
+  圈子成员数TOP10: CircleMemberNum;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -292,4 +325,5 @@ export default {
   >,
   PageShare: "analytics/pageshare" as EndPoint<PageShareReq, PageShare>,
   PageVisit: "analytics/pagevisit" as EndPoint<PageShareReq, PageShare>,
+  GroupData: "analytics/groupdata" as EndPoint<DateRangeReq, GroupData>,
 };

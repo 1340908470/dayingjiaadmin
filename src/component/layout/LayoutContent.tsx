@@ -15,6 +15,7 @@ import Works from "@/pages/Works";
 import InvitedPhotographer from "@/pages/InvitedPhotographer";
 import Share from "@/pages/Share";
 import PageAnalysis from "@/pages/PageAnalysis";
+import Circle from "@/pages/Circle";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -78,6 +79,9 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "页面分析"}>
               <PageAnalysis />
+            </div>
+            <div hidden={props.SiderNav !== "圈子"}>
+              <Circle />
             </div>
           </div>
         </Content>

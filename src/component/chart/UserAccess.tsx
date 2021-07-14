@@ -27,6 +27,15 @@ export default function UserAccess(props: UserAccessProps) {
     }
   };
   let config = {
+    label: {
+      style: {
+        fill: "black",
+        opacity: 0.6,
+        fontSize: 14,
+      },
+      offsetY: -5,
+      rotate: false,
+    },
     color: "#FF3E3E",
     smooth: true,
     data: data,
