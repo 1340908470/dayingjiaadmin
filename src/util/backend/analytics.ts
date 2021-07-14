@@ -291,4 +291,5 @@ export default {
     InviteGroupLikes[]
   >,
   PageShare: "analytics/pageshare" as EndPoint<PageShareReq, PageShare>,
+  PageVisit: "analytics/pagevisit" as EndPoint<PageShareReq, PageShare>,
 };

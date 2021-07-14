@@ -17,8 +17,10 @@ import InviteGroupComments from "@/component/chart/InviteGroupComments";
 import InviteGroupLikes from "@/component/chart/InviteGroupLikes";
 import PageSharePV from "@/component/chart/PageSharePV";
 import PageShareUV from "@/component/chart/PageShareUV";
+import PageVisitPV from "@/component/chart/PageVisitPV";
+import PageVisitUV from "@/component/chart/PageVisitUV";
 
-export default function Share() {
+export default function PageAnalysis() {
   const [date, setDate] = useState({} as DateRange);
 
   function setDateRange(startTime: string, endTime: string) {
@@ -34,9 +36,9 @@ export default function Share() {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"分享"} setDateRange={setDateRange} />
-      <PageSharePV begin={date.StartTime} end={date.EndTime} />
-      <PageShareUV begin={date.StartTime} end={date.EndTime} />
+      <DateRangeFilter Title={"页面分析"} setDateRange={setDateRange} />
+      <PageVisitPV begin={date.StartTime} end={date.EndTime} />
+      <PageVisitUV begin={date.StartTime} end={date.EndTime} />
     </div>
   );
 }
