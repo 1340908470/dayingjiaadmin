@@ -16,36 +16,38 @@ export default function UserAccessTime(props: UserAccessTimeProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.UserAccessData, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      let tmpData = [];
-      // @ts-ignore
-      let tmpDataTable = [];
+    if (props.begin && props.end) {
+      call(analytics.UserAccessData, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        let tmpData = [];
+        // @ts-ignore
+        let tmpDataTable = [];
 
-      if (r.访问时间) {
-        r.访问时间.forEach((value, index) => {
-          tmpData.push({
-            key: index,
-            type: value.访问时长,
-            value: value.访问次数,
-          });
+        if (r.访问时间) {
+          r.访问时间.forEach((value, index) => {
+            tmpData.push({
+              key: index,
+              type: value.访问时长,
+              value: value.访问次数,
+            });
 
-          tmpDataTable.push({
-            key: index,
-            accessTime: value.访问时长,
-            num: value.访问次数,
-            percent: value.占比,
+            tmpDataTable.push({
+              key: index,
+              accessTime: value.访问时长,
+              num: value.访问次数,
+              percent: value.占比,
+            });
           });
-        });
-      }
-      // @ts-ignore
-      setData(tmpData);
-      // @ts-ignore
-      setTableData(tmpDataTable);
-    });
+        }
+        // @ts-ignore
+        setData(tmpData);
+        // @ts-ignore
+        setTableData(tmpDataTable);
+      });
+    }
   };
 
   var config = {

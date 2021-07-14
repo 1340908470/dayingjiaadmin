@@ -16,43 +16,45 @@ export default function NewUserAge(props: NewUserAgeProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.UserAge, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      let tmpData = [];
-      // @ts-ignore
-      let tmpDataTable = [];
+    if (props.begin && props.end) {
+      call(analytics.UserAge, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        let tmpData = [];
+        // @ts-ignore
+        let tmpDataTable = [];
 
-      let sum = 0;
-      if (r.新用户年龄分布) {
-        r.新用户年龄分布.forEach((value) => {
-          sum += Number.parseInt(value.amount);
-        });
-      }
-
-      if (r.新用户年龄分布) {
-        r.新用户年龄分布.forEach((value, index) => {
-          tmpData.push({
-            key: index,
-            type: value.name,
-            value: Number.parseInt(value.amount),
+        let sum = 0;
+        if (r.新用户年龄分布) {
+          r.新用户年龄分布.forEach((value) => {
+            sum += Number.parseInt(value.amount);
           });
+        }
 
-          tmpDataTable.push({
-            key: index,
-            age: value.name,
-            num: value.amount,
-            percent: (Number.parseInt(value.amount) / sum).toFixed(2),
+        if (r.新用户年龄分布) {
+          r.新用户年龄分布.forEach((value, index) => {
+            tmpData.push({
+              key: index,
+              type: value.name,
+              value: Number.parseInt(value.amount),
+            });
+
+            tmpDataTable.push({
+              key: index,
+              age: value.name,
+              num: value.amount,
+              percent: (Number.parseInt(value.amount) / sum).toFixed(2),
+            });
           });
-        });
-      }
-      // @ts-ignore
-      setData(tmpData);
-      // @ts-ignore
-      setTableData(tmpDataTable);
-    });
+        }
+        // @ts-ignore
+        setData(tmpData);
+        // @ts-ignore
+        setTableData(tmpDataTable);
+      });
+    }
   };
 
   var config = {

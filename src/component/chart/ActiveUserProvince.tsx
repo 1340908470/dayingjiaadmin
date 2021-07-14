@@ -21,39 +21,41 @@ export default function ActiveUserProvince(props: ActiveUserProvinceProps) {
   }, [props]);
 
   const asyncFetch = () => {
-    call(analytics.UserProvince, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      let tmpData = [];
-      let tmpDataTable = [];
+    if (props.begin && props.end) {
+      call(analytics.UserProvince, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        let tmpData = [];
+        let tmpDataTable = [];
 
-      let sum = 0;
-      if (r.活跃用户地区分布) {
-        r.活跃用户地区分布.forEach((value) => {
-          sum += Number.parseInt(value.amount);
-        });
-      }
-
-      if (r.活跃用户地区分布) {
-        r.活跃用户地区分布.forEach((value, index) => {
-          tmpData.push({
-            key: index,
-            name: value.name,
-            value: Number.parseInt(value.amount),
+        let sum = 0;
+        if (r.活跃用户地区分布) {
+          r.活跃用户地区分布.forEach((value) => {
+            sum += Number.parseInt(value.amount);
           });
+        }
 
-          tmpDataTable.push({
-            key: index,
-            age: value.name,
-            num: value.amount,
-            percent: (Number.parseInt(value.amount) / sum).toFixed(2),
+        if (r.活跃用户地区分布) {
+          r.活跃用户地区分布.forEach((value, index) => {
+            tmpData.push({
+              key: index,
+              name: value.name,
+              value: Number.parseInt(value.amount),
+            });
+
+            tmpDataTable.push({
+              key: index,
+              age: value.name,
+              num: value.amount,
+              percent: (Number.parseInt(value.amount) / sum).toFixed(2),
+            });
           });
-        });
-      }
-      setData(tmpData);
-      setTableData(tmpDataTable);
-    });
+        }
+        setData(tmpData);
+        setTableData(tmpDataTable);
+      });
+    }
   };
 
   var config = {

@@ -17,13 +17,15 @@ export default function PhotoTag(props: PhotoTypeProps) {
   }, [props]);
 
   const asyncFetch = () => {
-    call(pandect.PhotoTag, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      setData(r);
-    });
+    if (props.begin && props.end) {
+      call(pandect.PhotoTag, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        setData(r);
+      });
+    }
   };
 
   return (

@@ -16,17 +16,19 @@ export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.RegisteredUserByDay, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      setData(r);
-      // if (data.length === 0) {
-      //     // @ts-ignore
-      //     setData(r)
-      // }
-    });
+    if (props.begin && props.end) {
+      call(analytics.RegisteredUserByDay, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        setData(r);
+        // if (data.length === 0) {
+        //     // @ts-ignore
+        //     setData(r)
+        // }
+      });
+    }
   };
   let config = {
     color: "#FF3E3E",

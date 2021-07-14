@@ -30,17 +30,15 @@ export default function NewPhotoByDay(props: NewPhotoByDayProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.NewPhotoByDay, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      setData(r);
-      // if (data.length === 0) {
-      //     // @ts-ignore
-      //     setData(r)
-      // }
-    });
+    if (props.begin && props.end) {
+      call(analytics.NewPhotoByDay, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        setData(r);
+      });
+    }
   };
   let config = {
     point: {

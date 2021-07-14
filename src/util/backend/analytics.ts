@@ -216,6 +216,27 @@ interface InviteGroupLikes {
   data: number;
 }
 
+interface PageSharPV {
+  pv: string;
+  name: string;
+}
+
+interface PageSharUV {
+  pv: string;
+  name: string;
+}
+
+interface PageShare {
+  pv: PageSharPV[];
+  uv: PageSharUV[];
+}
+
+// 开始、结束时间一样，举例：20210531
+interface PageShareReq {
+  begin: string;
+  end: string;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -269,4 +290,5 @@ export default {
     InviteGroupLikesReq,
     InviteGroupLikes[]
   >,
+  PageShare: "analytics/pageshare" as EndPoint<PageShareReq, PageShare>,
 };

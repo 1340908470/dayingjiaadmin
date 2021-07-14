@@ -38,86 +38,88 @@ export default function DataSummary(props: DataSummaryProps) {
   };
 
   const asyncFetch = () => {
-    call(analytics.DataSummary, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      setData([
-        {
-          // @ts-ignore
-          key: "1",
-          // @ts-ignore
-          content: "访问人数",
-          // @ts-ignore
-          num: r.访问人数,
-        },
-        {
-          // @ts-ignore
-          key: "2",
-          // @ts-ignore
-          content: "访问次数",
-          // @ts-ignore
-          num: r.访问次数,
-        },
-        {
-          // @ts-ignore
-          key: "3",
-          // @ts-ignore
-          content: "新注册用户数",
-          // @ts-ignore
-          num: r.新注册用户数,
-        },
-        {
-          // @ts-ignore
-          key: "4",
-          // @ts-ignore
-          content: "老用户回归数",
-          // @ts-ignore
-          num: r.老用户回归数,
-        },
-        {
-          // @ts-ignore
-          key: "5",
-          // @ts-ignore
-          content: "新作品数",
-          // @ts-ignore
-          num: r.新作品数,
-        },
-        {
-          // @ts-ignore
-          key: "6",
-          // @ts-ignore
-          content: "本年度新增注册用户数",
-          // @ts-ignore
-          num: r.本年度新增注册用户数,
-        },
-        {
-          // @ts-ignore
-          key: "7",
-          // @ts-ignore
-          content: "本年度新增作品数",
-          // @ts-ignore
-          num: r.本年度新增作品数,
-        },
-        {
-          // @ts-ignore
-          key: "8",
-          // @ts-ignore
-          content: "累计注册用户数",
-          // @ts-ignore
-          num: r.累计注册用户数,
-        },
-        {
-          // @ts-ignore
-          key: "9",
-          // @ts-ignore
-          content: "累计作品数",
-          // @ts-ignore
-          num: r.累计作品数,
-        },
-      ]);
-    });
+    if (props.begin && props.end) {
+      call(analytics.DataSummary, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        setData([
+          {
+            // @ts-ignore
+            key: "1",
+            // @ts-ignore
+            content: "访问人数",
+            // @ts-ignore
+            num: r.访问人数,
+          },
+          {
+            // @ts-ignore
+            key: "2",
+            // @ts-ignore
+            content: "访问次数",
+            // @ts-ignore
+            num: r.访问次数,
+          },
+          {
+            // @ts-ignore
+            key: "3",
+            // @ts-ignore
+            content: "新注册用户数",
+            // @ts-ignore
+            num: r.新注册用户数,
+          },
+          {
+            // @ts-ignore
+            key: "4",
+            // @ts-ignore
+            content: "老用户回归数",
+            // @ts-ignore
+            num: r.老用户回归数,
+          },
+          {
+            // @ts-ignore
+            key: "5",
+            // @ts-ignore
+            content: "新作品数",
+            // @ts-ignore
+            num: r.新作品数,
+          },
+          {
+            // @ts-ignore
+            key: "6",
+            // @ts-ignore
+            content: "本年度新增注册用户数",
+            // @ts-ignore
+            num: r.本年度新增注册用户数,
+          },
+          {
+            // @ts-ignore
+            key: "7",
+            // @ts-ignore
+            content: "本年度新增作品数",
+            // @ts-ignore
+            num: r.本年度新增作品数,
+          },
+          {
+            // @ts-ignore
+            key: "8",
+            // @ts-ignore
+            content: "累计注册用户数",
+            // @ts-ignore
+            num: r.累计注册用户数,
+          },
+          {
+            // @ts-ignore
+            key: "9",
+            // @ts-ignore
+            content: "累计作品数",
+            // @ts-ignore
+            num: r.累计作品数,
+          },
+        ]);
+      });
+    }
   };
 
   return (

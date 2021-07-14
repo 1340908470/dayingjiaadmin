@@ -19,27 +19,29 @@ export default function FromInviter(props: FromInviterProps) {
   }, [props]);
 
   const asyncFetch = () => {
-    call(analytics.FromInviter, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      let tmpData = [];
-      // @ts-ignore
-      if (r) {
-        r.forEach((value, index) => {
-          // @ts-ignore
-          tmpData.push({
-            key: index,
-            person: value.特邀影家,
-            num: value.amount,
-            percent: value.占比,
+    if (props.begin && props.end) {
+      call(analytics.FromInviter, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        let tmpData = [];
+        // @ts-ignore
+        if (r) {
+          r.forEach((value, index) => {
+            // @ts-ignore
+            tmpData.push({
+              key: index,
+              person: value.特邀影家,
+              num: value.amount,
+              percent: value.占比,
+            });
           });
-        });
-      }
-      // @ts-ignore
-      setData(tmpData);
-    });
+        }
+        // @ts-ignore
+        setData(tmpData);
+      });
+    }
   };
 
   const columns = [

@@ -17,22 +17,24 @@ export default function PhotoTypes(props: PhotoTypeProps) {
   }, [props]);
 
   const asyncFetch = () => {
-    call(pandect.PhotoTypes, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      setData([
+    if (props.begin && props.end) {
+      call(pandect.PhotoTypes, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
         // @ts-ignore
-        { tag: "参赛", amount: r.参赛 },
-        // @ts-ignore
-        { tag: "挑战", amount: r.挑战 },
-        // @ts-ignore
-        { tag: "圈子", amount: r.圈子 },
-        // @ts-ignore
-        { tag: "其它", amount: r.其它 },
-      ]);
-    });
+        setData([
+          // @ts-ignore
+          { tag: "参赛", amount: r.参赛 },
+          // @ts-ignore
+          { tag: "挑战", amount: r.挑战 },
+          // @ts-ignore
+          { tag: "圈子", amount: r.圈子 },
+          // @ts-ignore
+          { tag: "其它", amount: r.其它 },
+        ]);
+      });
+    }
   };
 
   return (

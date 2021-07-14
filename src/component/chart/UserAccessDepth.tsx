@@ -16,36 +16,38 @@ export default function UserAccessDepth(props: UserAccessDepthProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.UserAccessData, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      let tmpData = [];
-      // @ts-ignore
-      let tmpDataTable = [];
+    if (props.begin && props.end) {
+      call(analytics.UserAccessData, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        let tmpData = [];
+        // @ts-ignore
+        let tmpDataTable = [];
 
-      if (r.访问深度) {
-        r.访问深度.forEach((value, index) => {
-          tmpData.push({
-            key: index,
-            type: value.来源,
-            value: value.访问次数,
-          });
+        if (r.访问深度) {
+          r.访问深度.forEach((value, index) => {
+            tmpData.push({
+              key: index,
+              type: value.来源,
+              value: value.访问次数,
+            });
 
-          tmpDataTable.push({
-            key: index,
-            source: value.来源,
-            num: value.访问次数,
-            percent: value.占比,
+            tmpDataTable.push({
+              key: index,
+              source: value.来源,
+              num: value.访问次数,
+              percent: value.占比,
+            });
           });
-        });
-      }
-      // @ts-ignore
-      setData(tmpData);
-      // @ts-ignore
-      setTableData(tmpDataTable);
-    });
+        }
+        // @ts-ignore
+        setData(tmpData);
+        // @ts-ignore
+        setTableData(tmpDataTable);
+      });
+    }
   };
 
   var config = {

@@ -16,35 +16,37 @@ export default function UserAccessByChannel(props: UserAccessProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.UserAccessByChannel, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      let tmpData = [];
-      // @ts-ignore
-      let tmpDataTable = [];
-      if (r) {
-        r.forEach((value, index) => {
-          tmpData.push({
-            key: index,
-            type: value.来源,
-            value: value.访问次数,
-          });
+    if (props.begin && props.end) {
+      call(analytics.UserAccessByChannel, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        let tmpData = [];
+        // @ts-ignore
+        let tmpDataTable = [];
+        if (r) {
+          r.forEach((value, index) => {
+            tmpData.push({
+              key: index,
+              type: value.来源,
+              value: value.访问次数,
+            });
 
-          tmpDataTable.push({
-            key: index,
-            source: value.来源,
-            num: value.访问次数,
-            percent: value.占比,
+            tmpDataTable.push({
+              key: index,
+              source: value.来源,
+              num: value.访问次数,
+              percent: value.占比,
+            });
           });
-        });
-      }
-      // @ts-ignore
-      setData(tmpData);
-      // @ts-ignore
-      setTableData(tmpDataTable);
-    });
+        }
+        // @ts-ignore
+        setData(tmpData);
+        // @ts-ignore
+        setTableData(tmpDataTable);
+      });
+    }
   };
 
   var config = {

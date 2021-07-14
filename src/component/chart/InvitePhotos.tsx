@@ -17,14 +17,16 @@ export default function InvitePhotos(props: InvitePhotosProps) {
   }, [props]);
 
   const asyncFetch = () => {
-    call(pandect.InvitePhoto, {
-      stage: "",
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      setData(r);
-    });
+    if (props.begin && props.end) {
+      call(pandect.InvitePhoto, {
+        stage: "",
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        setData(r);
+      });
+    }
   };
 
   return (

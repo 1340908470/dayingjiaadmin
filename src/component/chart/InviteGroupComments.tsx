@@ -17,14 +17,16 @@ export default function InviteGroupComments(props: InviteGroupCommentsProps) {
   }, [props]);
 
   const asyncFetch = () => {
-    call(pandect.InviteGroupComments, {
-      stage: "",
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      setData(r);
-    });
+    if (props.begin && props.end) {
+      call(pandect.InviteGroupComments, {
+        stage: "",
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        setData(r);
+      });
+    }
   };
 
   return (

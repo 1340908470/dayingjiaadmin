@@ -16,43 +16,45 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.PhotoEquipment, {
-      begin: props.begin,
-      end: props.end,
-    }).then((r) => {
-      // @ts-ignore
-      let tmpData = [];
-      // @ts-ignore
-      let tmpDataTable = [];
+    if (props.begin && props.end) {
+      call(analytics.PhotoEquipment, {
+        begin: props.begin,
+        end: props.end,
+      }).then((r) => {
+        // @ts-ignore
+        let tmpData = [];
+        // @ts-ignore
+        let tmpDataTable = [];
 
-      let sum = 0;
-      if (r) {
-        r.forEach((value) => {
-          sum += value.amount;
-        });
-      }
-
-      if (r) {
-        r.forEach((value, index) => {
-          tmpData.push({
-            key: index,
-            type: value.name,
-            value: value.amount,
+        let sum = 0;
+        if (r) {
+          r.forEach((value) => {
+            sum += value.amount;
           });
+        }
 
-          tmpDataTable.push({
-            key: index,
-            band: value.name,
-            num: value.amount,
-            percent: (value.amount / sum).toFixed(2),
+        if (r) {
+          r.forEach((value, index) => {
+            tmpData.push({
+              key: index,
+              type: value.name,
+              value: value.amount,
+            });
+
+            tmpDataTable.push({
+              key: index,
+              band: value.name,
+              num: value.amount,
+              percent: (value.amount / sum).toFixed(2),
+            });
           });
-        });
-      }
-      // @ts-ignore
-      setData(tmpData);
-      // @ts-ignore
-      setTableData(tmpDataTable);
-    });
+        }
+        // @ts-ignore
+        setData(tmpData);
+        // @ts-ignore
+        setTableData(tmpDataTable);
+      });
+    }
   };
 
   var config = {
