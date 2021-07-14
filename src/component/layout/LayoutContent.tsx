@@ -12,6 +12,7 @@ import UserPortrait from "@/pages/UserPortrait";
 import BehaviorAnalysis from "@/pages/BehaviorAnalysis";
 import RetentionAnalysis from "@/pages/RetentionAnalysis";
 import Works from "@/pages/Works";
+import InvitedPhotographer from "@/pages/InvitedPhotographer";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -63,6 +64,9 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "留存分析"}>
               <RetentionAnalysis />
+            </div>
+            <div hidden={props.SiderNav !== "特邀影家"}>
+              <InvitedPhotographer />
             </div>
             <div hidden={props.SiderNav !== "作品"}>
               <Works />

@@ -183,6 +183,39 @@ interface PhotoEquipment {
   amount: number;
 }
 
+interface InviteGroupPhotosReq {
+  stage: string;
+  begin: string;
+  end: string;
+}
+
+interface InviteGroupPhotos {
+  name: string;
+  data: number;
+}
+
+interface InviteGroupCommentsReq {
+  stage: string;
+  begin: string;
+  end: string;
+}
+
+interface InviteGroupComments {
+  name: string;
+  data: number;
+}
+
+interface InviteGroupLikesReq {
+  stage: string;
+  begin: string;
+  end: string;
+}
+
+interface InviteGroupLikes {
+  name: string;
+  data: number;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -223,5 +256,17 @@ export default {
   InvitePhoto: "analytics/invitephotos" as EndPoint<
     InvitePhotoReq,
     InvitePhoto[]
+  >,
+  InviteGroupPhotos: "analytics/invitegroupphotos" as EndPoint<
+    InviteGroupPhotosReq,
+    InviteGroupPhotos[]
+  >,
+  InviteGroupComments: "analytics/invitegroupcomments" as EndPoint<
+    InviteGroupCommentsReq,
+    InviteGroupComments[]
+  >,
+  InviteGroupLikes: "analytics/invitegrouplikes" as EndPoint<
+    InviteGroupLikesReq,
+    InviteGroupLikes[]
   >,
 };

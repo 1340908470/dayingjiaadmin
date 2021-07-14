@@ -4,12 +4,12 @@ import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 
-interface InvitePhotosProps {
+interface InviteGroupLikesProps {
   begin: string;
   end: string;
 }
 
-export default function InvitePhotos(props: InvitePhotosProps) {
+export default function InviteGroupLikes(props: InviteGroupLikesProps) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function InvitePhotos(props: InvitePhotosProps) {
   }, [props]);
 
   const asyncFetch = () => {
-    call(pandect.InvitePhoto, {
+    call(pandect.InviteGroupLikes, {
       stage: "",
       begin: props.begin,
       end: props.end,
@@ -29,7 +29,7 @@ export default function InvitePhotos(props: InvitePhotosProps) {
 
   return (
     <div className={"chart-card"}>
-      <div className={"card-title"}>发布作品数</div>
+      <div className={"card-title"}>特邀影家点赞数</div>
       <Bar
         data={data}
         yField={"name"}
