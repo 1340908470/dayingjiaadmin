@@ -4,7 +4,7 @@
 
 import "./Default.css";
 import { useState } from "react";
-import Filter, { DateRange } from "@/component/Filter";
+import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
 import UserAccess from "@/component/chart/UserAccess";
 import DataSummary from "@/component/chart/DataSummary";
 import RegisteredUserByDay from "@/component/chart/RegisteredUserByDay";
@@ -26,7 +26,7 @@ export default function Pandect() {
         minHeight: "1000px",
       }}
     >
-      <Filter Title={"总览"} setDateRange={setDateRange} />
+      <DateRangeFilter Title={"总览"} setDateRange={setDateRange} />
       <DataSummary begin={date.StartTime} end={date.EndTime} />
       <UserAccess begin={date.StartTime} end={date.EndTime} />
       <RegisteredUserByDay begin={date.StartTime} end={date.EndTime} />

@@ -15,38 +15,40 @@ export default function UserPhotos(props: UserPhotosProps) {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
-    call(analytics.UserPhoto, {
-      begin: props.begin,
-      end: props.end,
-      split: "50,40,20,10",
-    }).then((r) => {
-      // @ts-ignore
-      let tmpData = [];
-      // @ts-ignore
-      let tmpDataTable = [];
+    if (props.begin && props.end) {
+      call(analytics.UserPhoto, {
+        begin: props.begin,
+        end: props.end,
+        split: "50,40,20,10",
+      }).then((r) => {
+        // @ts-ignore
+        let tmpData = [];
+        // @ts-ignore
+        let tmpDataTable = [];
 
-      if (r) {
-        r.forEach((value, index) => {
-          tmpData.push({
-            key: index,
-            type: value.作品数量 + "张以上",
-            value: value.用户数,
+        if (r) {
+          r.forEach((value, index) => {
+            tmpData.push({
+              key: index,
+              type: value.作品数量 + "张以上",
+              value: value.用户数,
+            });
+
+            tmpDataTable.push({
+              key: index,
+              work: value.作品数量 + "张以上",
+              num: value.用户数,
+              percent: value.占比,
+            });
           });
+        }
 
-          tmpDataTable.push({
-            key: index,
-            work: value.作品数量 + "张以上",
-            num: value.用户数,
-            percent: value.占比,
-          });
-        });
-      }
-
-      // @ts-ignore
-      setData(tmpData);
-      // @ts-ignore
-      setTableData(tmpDataTable);
-    });
+        // @ts-ignore
+        setData(tmpData);
+        // @ts-ignore
+        setTableData(tmpDataTable);
+      });
+    }
   };
 
   var config = {

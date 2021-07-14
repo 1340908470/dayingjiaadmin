@@ -145,6 +145,13 @@ interface UserPhotoReq {
   split: string;
 }
 
+interface InvitePhoto {}
+
+interface PhotoEquipment {
+  name: string;
+  amount: number;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -176,5 +183,9 @@ export default {
   UserAccessData: "analytics/useraccessdata" as EndPoint<
     DateRangeReq,
     UserAccessData
+  >,
+  PhotoEquipment: "analytics/photoequipment" as EndPoint<
+    DateRangeReq,
+    PhotoEquipment[]
   >,
 };

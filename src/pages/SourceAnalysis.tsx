@@ -4,7 +4,7 @@
 
 import "./Default.css";
 import { useState } from "react";
-import Filter, { DateRange } from "@/component/Filter";
+import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
 import UserAccess from "@/component/chart/UserAccess";
 import DataSummary from "@/component/chart/DataSummary";
 import RegisteredUserByDay from "@/component/chart/RegisteredUserByDay";
@@ -28,7 +28,7 @@ export default function SourceAnalysis() {
         minHeight: "1000px",
       }}
     >
-      <Filter Title={"来源分析"} setDateRange={setDateRange} />
+      <DateRangeFilter Title={"来源分析"} setDateRange={setDateRange} />
       <UserAccessByChannel begin={date.StartTime} end={date.EndTime} />
       <FromInviter begin={date.StartTime} end={date.EndTime} />
     </div>

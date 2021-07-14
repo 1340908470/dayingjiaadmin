@@ -28,6 +28,7 @@ export default function PhotoTag(props: PhotoTypeProps) {
 
   return (
     <div className={"chart-card"}>
+      <div className={"card-title"}>不同标签作品数统计</div>
       <Bar
         data={data}
         yField={"tag"}

@@ -4,7 +4,7 @@
 
 import "./Default.css";
 import { useState } from "react";
-import Filter, { DateRange } from "@/component/Filter";
+import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
 import { Tabs } from "antd";
 import ActiveUserGender from "@/component/chart/ActiveUserGender";
 import NewUserGender from "@/component/chart/NewUserGender";
@@ -37,7 +37,7 @@ export default function UserPortrait() {
         minHeight: "1000px",
       }}
     >
-      <Filter Title={"用户画像"} setDateRange={setDateRange} />
+      <DateRangeFilter Title={"用户画像"} setDateRange={setDateRange} />
       <div style={{ marginTop: "-10px" }}>
         <Tabs defaultActiveKey="性别及年龄分布" onChange={callback}>
           <TabPane tab="性别及年龄分布" key="性别及年龄分布">

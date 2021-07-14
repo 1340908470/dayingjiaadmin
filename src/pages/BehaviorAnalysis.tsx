@@ -4,7 +4,7 @@
 
 import "./Default.css";
 import { useState } from "react";
-import Filter, { DateRange } from "@/component/Filter";
+import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
 import UserAccess from "@/component/chart/UserAccess";
 import DataSummary from "@/component/chart/DataSummary";
 import RegisteredUserByDay from "@/component/chart/RegisteredUserByDay";
@@ -31,7 +31,7 @@ export default function BehaviorAnalysis() {
         minHeight: "1000px",
       }}
     >
-      <Filter Title={"行为分析"} setDateRange={setDateRange} />
+      <DateRangeFilter Title={"行为分析"} setDateRange={setDateRange} />
       <UserPhotos begin={date.StartTime} end={date.EndTime} />
       <UserAccessTime begin={date.StartTime} end={date.EndTime} />
       <UserAccessDepth begin={date.StartTime} end={date.EndTime} />

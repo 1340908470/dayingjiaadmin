@@ -10,6 +10,8 @@ import { call } from "@/util/client";
 import SourceAnalysis from "@/pages/SourceAnalysis";
 import UserPortrait from "@/pages/UserPortrait";
 import BehaviorAnalysis from "@/pages/BehaviorAnalysis";
+import RetentionAnalysis from "@/pages/RetentionAnalysis";
+import Works from "@/pages/Works";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -18,6 +20,7 @@ interface LayoutContentProps {
 
 export default function LayoutContent(props: LayoutContentProps) {
   const contentRef = useRef(null);
+  console.log(props);
   return (
     <>
       <Layout style={{ padding: "0 24px 24px", backgroundColor: "#F5F5F5" }}>
@@ -57,6 +60,12 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "行为分析"}>
               <BehaviorAnalysis />
+            </div>
+            <div hidden={props.SiderNav !== "留存分析"}>
+              <RetentionAnalysis />
+            </div>
+            <div hidden={props.SiderNav !== "作品"}>
+              <Works />
             </div>
           </div>
         </Content>

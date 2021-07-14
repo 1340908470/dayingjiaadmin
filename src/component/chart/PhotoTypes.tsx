@@ -37,7 +37,9 @@ export default function PhotoTypes(props: PhotoTypeProps) {
 
   return (
     <div className={"chart-card"}>
+      <div className={"card-title"}>发布作品类型分布</div>
       <Bar
+        height={200}
         color={() => {
           return "#FF3E3E";
         }}
