@@ -325,14 +325,14 @@ interface FreeCourseAccess {
 }
 
 interface CourseExchange {
-  amount: string;
+  sales: string;
   sku_id: number;
   name: string;
   onshelf: string;
 }
 
 interface AvatarExchange {
-  amount: string;
+  sales: string;
   sku_id: number;
   name: string;
   onshelf: string;

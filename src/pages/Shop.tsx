@@ -22,12 +22,12 @@ import FreeCourseAccess from "@/component/chart/FreeCourseAccess";
 import CourseExchange from "@/component/chart/CourseExchange";
 import AvatarExchange from "@/component/chart/AvatarExchange";
 
-interface ChallengeProps {
+interface ShopProps {
   nowPage: string;
   resetPage: () => void;
 }
 
-export default function Challenge(props: ChallengeProps) {
+export default function Shop(props: ShopProps) {
   const [date, setDate] = useState({} as DateRange);
 
   function setDateRange(startTime: string, endTime: string) {

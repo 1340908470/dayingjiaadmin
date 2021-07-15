@@ -34,7 +34,7 @@ export default function CourseExchange(props: CourseExchangeProps) {
       <Bar
         data={data}
         yField={"name"}
-        xField={"amount"}
+        xField={"sales"}
         yAxis={{
           label: { autoRotate: false },
         }}
