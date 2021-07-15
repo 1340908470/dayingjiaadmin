@@ -21,6 +21,7 @@ import GiftRelatedData from "@/component/chart/GiftRelatedData";
 import FreeCourseAccess from "@/component/chart/FreeCourseAccess";
 import CourseExchange from "@/component/chart/CourseExchange";
 import AvatarExchange from "@/component/chart/AvatarExchange";
+import ShopInfo from "@/component/chart/ShopInfo";
 
 interface ShopProps {
   nowPage: string;
@@ -41,6 +42,7 @@ export default function Shop(props: ShopProps) {
   const FreeCourseAccessRef = useRef(null);
   const CourseExchangeRef = useRef(null);
   const AvatarExchangeRef = useRef(null);
+  const ShopInfoRef = useRef(null);
 
   if (props.nowPage === "积分商城") {
     exportComponentAsPNG(GiftRelatedDataRef)
@@ -52,6 +54,9 @@ export default function Shop(props: ShopProps) {
       })
       .then(() => {
         return exportComponentAsPNG(AvatarExchangeRef);
+      })
+      .then(() => {
+        return exportComponentAsPNG(ShopInfoRef);
       })
       .then(() => {
         props.resetPage();
@@ -77,6 +82,9 @@ export default function Shop(props: ShopProps) {
       </div>
       <div ref={AvatarExchangeRef}>
         <AvatarExchange begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={ShopInfoRef}>
+        <ShopInfo begin={date.StartTime} end={date.EndTime} />
       </div>
     </div>
   );

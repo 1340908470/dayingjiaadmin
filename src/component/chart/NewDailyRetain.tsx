@@ -21,7 +21,7 @@ const columns = [
     key: "day1",
     render: (text: any, row: any, index: number) => {
       return (
-        <div style={{ width: "30px" }}>
+        <div style={{ width: "30px" }} key={index}>
           <div
             style={{
               backgroundColor: "rgba(255,62,62," + text * 3 + ")",
@@ -47,7 +47,7 @@ const columns = [
     key: "day2",
     render: (text: any, row: any, index: number) => {
       return (
-        <div style={{ width: "30px" }}>
+        <div style={{ width: "30px" }} key={index}>
           <div
             style={{
               backgroundColor: "rgba(255,62,62," + text * 3 + ")",
@@ -73,7 +73,7 @@ const columns = [
     key: "day3",
     render: (text: any, row: any, index: number) => {
       return (
-        <div style={{ width: "30px" }}>
+        <div style={{ width: "30px" }} key={index}>
           <div
             style={{
               backgroundColor: "rgba(255,62,62," + text * 3 + ")",
@@ -99,7 +99,7 @@ const columns = [
     key: "day4",
     render: (text: any, row: any, index: number) => {
       return (
-        <div style={{ width: "30px" }}>
+        <div style={{ width: "30px" }} key={index}>
           <div
             style={{
               backgroundColor: "rgba(255,62,62," + text * 3 + ")",
@@ -125,7 +125,7 @@ const columns = [
     key: "day5",
     render: (text: any, row: any, index: number) => {
       return (
-        <div style={{ width: "30px" }}>
+        <div style={{ width: "30px" }} key={index}>
           <div
             style={{
               backgroundColor: "rgba(255,62,62," + text * 3 + ")",
@@ -151,7 +151,7 @@ const columns = [
     key: "day6",
     render: (text: any, row: any, index: number) => {
       return (
-        <div style={{ width: "30px" }}>
+        <div style={{ width: "30px" }} key={index}>
           <div
             style={{
               backgroundColor: "rgba(255,62,62," + text * 3 + ")",
@@ -177,7 +177,7 @@ const columns = [
     key: "day7",
     render: (text: any, row: any, index: number) => {
       return (
-        <div style={{ width: "30px" }}>
+        <div style={{ width: "30px" }} key={index}>
           <div
             style={{
               backgroundColor: "rgba(255,62,62," + text * 3 + ")",

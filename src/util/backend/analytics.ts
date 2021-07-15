@@ -445,6 +445,47 @@ interface CompetitionChannel {
   老用户回归数: number;
 }
 
+interface ShopInfoAvatarReq {
+  begin: string;
+  end: string;
+  category: "头像挂件";
+}
+
+interface ShopInfoCourseReq {
+  begin: string;
+  end: string;
+  category: "精品课程";
+}
+
+interface ShopInfoFreeCourseReq {
+  begin: string;
+  end: string;
+  category: "免费课程";
+}
+
+interface ShopInfoAvatar {
+  礼品名称: string;
+  上架时间: string;
+  兑换次数: number;
+  兑换积分: number;
+}
+
+// 精品课程
+interface ShopInfoCourse {
+  礼品名称: string;
+  上架时间: string;
+  访问次数: string;
+  兑换次数: number;
+  兑换积分: number;
+}
+
+// 免费课程
+interface ShopInfoFreeCourse {
+  礼品名称: string;
+  上架时间: string;
+  访问次数: string;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -519,5 +560,17 @@ export default {
   CompetitionChannel: "analytics/competitionchannel" as EndPoint<
     CompetitionChannelReq,
     CompetitionChannel[]
+  >,
+  ShopInfoAvatar: "analytics/shopinfo" as EndPoint<
+    ShopInfoAvatarReq,
+    ShopInfoAvatar[]
+  >,
+  ShopInfoCourse: "analytics/shopinfo" as EndPoint<
+    ShopInfoCourseReq,
+    ShopInfoCourse[]
+  >,
+  ShopInfoFreeCourse: "analytics/shopinfo" as EndPoint<
+    ShopInfoFreeCourseReq,
+    ShopInfoFreeCourse[]
   >,
 };
