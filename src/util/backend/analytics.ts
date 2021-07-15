@@ -317,6 +317,40 @@ interface ChallengeData {
   各级别挑战成功作品数: ChallengeSuccessWorks;
 }
 
+interface FreeCourseAccess {
+  amount: string;
+  sku_id: number;
+  name: string;
+  onshelf: string;
+}
+
+interface CourseExchange {
+  amount: string;
+  sku_id: number;
+  name: string;
+  onshelf: string;
+}
+
+interface AvatarExchange {
+  amount: string;
+  sku_id: number;
+  name: string;
+  onshelf: string;
+}
+
+interface Shop {
+  新增免费课程数: number;
+  累计免费课程数: number;
+  新增精品课程数: number;
+  累计精品课程数: number;
+  新增头像挂件数: number;
+  累计头像挂件数: number;
+
+  免费课程访问数: FreeCourseAccess[];
+  精品课程兑换数: CourseExchange[];
+  头像挂件兑换数: AvatarExchange[];
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -374,4 +408,5 @@ export default {
   PageVisit: "analytics/pagevisit" as EndPoint<PageShareReq, PageShare>,
   GroupData: "analytics/groupdata" as EndPoint<DateRangeReq, GroupData>,
   ChallengeData: "analytics/challenge" as EndPoint<DateRangeReq, ChallengeData>,
+  Shop: "analytics/shop" as EndPoint<DateRangeReq, Shop>,
 };
