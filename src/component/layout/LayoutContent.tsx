@@ -16,6 +16,7 @@ import PageAnalysis from "@/pages/PageAnalysis";
 import Circle from "@/pages/Circle";
 import Challenge from "@/pages/Challenge";
 import Shop from "@/pages/Shop";
+import Mine from "@/pages/Mine";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -92,6 +93,9 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "积分商城"}>
               <Shop nowPage={nowPage} resetPage={resetPage} />
+            </div>
+            <div hidden={props.SiderNav !== "我的"}>
+              <Mine nowPage={nowPage} resetPage={resetPage} />
             </div>
           </div>
         </Content>

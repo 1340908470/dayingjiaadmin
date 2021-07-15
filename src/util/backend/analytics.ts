@@ -351,6 +351,40 @@ interface Shop {
   头像挂件兑换数: AvatarExchange[];
 }
 
+interface UserCheckIn {
+  7: number;
+  6: number;
+  5: number;
+  4: number;
+  3: number;
+  2: number;
+  1: number;
+  0: number;
+}
+
+interface UserPoints {
+  141: number;
+  121: number;
+  101: number;
+  81: number;
+  61: number;
+  41: number;
+  21: number;
+  0: number;
+}
+
+interface Mine {
+  用户签到分布: UserCheckIn;
+  用户获取积分分布: UserPoints;
+}
+
+interface MineReq {
+  begin: string;
+  end: string;
+  checkin: string;
+  point: string;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -409,4 +443,5 @@ export default {
   GroupData: "analytics/groupdata" as EndPoint<DateRangeReq, GroupData>,
   ChallengeData: "analytics/challenge" as EndPoint<DateRangeReq, ChallengeData>,
   Shop: "analytics/shop" as EndPoint<DateRangeReq, Shop>,
+  Mine: "analytics/user" as EndPoint<MineReq, Mine>,
 };
