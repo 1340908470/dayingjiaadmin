@@ -270,6 +270,53 @@ interface GroupData {
   圈子成员数TOP10: CircleMemberNum;
 }
 
+interface ChallengeRelatedData {
+  新增挑战作品数: number;
+  新增挑战成功作品数: number;
+  新增获取头衔用户数: number;
+  累计挑战通关用户数: number;
+  累计挑战作品数: number;
+  累计挑战成功作品数: number;
+}
+
+interface ChallengeWorksTrend {
+  amount: number;
+  date: string;
+}
+
+interface ChallengeJoinMember {
+  id: number;
+  amount: number;
+  date: string;
+}
+
+interface ChallengeGetHonor {
+  id: number;
+  amount: number;
+  date: string;
+}
+
+interface ChallengeJoinWorks {
+  id: number;
+  amount: number;
+  date: string;
+}
+
+interface ChallengeSuccessWorks {
+  id: number;
+  amount: number;
+  date: string;
+}
+
+interface ChallengeData {
+  挑战相关数据: ChallengeRelatedData[];
+  挑战作品发布趋势: ChallengeWorksTrend;
+  各级别参与挑战用户数: ChallengeJoinMember;
+  各级别获取头衔用户数: ChallengeGetHonor;
+  各级别参与挑战作品数: ChallengeJoinWorks;
+  各级别挑战成功作品数: ChallengeSuccessWorks;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -326,4 +373,5 @@ export default {
   PageShare: "analytics/pageshare" as EndPoint<PageShareReq, PageShare>,
   PageVisit: "analytics/pagevisit" as EndPoint<PageShareReq, PageShare>,
   GroupData: "analytics/groupdata" as EndPoint<DateRangeReq, GroupData>,
+  ChallengeData: "analytics/challenge" as EndPoint<DateRangeReq, ChallengeData>,
 };

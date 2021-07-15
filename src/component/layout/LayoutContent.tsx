@@ -14,6 +14,7 @@ import InvitedPhotographer from "@/pages/InvitedPhotographer";
 import Share from "@/pages/Share";
 import PageAnalysis from "@/pages/PageAnalysis";
 import Circle from "@/pages/Circle";
+import Challenge from "@/pages/Challenge";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -35,18 +36,6 @@ export default function LayoutContent(props: LayoutContentProps) {
         <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>{props.HeaderNav}</Breadcrumb.Item>
           <Breadcrumb.Item>{props.SiderNav}</Breadcrumb.Item>
-          {/*<ReactToPrint*/}
-          {/*  trigger={() => (*/}
-          {/*    <Button*/}
-          {/*      className="print"*/}
-          {/*      type="primary"*/}
-          {/*      icon={<DownloadOutlined />}*/}
-          {/*    >*/}
-          {/*      打印*/}
-          {/*    </Button>*/}
-          {/*  )}*/}
-          {/*  content={() => contentRef.current}*/}
-          {/*/>*/}
           <Button
             className="print"
             type="primary"
@@ -55,7 +44,7 @@ export default function LayoutContent(props: LayoutContentProps) {
               setNowPage("总览");
             }}
           >
-            打印
+            导出
           </Button>
         </Breadcrumb>
         <Content
@@ -96,6 +85,9 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "圈子"}>
               <Circle nowPage={nowPage} resetPage={resetPage} />
+            </div>
+            <div hidden={props.SiderNav !== "挑战"}>
+              <Challenge nowPage={nowPage} resetPage={resetPage} />
             </div>
           </div>
         </Content>

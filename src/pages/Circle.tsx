@@ -33,7 +33,7 @@ export default function Circle(props: CircleProps) {
   const CircleNewWorksRef = useRef(null);
   const CircleMemberRef = useRef(null);
 
-  if (props.nowPage === "总览") {
+  if (props.nowPage === "圈子") {
     exportComponentAsPNG(CircleRelatedDataRef)
       .then(() => {
         return exportComponentAsPNG(CircleTrendRef);
