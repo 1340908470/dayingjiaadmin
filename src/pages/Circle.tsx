@@ -4,7 +4,7 @@
 
 import "./Default.css";
 import { useRef, useState } from "react";
-import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
+import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import CircleRelatedData from "@/component/chart/CircleRelatedData";
 import { exportComponentAsPNG } from "react-component-export-image";
 import CircleTrend from "@/component/chart/CircleTrend";

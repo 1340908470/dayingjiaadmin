@@ -4,7 +4,7 @@
 
 import "./Default.css";
 import { useRef, useState } from "react";
-import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
+import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import UserPhotos from "@/component/chart/UserPhotos";
 import UserAccessTime from "@/component/chart/UserAccessTime";
 import UserAccessDepth from "@/component/chart/UserAccessDepth";

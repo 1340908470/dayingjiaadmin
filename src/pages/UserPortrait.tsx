@@ -4,7 +4,7 @@
 
 import "./Default.css";
 import { useRef, useState } from "react";
-import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
+import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import { Tabs } from "antd";
 import ActiveUserGender from "@/component/chart/ActiveUserGender";
 import NewUserGender from "@/component/chart/NewUserGender";

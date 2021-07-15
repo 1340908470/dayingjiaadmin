@@ -404,6 +404,47 @@ interface Competition {
   注册人数: number;
 }
 
+interface CompetitionDataReq {
+  begin: string;
+  end: string;
+  id: number;
+}
+
+interface CompetitionData {
+  新投稿人数: number;
+  累计投稿人数: number;
+  比赛推广新增注册人数: number;
+  比赛推广累计注册人数: number;
+  比赛推广新增访问次数: number;
+  比赛推广累计访问次数: number;
+}
+
+interface CompetitionParticipateReq {
+  begin: string;
+  end: string;
+  id: number;
+}
+
+interface CompetitionParticipate {
+  日期: string;
+  amount: number;
+}
+
+interface CompetitionChannelReq {
+  begin: string;
+  end: string;
+  id: number;
+}
+
+interface CompetitionChannel {
+  推广渠道: string;
+  注册人数: number;
+  访问次数: number;
+  访问人数: number;
+  投稿数: number;
+  老用户回归数: number;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -466,5 +507,17 @@ export default {
   TotalCompetition: "analytics/totalcompetition" as EndPoint<
     DateRangeReq,
     Competition[]
+  >,
+  CompetitionData: "analytics/competitiondata" as EndPoint<
+    CompetitionDataReq,
+    CompetitionData
+  >,
+  CompetitionParticipate: "analytics/competitionparticipate" as EndPoint<
+    CompetitionParticipateReq,
+    CompetitionParticipate[]
+  >,
+  CompetitionChannel: "analytics/competitionchannel" as EndPoint<
+    CompetitionChannelReq,
+    CompetitionChannel[]
   >,
 };

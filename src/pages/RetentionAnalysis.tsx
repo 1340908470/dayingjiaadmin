@@ -4,8 +4,8 @@
 
 import "./Default.css";
 import { useRef, useState } from "react";
-import { DateRange } from "@/component/Filter/DateRangeFilter";
-import SingleDateFilter from "@/component/Filter/SingleDateFilter";
+import { DateRange } from "@/component/filter/DateRangeFilter";
+import SingleDateFilter from "@/component/filter/SingleDateFilter";
 import ActiveDailyRetain from "@/component/chart/ActiveDailyRetain";
 import NewDailyRetain from "@/component/chart/NewDailyRetain";
 import { exportComponentAsPNG } from "react-component-export-image";

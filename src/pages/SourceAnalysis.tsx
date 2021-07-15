@@ -4,7 +4,7 @@
 
 import "./Default.css";
 import { useRef, useState } from "react";
-import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
+import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import UserAccessByChannel from "@/component/chart/UserAccessByChannel";
 import FromInviter from "@/component/chart/FromInviter";
 import { exportComponentAsPNG } from "react-component-export-image";
