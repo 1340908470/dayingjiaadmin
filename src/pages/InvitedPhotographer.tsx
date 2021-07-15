@@ -3,7 +3,7 @@
  * */
 
 import "./Default.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
 import UserAccess from "@/component/chart/UserAccess";
 import DataSummary from "@/component/chart/DataSummary";
@@ -15,8 +15,14 @@ import InvitePhotos from "@/component/chart/InvitePhotos";
 import InviteGroupPhotos from "@/component/chart/InviteGroupPhotos";
 import InviteGroupComments from "@/component/chart/InviteGroupComments";
 import InviteGroupLikes from "@/component/chart/InviteGroupLikes";
+import { exportComponentAsPNG } from "react-component-export-image";
 
-export default function InvitedPhotographer() {
+interface InvitedPhotographerProps {
+  nowPage: string;
+  resetPage: () => void;
+}
+
+export default function InvitedPhotographer(props: InvitedPhotographerProps) {
   const [date, setDate] = useState({} as DateRange);
 
   function setDateRange(startTime: string, endTime: string) {
@@ -26,6 +32,27 @@ export default function InvitedPhotographer() {
     });
   }
 
+  const InvitePhotosRef = useRef(null);
+  const InviteGroupPhotosRef = useRef(null);
+  const InviteGroupCommentsRef = useRef(null);
+  const InviteGroupLikesRef = useRef(null);
+
+  if (props.nowPage === "特邀影家") {
+    exportComponentAsPNG(InvitePhotosRef)
+      .then(() => {
+        return exportComponentAsPNG(InviteGroupPhotosRef);
+      })
+      .then(() => {
+        return exportComponentAsPNG(InviteGroupCommentsRef);
+      })
+      .then(() => {
+        return exportComponentAsPNG(InviteGroupLikesRef);
+      })
+      .then(() => {
+        props.resetPage();
+      });
+  }
+
   return (
     <div
       style={{
@@ -33,10 +60,18 @@ export default function InvitedPhotographer() {
       }}
     >
       <DateRangeFilter Title={"特邀影家"} setDateRange={setDateRange} />
-      <InvitePhotos begin={date.StartTime} end={date.EndTime} />
-      <InviteGroupPhotos begin={date.StartTime} end={date.EndTime} />
-      <InviteGroupComments begin={date.StartTime} end={date.EndTime} />
-      <InviteGroupLikes begin={date.StartTime} end={date.EndTime} />
+      <div ref={InvitePhotosRef}>
+        <InvitePhotos begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={InviteGroupPhotosRef}>
+        <InviteGroupPhotos begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={InviteGroupCommentsRef}>
+        <InviteGroupComments begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={InviteGroupLikesRef}>
+        <InviteGroupLikes begin={date.StartTime} end={date.EndTime} />
+      </div>
     </div>
   );
 }

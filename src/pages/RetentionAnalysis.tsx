@@ -3,13 +3,19 @@
  * */
 
 import "./Default.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { DateRange } from "@/component/Filter/DateRangeFilter";
 import SingleDateFilter from "@/component/Filter/SingleDateFilter";
 import ActiveDailyRetain from "@/component/chart/ActiveDailyRetain";
 import NewDailyRetain from "@/component/chart/NewDailyRetain";
+import { exportComponentAsPNG } from "react-component-export-image";
 
-export default function RetentionAnalysis() {
+interface RetentionAnalysisProps {
+  nowPage: string;
+  resetPage: () => void;
+}
+
+export default function RetentionAnalysis(props: RetentionAnalysisProps) {
   const [date, setDate] = useState({} as DateRange);
 
   function setDateRange(startTime: string, endTime: string) {
@@ -19,6 +25,19 @@ export default function RetentionAnalysis() {
     });
   }
 
+  const ActiveDailyRetainRef = useRef(null);
+  const NewDailyRetainRef = useRef(null);
+
+  if (props.nowPage === "留存分析") {
+    exportComponentAsPNG(ActiveDailyRetainRef)
+      .then(() => {
+        return exportComponentAsPNG(NewDailyRetainRef);
+      })
+      .then(() => {
+        props.resetPage();
+      });
+  }
+
   return (
     <div
       style={{
@@ -26,8 +45,12 @@ export default function RetentionAnalysis() {
       }}
     >
       <SingleDateFilter Title={"留存分析"} setDateRange={setDateRange} />
-      <ActiveDailyRetain begin={date.StartTime} end={date.EndTime} />
-      <NewDailyRetain begin={date.StartTime} end={date.EndTime} />
+      <div ref={ActiveDailyRetainRef}>
+        <ActiveDailyRetain begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={NewDailyRetainRef}>
+        <NewDailyRetain begin={date.StartTime} end={date.EndTime} />
+      </div>
     </div>
   );
 }

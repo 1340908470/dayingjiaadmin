@@ -3,7 +3,7 @@
  * */
 
 import "./Default.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
 import UserAccess from "@/component/chart/UserAccess";
 import DataSummary from "@/component/chart/DataSummary";
@@ -19,8 +19,14 @@ import PageSharePV from "@/component/chart/PageSharePV";
 import PageShareUV from "@/component/chart/PageShareUV";
 import PageVisitPV from "@/component/chart/PageVisitPV";
 import PageVisitUV from "@/component/chart/PageVisitUV";
+import { exportComponentAsPNG } from "react-component-export-image";
 
-export default function PageAnalysis() {
+interface PageAnalysisProps {
+  nowPage: string;
+  resetPage: () => void;
+}
+
+export default function PageAnalysis(props: PageAnalysisProps) {
   const [date, setDate] = useState({} as DateRange);
 
   function setDateRange(startTime: string, endTime: string) {
@@ -30,6 +36,19 @@ export default function PageAnalysis() {
     });
   }
 
+  const PageVisitPVRef = useRef(null);
+  const PageVisitUVRef = useRef(null);
+
+  if (props.nowPage === "页面分析") {
+    exportComponentAsPNG(PageVisitPVRef)
+      .then(() => {
+        return exportComponentAsPNG(PageVisitUVRef);
+      })
+      .then(() => {
+        props.resetPage();
+      });
+  }
+
   return (
     <div
       style={{
@@ -37,8 +56,12 @@ export default function PageAnalysis() {
       }}
     >
       <DateRangeFilter Title={"页面分析"} setDateRange={setDateRange} />
-      <PageVisitPV begin={date.StartTime} end={date.EndTime} />
-      <PageVisitUV begin={date.StartTime} end={date.EndTime} />
+      <div ref={PageVisitPVRef}>
+        <PageVisitPV begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={PageVisitUVRef}>
+        <PageVisitUV begin={date.StartTime} end={date.EndTime} />
+      </div>
     </div>
   );
 }

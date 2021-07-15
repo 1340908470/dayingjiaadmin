@@ -3,20 +3,17 @@
  * */
 
 import "./Default.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
-import UserAccess from "@/component/chart/UserAccess";
-import DataSummary from "@/component/chart/DataSummary";
-import RegisteredUserByDay from "@/component/chart/RegisteredUserByDay";
-import NewPhotoByDay from "@/component/chart/NewPhotoByDay";
-import UserAccessByChannel from "@/component/chart/UserAccessByChannel";
-import FromInviter from "@/component/chart/FromInviter";
-import PhotoTypes from "@/component/chart/PhotoTypes";
-import PhotoTag from "@/component/chart/PhotoTag";
-import PhotoEquipment from "@/component/chart/PhotoEquipment";
 import CircleRelatedData from "@/component/chart/CircleRelatedData";
+import { exportComponentAsPNG } from "react-component-export-image";
 
-export default function Circle() {
+interface CircleProps {
+  nowPage: string;
+  resetPage: () => void;
+}
+
+export default function Circle(props: CircleProps) {
   const [date, setDate] = useState({} as DateRange);
 
   function setDateRange(startTime: string, endTime: string) {
@@ -26,6 +23,23 @@ export default function Circle() {
     });
   }
 
+  // const UserPhotosRef = useRef(null);
+  // const UserAccessTimeRef = useRef(null);
+  // const UserAccessDepthRef = useRef(null);
+  //
+  // if (props.nowPage === "总览") {
+  //   exportComponentAsPNG(UserPhotosRef)
+  //       .then(() => {
+  //         return exportComponentAsPNG(UserAccessTimeRef);
+  //       })
+  //       .then(() => {
+  //         return exportComponentAsPNG(UserAccessDepthRef);
+  //       })
+  //       .then(() => {
+  //         props.resetPage();
+  //       });
+  // }
+
   return (
     <div
       style={{
@@ -34,8 +48,6 @@ export default function Circle() {
     >
       <DateRangeFilter Title={"圈子"} setDateRange={setDateRange} />
       <CircleRelatedData begin={date.StartTime} end={date.EndTime} />
-      <PhotoTag begin={date.StartTime} end={date.EndTime} />
-      <PhotoEquipment begin={date.StartTime} end={date.EndTime} />
     </div>
   );
 }

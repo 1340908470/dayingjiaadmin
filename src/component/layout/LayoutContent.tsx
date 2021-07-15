@@ -1,12 +1,10 @@
 import { Breadcrumb, Layout, Button } from "antd";
 import Pandect from "@/pages/Pandect";
-import ReactToPrint from "react-to-print";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { DownloadOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 import "./LayoutContent.css";
-import { call } from "@/util/client";
 import SourceAnalysis from "@/pages/SourceAnalysis";
 import UserPortrait from "@/pages/UserPortrait";
 import BehaviorAnalysis from "@/pages/BehaviorAnalysis";
@@ -24,25 +22,41 @@ interface LayoutContentProps {
 
 export default function LayoutContent(props: LayoutContentProps) {
   const contentRef = useRef(null);
-  console.log(props);
+
+  const [nowPage, setNowPage] = useState("");
+
+  const resetPage = () => {
+    setNowPage("");
+  };
+
   return (
     <>
       <Layout style={{ padding: "0 24px 24px", backgroundColor: "#F5F5F5" }}>
         <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>{props.HeaderNav}</Breadcrumb.Item>
           <Breadcrumb.Item>{props.SiderNav}</Breadcrumb.Item>
-          <ReactToPrint
-            trigger={() => (
-              <Button
-                className="print"
-                type="primary"
-                icon={<DownloadOutlined />}
-              >
-                打印
-              </Button>
-            )}
-            content={() => contentRef.current}
-          />
+          {/*<ReactToPrint*/}
+          {/*  trigger={() => (*/}
+          {/*    <Button*/}
+          {/*      className="print"*/}
+          {/*      type="primary"*/}
+          {/*      icon={<DownloadOutlined />}*/}
+          {/*    >*/}
+          {/*      打印*/}
+          {/*    </Button>*/}
+          {/*  )}*/}
+          {/*  content={() => contentRef.current}*/}
+          {/*/>*/}
+          <Button
+            className="print"
+            type="primary"
+            icon={<DownloadOutlined />}
+            onClick={() => {
+              setNowPage("总览");
+            }}
+          >
+            打印
+          </Button>
         </Breadcrumb>
         <Content
           className="site-layout-background"
@@ -54,34 +68,34 @@ export default function LayoutContent(props: LayoutContentProps) {
         >
           <div ref={contentRef}>
             <div hidden={props.SiderNav !== "总览"}>
-              <Pandect />
+              <Pandect nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "来源分析"}>
-              <SourceAnalysis />
+              <SourceAnalysis nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "用户画像"}>
-              <UserPortrait />
+              <UserPortrait nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "行为分析"}>
-              <BehaviorAnalysis />
+              <BehaviorAnalysis nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "留存分析"}>
-              <RetentionAnalysis />
+              <RetentionAnalysis nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "特邀影家"}>
-              <InvitedPhotographer />
+              <InvitedPhotographer nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "作品"}>
-              <Works />
+              <Works nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "分享"}>
-              <Share />
+              <Share nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "页面分析"}>
-              <PageAnalysis />
+              <PageAnalysis nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "圈子"}>
-              <Circle />
+              <Circle nowPage={nowPage} resetPage={resetPage} />
             </div>
           </div>
         </Content>

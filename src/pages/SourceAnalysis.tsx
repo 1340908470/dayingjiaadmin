@@ -3,12 +3,19 @@
  * */
 
 import "./Default.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
 import UserAccessByChannel from "@/component/chart/UserAccessByChannel";
 import FromInviter from "@/component/chart/FromInviter";
+import { exportComponentAsPNG } from "react-component-export-image";
+import PageSharePV from "@/component/chart/PageSharePV";
 
-export default function SourceAnalysis() {
+interface ShareProps {
+  nowPage: string;
+  resetPage: () => void;
+}
+
+export default function SourceAnalysis(props: ShareProps) {
   const [date, setDate] = useState({} as DateRange);
 
   function setDateRange(startTime: string, endTime: string) {
@@ -18,6 +25,19 @@ export default function SourceAnalysis() {
     });
   }
 
+  const UserAccessByChannelRef = useRef(null);
+  const FromInviterRef = useRef(null);
+
+  if (props.nowPage === "来源分析") {
+    exportComponentAsPNG(UserAccessByChannelRef)
+      .then(() => {
+        return exportComponentAsPNG(FromInviterRef);
+      })
+      .then(() => {
+        props.resetPage();
+      });
+  }
+
   return (
     <div
       style={{
@@ -25,8 +45,12 @@ export default function SourceAnalysis() {
       }}
     >
       <DateRangeFilter Title={"来源分析"} setDateRange={setDateRange} />
-      <UserAccessByChannel begin={date.StartTime} end={date.EndTime} />
-      <FromInviter begin={date.StartTime} end={date.EndTime} />
+      <div ref={UserAccessByChannelRef}>
+        <UserAccessByChannel begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={FromInviterRef}>
+        <FromInviter begin={date.StartTime} end={date.EndTime} />
+      </div>
     </div>
   );
 }
