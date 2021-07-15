@@ -14,7 +14,7 @@ export default function InviteGroupComments(props: InviteGroupCommentsProps) {
 
   useEffect(() => {
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

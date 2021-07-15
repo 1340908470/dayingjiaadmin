@@ -18,7 +18,7 @@ export default function ActiveUserProvince(props: ActiveUserProvinceProps) {
 
   useEffect(() => {
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

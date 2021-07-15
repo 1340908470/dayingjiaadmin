@@ -14,7 +14,7 @@ export default function PhotoTag(props: PhotoTypeProps) {
 
   useEffect(() => {
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

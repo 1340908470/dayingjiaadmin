@@ -17,6 +17,7 @@ import Circle from "@/pages/Circle";
 import Challenge from "@/pages/Challenge";
 import Shop from "@/pages/Shop";
 import Mine from "@/pages/Mine";
+import PhotoCompetition from "@/pages/PhotoCompetition";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -78,6 +79,9 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "作品"}>
               <Works nowPage={nowPage} resetPage={resetPage} />
+            </div>
+            <div hidden={props.SiderNav !== "摄影比赛"}>
+              <PhotoCompetition nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "分享"}>
               <Share nowPage={nowPage} resetPage={resetPage} />

@@ -15,7 +15,7 @@ export default function ChallengeWorksTrend(props: ChallengeWorksTrendProps) {
   const [data, setData] = useState([]);
   useEffect(() => {
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.ChallengeData, {

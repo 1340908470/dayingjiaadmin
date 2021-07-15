@@ -14,7 +14,7 @@ export default function PhotoTypes(props: PhotoTypeProps) {
 
   useEffect(() => {
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

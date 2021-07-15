@@ -225,7 +225,7 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
 
   useEffect(() => {
     if (data.length === 0) asyncFetch();
-  }, [props]);
+  }, [props.begin]);
 
   const convertTime = (date: Date) => {
     return (

@@ -29,7 +29,7 @@ export default function DataSummary(props: DataSummaryProps) {
 
   useEffect(() => {
     if (data.length === 0) asyncFetch();
-  }, [props]);
+  }, [props.begin]);
 
   const getRowClassName = (record: any, index: number) => {
     let className = "";

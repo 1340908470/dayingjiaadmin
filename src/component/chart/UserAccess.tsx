@@ -15,7 +15,7 @@ export default function UserAccess(props: UserAccessProps) {
   const [data, setData] = useState([]);
   useEffect(() => {
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.UserAccess, {

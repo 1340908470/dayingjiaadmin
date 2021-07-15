@@ -14,7 +14,7 @@ export default function PageSharePV(props: PageSharePVProps) {
 
   useEffect(() => {
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

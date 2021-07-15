@@ -14,7 +14,7 @@ export default function NewUserAge(props: NewUserAgeProps) {
   const [data, setData] = useState([]);
   useEffect(() => {
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.UserAge, {

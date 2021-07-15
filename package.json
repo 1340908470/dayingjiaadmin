@@ -35,6 +35,7 @@
     "react-component-export-image": "^1.0.6",
     "react-echarts-map-china": "^0.1.9",
     "react-to-print": "^2.12.6",
+    "react-use": "^17.2.4",
     "umi": "^3.5.0"
   },
   "devDependencies": {

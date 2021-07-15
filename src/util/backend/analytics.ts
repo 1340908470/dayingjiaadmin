@@ -385,6 +385,25 @@ interface MineReq {
   point: string;
 }
 
+interface ChannelAccessTimes {
+  amount: number;
+  channel: string;
+}
+
+interface ChannelAccessNumbers {
+  amount: number;
+  channel: string;
+}
+
+interface Competition {
+  id: number;
+  name: string;
+  投稿数量: number;
+  详情页各渠道访问次数: ChannelAccessTimes[];
+  详情页各渠道访问人数: ChannelAccessNumbers[];
+  注册人数: number;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -444,4 +463,8 @@ export default {
   ChallengeData: "analytics/challenge" as EndPoint<DateRangeReq, ChallengeData>,
   Shop: "analytics/shop" as EndPoint<DateRangeReq, Shop>,
   Mine: "analytics/user" as EndPoint<MineReq, Mine>,
+  TotalCompetition: "analytics/totalcompetition" as EndPoint<
+    DateRangeReq,
+    Competition[]
+  >,
 };
