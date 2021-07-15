@@ -4,12 +4,12 @@ import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 
-interface PageShareUVProps {
+interface CircleWorksProps {
   begin: string;
   end: string;
 }
 
-export default function PageShareUV(props: PageShareUVProps) {
+export default function CircleMember(props: CircleWorksProps) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
@@ -18,31 +18,23 @@ export default function PageShareUV(props: PageShareUVProps) {
 
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      call(pandect.PageShare, {
-        begin:
-          props.begin.split("-")[0] +
-          props.begin.split("-")[1] +
-          props.begin.split("-")[2] +
-          "",
-        end:
-          props.end.split("-")[0] +
-          props.end.split("-")[1] +
-          props.end.split("-")[2] +
-          "",
+      call(pandect.GroupData, {
+        begin: props.begin,
+        end: props.end,
       }).then((r) => {
         // @ts-ignore
-        setData(r.uv);
+        setData(r.圈子成员数TOP10);
       });
     }
   };
 
   return (
     <div className={"chart-card"}>
-      <div className={"card-title"}>页面分享次数Top10对比</div>
+      <div className={"card-title"}>圈子成员数TOP10对比</div>
       <Bar
         data={data}
         yField={"name"}
-        xField={"uv"}
+        xField={"amount"}
         yAxis={{
           label: { autoRotate: false },
         }}

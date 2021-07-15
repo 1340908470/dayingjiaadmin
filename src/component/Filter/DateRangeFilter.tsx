@@ -34,7 +34,6 @@ export default function DateRangeFilter(props: FilterProps) {
     const month = ("0" + date.getMonth()).slice(-2);
     const day = ("0" + date.getDate()).slice(-2);
 
-    console.log(now);
     const startTime = year + "-" + month + "-" + day;
     const endTime =
       now.getFullYear() +

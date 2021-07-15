@@ -7,6 +7,10 @@ import { useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/Filter/DateRangeFilter";
 import CircleRelatedData from "@/component/chart/CircleRelatedData";
 import { exportComponentAsPNG } from "react-component-export-image";
+import CircleTrend from "@/component/chart/CircleTrend";
+import CircleNewMember from "@/component/chart/CircleNewMember";
+import CircleNewWorks from "@/component/chart/CircleNewWorks";
+import CircleMember from "@/component/chart/CircleMember";
 
 interface CircleProps {
   nowPage: string;
@@ -23,22 +27,30 @@ export default function Circle(props: CircleProps) {
     });
   }
 
-  // const UserPhotosRef = useRef(null);
-  // const UserAccessTimeRef = useRef(null);
-  // const UserAccessDepthRef = useRef(null);
-  //
-  // if (props.nowPage === "总览") {
-  //   exportComponentAsPNG(UserPhotosRef)
-  //       .then(() => {
-  //         return exportComponentAsPNG(UserAccessTimeRef);
-  //       })
-  //       .then(() => {
-  //         return exportComponentAsPNG(UserAccessDepthRef);
-  //       })
-  //       .then(() => {
-  //         props.resetPage();
-  //       });
-  // }
+  const CircleRelatedDataRef = useRef(null);
+  const CircleTrendRef = useRef(null);
+  const CircleNewMemberRef = useRef(null);
+  const CircleNewWorksRef = useRef(null);
+  const CircleMemberRef = useRef(null);
+
+  if (props.nowPage === "总览") {
+    exportComponentAsPNG(CircleRelatedDataRef)
+      .then(() => {
+        return exportComponentAsPNG(CircleTrendRef);
+      })
+      .then(() => {
+        return exportComponentAsPNG(CircleNewMemberRef);
+      })
+      .then(() => {
+        return exportComponentAsPNG(CircleNewWorksRef);
+      })
+      .then(() => {
+        return exportComponentAsPNG(CircleMemberRef);
+      })
+      .then(() => {
+        props.resetPage();
+      });
+  }
 
   return (
     <div
@@ -47,7 +59,22 @@ export default function Circle(props: CircleProps) {
       }}
     >
       <DateRangeFilter Title={"圈子"} setDateRange={setDateRange} />
-      <CircleRelatedData begin={date.StartTime} end={date.EndTime} />
+
+      <div ref={CircleRelatedDataRef}>
+        <CircleRelatedData begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={CircleTrendRef}>
+        <CircleTrend begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={CircleNewMemberRef}>
+        <CircleNewMember begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={CircleNewWorksRef}>
+        <CircleNewWorks begin={date.StartTime} end={date.EndTime} />
+      </div>
+      <div ref={CircleMemberRef}>
+        <CircleMember begin={date.StartTime} end={date.EndTime} />
+      </div>
     </div>
   );
 }

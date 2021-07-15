@@ -27,6 +27,10 @@ export default function UserAccess(props: UserAccessProps) {
     }
   };
   let config = {
+    point: {
+      size: 4,
+      color: "#FF3E3E",
+    },
     label: {
       style: {
         fill: "black",

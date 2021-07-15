@@ -40,7 +40,7 @@ export default function LayoutHeader(props: LayoutHeaderProps) {
               onClick={(e) => e.preventDefault()}
             >
               <Avatar icon={<UserOutlined />} />
-              <text style={{ marginLeft: "10px" }}>admin</text>
+              <div style={{ marginLeft: "10px", float: "right" }}>admin</div>
             </div>
           </Dropdown>
         </div>

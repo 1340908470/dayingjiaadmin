@@ -18,12 +18,6 @@ export default function PageVisitPV(props: PageVisitPVProps) {
 
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      console.log(
-        props.begin.split("-")[0] +
-          props.begin.split("-")[1] +
-          props.begin.split("-")[2] +
-          ""
-      );
       call(pandect.PageVisit, {
         begin:
           props.begin.split("-")[0] +

@@ -11,7 +11,6 @@ interface PageSharePVProps {
 
 export default function PageSharePV(props: PageSharePVProps) {
   let [data, setData] = useState([]);
-  console.log(data);
 
   useEffect(() => {
     asyncFetch();
@@ -19,12 +18,6 @@ export default function PageSharePV(props: PageSharePVProps) {
 
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      console.log(
-        props.begin.split("-")[0] +
-          props.begin.split("-")[1] +
-          props.begin.split("-")[2] +
-          ""
-      );
       call(pandect.PageShare, {
         begin:
           props.begin.split("-")[0] +

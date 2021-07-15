@@ -6,28 +6,23 @@ import auth from "@/util/backend/auth";
 import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
 
-interface RegisteredUserByDayProps {
+interface CircleTrendProps {
   begin: string;
   end: string;
 }
 
-export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
+export default function CircleTrend(props: CircleTrendProps) {
   const [data, setData] = useState([]);
   useEffect(() => {
     asyncFetch();
   }, [props]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      call(analytics.RegisteredUserByDay, {
+      call(analytics.GroupData, {
         begin: props.begin,
         end: props.end,
       }).then((r) => {
-        // @ts-ignore
-        setData(r);
-        // if (data.length === 0) {
-        //     // @ts-ignore
-        //     setData(r)
-        // }
+        setData(r.圈子作品发布趋势);
       });
     }
   };
@@ -48,14 +43,14 @@ export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
     color: "#FF3E3E",
     smooth: true,
     data: data,
-    xField: "日期",
+    xField: "date",
     yField: "amount",
     xAxis: { tickCount: 5 },
   };
   return (
     <>
       <div className={"chart-card"}>
-        <div className={"card-title"}>新增用户注册数</div>
+        <div className={"card-title"}>圈子作品发布趋势</div>
         <Area {...config} />
       </div>
     </>
