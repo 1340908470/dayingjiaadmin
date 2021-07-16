@@ -46,7 +46,6 @@ export default function WeeklyUserAccessChannel(
         color={() => {
           return "#FF3E3E";
         }}
-        scrollbar={{ type: "vertical" }}
       />
     </div>
   );

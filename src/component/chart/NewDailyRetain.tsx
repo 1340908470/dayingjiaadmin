@@ -334,7 +334,9 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           新用户7日留存数据
         </div>
-        <Table pagination={false} dataSource={data} columns={columns} />
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Table pagination={false} dataSource={data} columns={columns} />
+        </div>
       </div>
     </>
   );

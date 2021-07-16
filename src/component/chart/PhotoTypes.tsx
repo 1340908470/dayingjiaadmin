@@ -43,19 +43,20 @@ export default function PhotoTypes(props: PhotoTypeProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         发布作品类型分布
       </div>
-      <Bar
-        height={200}
-        color={() => {
-          return "#FF3E3E";
-        }}
-        data={data}
-        yField={"tag"}
-        xField={"amount"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        scrollbar={{ type: "vertical" }}
-      />
+      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+        <Bar
+          height={300}
+          color={() => {
+            return "#FF3E3E";
+          }}
+          data={data}
+          yField={"tag"}
+          xField={"amount"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+        />
+      </div>
     </div>
   );
 }

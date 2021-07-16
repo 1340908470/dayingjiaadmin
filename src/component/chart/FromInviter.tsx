@@ -69,7 +69,10 @@ export default function FromInviter(props: FromInviterProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           来自特邀影家渠道访问详情
         </div>
-        <Table pagination={false} dataSource={data} columns={columns} />
+
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Table pagination={false} dataSource={data} columns={columns} />
+        </div>
       </div>
     </>
   );

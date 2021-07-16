@@ -34,18 +34,21 @@ export default function AvatarExchange(props: AvatarExchangeProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         头像挂件兑换数Top10
       </div>
-      <Bar
-        data={data}
-        yField={"name"}
-        xField={"sales"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-        scrollbar={{ type: "vertical" }}
-      />
+
+      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+        <Bar
+          height={400}
+          data={data}
+          yField={"name"}
+          xField={"sales"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      </div>
     </div>
   );
 }

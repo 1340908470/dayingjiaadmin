@@ -11,7 +11,7 @@ const columns = [
     key: "time",
   },
   {
-    title: "活跃用户数",
+    title: "访问用户数",
     dataIndex: "num",
     key: "num",
   },
@@ -332,12 +332,11 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          活跃用户7日留存数据
+          访问用户7日留存数据
         </div>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          活跃用户7日留存数据
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Table pagination={false} dataSource={data} columns={columns} />
         </div>
-        <Table pagination={false} dataSource={data} columns={columns} />
       </div>
     </>
   );

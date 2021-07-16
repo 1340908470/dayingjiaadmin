@@ -45,7 +45,6 @@ export default function InviteGroupLikes(props: InviteGroupLikesProps) {
         color={() => {
           return "#FF3E3E";
         }}
-        scrollbar={{ type: "vertical" }}
       />
     </div>
   );

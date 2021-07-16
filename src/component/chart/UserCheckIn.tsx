@@ -233,8 +233,8 @@ export default function UserCheckIn(props: ActiveUserAgeProps) {
         <Col flex={"auto"}>
           <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
             <Table
-              pagination={{ pageSize: 6 }} //自定义每页显示的数据条数
               dataSource={tableData}
+              pagination={false}
               columns={columns}
               bordered={false}
             />

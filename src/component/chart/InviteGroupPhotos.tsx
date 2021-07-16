@@ -45,7 +45,6 @@ export default function InviteGroupPhotos(props: InviteGroupPhotosProps) {
         color={() => {
           return "#FF3E3E";
         }}
-        scrollbar={{ type: "vertical" }}
       />
     </div>
   );

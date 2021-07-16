@@ -104,13 +104,15 @@ export default function GiftRelatedData(props: GiftRelatedDataProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           礼品相关数据
         </div>
-        <Table
-          rowClassName={getRowClassName}
-          pagination={false}
-          showHeader={false}
-          dataSource={data}
-          columns={columns}
-        />
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Table
+            rowClassName={getRowClassName}
+            pagination={false}
+            showHeader={false}
+            dataSource={data}
+            columns={columns}
+          />
+        </div>
       </div>
     </>
   );

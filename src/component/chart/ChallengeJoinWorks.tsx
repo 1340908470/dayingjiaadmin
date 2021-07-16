@@ -44,7 +44,6 @@ export default function ChallengeJoinWorks(props: ChallengeJoinWorksProps) {
         color={() => {
           return "#FF3E3E";
         }}
-        scrollbar={{ type: "vertical" }}
       />
     </div>
   );

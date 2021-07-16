@@ -71,7 +71,10 @@ export default function CompetitionChannel(props: CompetitionChannelProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           各推广渠道数据
         </div>
-        <Table pagination={false} dataSource={data} columns={columns} />
+
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Table pagination={false} dataSource={data} columns={columns} />
+        </div>
       </div>
     </>
   );

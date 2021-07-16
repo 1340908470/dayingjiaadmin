@@ -42,18 +42,20 @@ export default function PageVisitPV(props: PageVisitPVProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         页面访问人数Top10对比
       </div>
-      <Bar
-        data={data}
-        yField={"name"}
-        xField={"pv"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-        scrollbar={{ type: "vertical" }}
-      />
+
+      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+        <Bar
+          data={data}
+          yField={"name"}
+          xField={"pv"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      </div>
     </div>
   );
 }

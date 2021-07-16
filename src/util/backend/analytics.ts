@@ -511,6 +511,103 @@ export interface InviteKPI {
   pass: boolean;
 }
 
+interface StatisticMonth {
+  访问人数: number;
+  访问次数: number;
+  新注册用户数: number;
+  老用户回归数: number;
+  新作品数: number;
+}
+
+interface LastStatistic {
+  访问人数: number;
+  访问次数: number;
+  新注册用户数: number;
+  老用户回归数: number;
+  新作品数: number;
+}
+
+interface ChainGrowth {
+  访问人数: number;
+  访问次数: number;
+  新注册用户数: number;
+  老用户回归数: number;
+  新作品数: number;
+}
+
+interface DataSummaryByMonthReq {
+  month: string; // 2021-06
+}
+
+interface DataSummaryByMonth {
+  统计月: StatisticMonth;
+  上次统计: LastStatistic;
+  环比增长: ChainGrowth;
+}
+
+interface DateMonth {
+  month: string;
+}
+
+interface RegisteredUserByMonth {
+  周数: string;
+  amount: number;
+}
+
+interface PhotosByMonth {
+  周数: string;
+  amount: number;
+}
+
+interface PhotoTypeStatisticMonth {
+  参赛: number;
+  挑战: number;
+  圈子: number;
+  其它: number;
+}
+
+interface PhotoTypeLastStatistic {
+  参赛: number;
+  挑战: number;
+  圈子: number;
+  其它: number;
+}
+
+interface PhotoTypeChainGrowth {
+  参赛: number;
+  挑战: number;
+  圈子: number;
+  其它: number;
+}
+
+interface PhotoTypeByMonth {
+  统计月: PhotoTypeStatisticMonth;
+  上次统计: PhotoTypeLastStatistic;
+  环比增长: PhotoTypeChainGrowth;
+}
+
+interface MonthlyChannel {
+  统计项目: string;
+  统计月访问次数: number;
+  上次统计访问次数: number;
+  环比增长: string;
+}
+
+interface InviterFocused {
+  特邀影家: string;
+  新增注册用户数: number;
+  新增圈子成员数: number;
+  新增圈子作品数: number;
+  新增作品获赞数: number;
+  新增作品被评论数: number;
+}
+
+interface InviterFocusedReq {
+  begin: string;
+  end: string;
+  stage: "202104";
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -603,4 +700,28 @@ export default {
     WeeklyCompetition
   >,
   InviteKPI: "analytics/invites" as EndPoint<InviteKPIReq, InviteKPI[]>,
+  DataSummaryByMonth: "analytics/datasummarybymonth" as EndPoint<
+    DataSummaryByMonthReq,
+    DataSummaryByMonth
+  >,
+  RegisteredUserByMonth: "analytics/registereduserbymonth" as EndPoint<
+    DateMonth,
+    RegisteredUserByMonth[]
+  >,
+  PhotosByMonth: "analytics/photosbymonth" as EndPoint<
+    DateMonth,
+    PhotosByMonth[]
+  >,
+  PhotoTypeByMonth: "analytics/phototypebymonth" as EndPoint<
+    DateMonth,
+    PhotoTypeByMonth
+  >,
+  MonthlyChannel: "analytics/monthlychannel" as EndPoint<
+    DateMonth,
+    MonthlyChannel[]
+  >,
+  InviterFocused: "analytics/inviterfocused" as EndPoint<
+    InviterFocusedReq,
+    InviterFocused[]
+  >,
 };

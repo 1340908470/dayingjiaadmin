@@ -123,31 +123,32 @@ export default function UserAccessByChannel(props: UserAccessProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         不同来源访问人数分布
       </div>
-      <br />
-      <Row>
-        <Col span={11}>
-          <Pie {...config} />
-        </Col>
-        <Col
-          flex={"2px"}
-          style={{
-            backgroundColor: "#DDDDDD",
-            marginLeft: "2px",
-            marginRight: "20px",
-          }}
-        />
-        <Col flex={"auto"}>
-          <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table
-              pagination={false}
-              dataSource={tableData}
-              columns={columns}
-              size={"small"}
-              bordered={false}
-            />
-          </div>
-        </Col>
-      </Row>
+      <div className={props.isMonthReport ? "chart-title-ppt" : ""}>
+        <Row style={{ float: "left", width: "100%" }}>
+          <Col span={11}>
+            <Pie {...config} />
+          </Col>
+          <Col
+            flex={"2px"}
+            style={{
+              backgroundColor: "#DDDDDD",
+              marginLeft: "2px",
+              marginRight: "20px",
+            }}
+          />
+          <Col flex={"auto"}>
+            <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
+              <Table
+                pagination={false}
+                dataSource={tableData}
+                columns={columns}
+                size={"small"}
+                bordered={false}
+              />
+            </div>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }

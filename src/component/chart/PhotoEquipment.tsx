@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
-import { Pie } from "@ant-design/charts";
+import { Area, Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 
 interface ActiveUserAgeProps {
@@ -132,29 +132,31 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
         作品拍摄器材分布
       </div>
       <br />
-      <Row>
-        <Col span={11}>
-          <Pie {...config} />
-        </Col>
-        <Col
-          flex={"2px"}
-          style={{
-            backgroundColor: "#DDDDDD",
-            marginLeft: "2px",
-            marginRight: "20px",
-          }}
-        />
-        <Col flex={"auto"}>
-          <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table
-              pagination={{ pageSize: 6 }} //自定义每页显示的数据条数
-              dataSource={tableData}
-              columns={columns}
-              bordered={false}
-            />
-          </div>
-        </Col>
-      </Row>
+      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+        <Row>
+          <Col span={11}>
+            <Pie {...config} />
+          </Col>
+          <Col
+            flex={"2px"}
+            style={{
+              backgroundColor: "#DDDDDD",
+              marginLeft: "2px",
+              marginRight: "20px",
+            }}
+          />
+          <Col flex={"auto"}>
+            <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
+              <Table
+                pagination={false}
+                dataSource={tableData}
+                columns={columns}
+                bordered={false}
+              />
+            </div>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }

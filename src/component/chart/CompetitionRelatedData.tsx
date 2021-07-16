@@ -108,13 +108,15 @@ export default function CompetitionRelatedData(
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           比赛相关数据
         </div>
-        <Table
-          rowClassName={getRowClassName}
-          pagination={false}
-          showHeader={false}
-          dataSource={data}
-          columns={columns}
-        />
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Table
+            rowClassName={getRowClassName}
+            pagination={false}
+            showHeader={false}
+            dataSource={data}
+            columns={columns}
+          />
+        </div>
       </div>
     </>
   );

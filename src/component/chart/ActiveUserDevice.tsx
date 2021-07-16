@@ -124,7 +124,7 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        活跃用户终端分布
+        访问用户终端分布
       </div>
       <br />
       <Row>
@@ -141,12 +141,7 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
         />
         <Col flex={"auto"}>
           <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table
-              pagination={{ pageSize: 6 }} //自定义每页显示的数据条数
-              dataSource={tableData}
-              columns={columns}
-              bordered={false}
-            />
+            <Table dataSource={tableData} columns={columns} bordered={false} />
           </div>
         </Col>
       </Row>

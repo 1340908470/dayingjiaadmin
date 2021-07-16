@@ -51,7 +51,7 @@ export default function ShopInfo(props: ShopInfoProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        发布作品类型分布
+        积分商城礼品详情
         <div style={{ float: "right", marginTop: "5px" }}>
           <Dropdown overlay={menu} trigger={["click"]}>
             <Button

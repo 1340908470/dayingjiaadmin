@@ -129,10 +129,9 @@ export default function NewUserAge(props: NewUserAgeProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        活跃用户性别分布
+        新用户年龄分布
       </div>
-      <br />
-      <Row>
+      <Row style={{ float: "left", width: "100%" }}>
         <Col span={11}>
           <Pie {...config} />
         </Col>

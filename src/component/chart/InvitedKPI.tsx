@@ -206,10 +206,12 @@ export default function InvitedKPI(props: InvitedKPIProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           特邀影家KPI考核
         </div>
-        <div style={{ float: "left", marginLeft: "20px" }}>
-          （每周考核指标：发布作品数≥2，圈子内新作品数≥20，评论或点赞数≥20）
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Table pagination={false} dataSource={data} columns={columns} />
+          <div style={{ float: "right", marginTop: "20px" }}>
+            （每周考核指标：发布作品数≥2，圈子内新作品数≥20，评论或点赞数≥20）
+          </div>
         </div>
-        <Table pagination={false} dataSource={data} columns={columns} />
       </div>
     </>
   );

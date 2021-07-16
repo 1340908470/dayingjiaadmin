@@ -34,18 +34,21 @@ export default function CircleMember(props: CircleWorksProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         圈子成员数TOP10对比
       </div>
-      <Bar
-        data={data}
-        yField={"name"}
-        xField={"amount"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-        scrollbar={{ type: "vertical" }}
-      />
+
+      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+        <Bar
+          height={400}
+          data={data}
+          yField={"name"}
+          xField={"amount"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      </div>
     </div>
   );
 }

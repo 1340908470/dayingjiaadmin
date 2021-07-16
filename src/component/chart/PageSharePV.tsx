@@ -42,18 +42,21 @@ export default function PageSharePV(props: PageSharePVProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         页面分享人数Top10对比
       </div>
-      <Bar
-        data={data}
-        yField={"name"}
-        xField={"pv"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-        scrollbar={{ type: "vertical" }}
-      />
+
+      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+        <Bar
+          height={400}
+          data={data}
+          yField={"name"}
+          xField={"pv"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      </div>
     </div>
   );
 }

@@ -34,18 +34,20 @@ export default function PhotoTag(props: PhotoTypeProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         不同标签作品数统计
       </div>
-      <Bar
-        data={data}
-        yField={"tag"}
-        xField={"amount"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-        scrollbar={{ type: "vertical" }}
-      />
+      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+        <Bar
+          height={400}
+          data={data}
+          yField={"tag"}
+          xField={"amount"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      </div>
     </div>
   );
 }

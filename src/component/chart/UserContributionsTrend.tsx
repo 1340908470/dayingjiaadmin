@@ -58,7 +58,9 @@ export default function UserContributionsTrend(
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           用户投稿趋势
         </div>
-        <Area {...config} />
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Area {...config} />
+        </div>
       </div>
     </>
   );
