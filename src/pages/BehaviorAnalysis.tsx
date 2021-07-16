@@ -8,7 +8,6 @@ import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import UserPhotos from "@/component/chart/UserPhotos";
 import UserAccessTime from "@/component/chart/UserAccessTime";
 import UserAccessDepth from "@/component/chart/UserAccessDepth";
-import KeepAlive, { AliveScope } from "react-activation";
 import { exportComponentAsPNG } from "react-component-export-image";
 
 interface BehaviorAnalysisProps {

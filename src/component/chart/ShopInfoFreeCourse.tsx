@@ -43,6 +43,7 @@ const columns = [
 ];
 
 interface ShopInfoFreeCourseProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }

@@ -6,6 +6,7 @@ import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 
 interface UserAccessDepthProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -119,8 +120,10 @@ export default function UserAccessDepth(props: UserAccessDepthProps) {
 
   // @ts-ignore}
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>访问深度分布</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        访问深度分布
+      </div>
       <br />
       <Row>
         <Col span={11}>

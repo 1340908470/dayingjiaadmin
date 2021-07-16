@@ -8,6 +8,7 @@ import ShopInfoAvatar from "@/component/chart/ShopInfoAvatar";
 import ShopInfoCourse from "@/component/chart/ShopInfoCourse";
 
 interface ShopInfoProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -48,8 +49,8 @@ export default function ShopInfo(props: ShopInfoProps) {
   );
 
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         发布作品类型分布
         <div style={{ float: "right", marginTop: "5px" }}>
           <Dropdown overlay={menu} trigger={["click"]}>

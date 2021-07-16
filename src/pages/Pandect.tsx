@@ -31,7 +31,7 @@ export default function Pandect(props: PandectProps) {
   const RegisteredUserByDayRef = useRef(null);
   const NewPhotoByDayRef = useRef(null);
 
-  if (props.nowPage === "行为分析") {
+  if (props.nowPage === "总览") {
     exportComponentAsPNG(DataSummaryRef)
       .then(() => {
         return exportComponentAsPNG(UserAccessRef);
@@ -53,7 +53,7 @@ export default function Pandect(props: PandectProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"行为分析"} setDateRange={setDateRange} />
+      <DateRangeFilter Title={"总览"} setDateRange={setDateRange} />
       <div ref={DataSummaryRef}>
         <DataSummary begin={date.StartTime} end={date.EndTime} />
       </div>

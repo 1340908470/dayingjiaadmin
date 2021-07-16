@@ -5,12 +5,7 @@
 import "./Default.css";
 import { useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
-import CircleRelatedData from "@/component/chart/CircleRelatedData";
 import { exportComponentAsPNG } from "react-component-export-image";
-import CircleTrend from "@/component/chart/CircleTrend";
-import CircleNewMember from "@/component/chart/CircleNewMember";
-import CircleNewWorks from "@/component/chart/CircleNewWorks";
-import CircleMember from "@/component/chart/CircleMember";
 import ChallengeRelatedData from "@/component/chart/ChallengeRelatedData";
 import ChallengeWorksTrend from "@/component/chart/ChallengeWorksTrend";
 import ChallengeJoinMember from "@/component/chart/ChallengeJoinMember";

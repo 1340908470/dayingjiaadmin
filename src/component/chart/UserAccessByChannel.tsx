@@ -6,6 +6,7 @@ import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 
 interface UserAccessProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -118,8 +119,10 @@ export default function UserAccessByChannel(props: UserAccessProps) {
 
   // @ts-ignore}
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>不同来源访问人数分布</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        不同来源访问人数分布
+      </div>
       <br />
       <Row>
         <Col span={11}>

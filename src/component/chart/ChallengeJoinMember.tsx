@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 
 interface ChallengeJoinMemberProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -29,8 +30,10 @@ export default function ChallengeJoinMember(props: ChallengeJoinMemberProps) {
   };
 
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>各级别参与挑战用户</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        各级别参与挑战用户
+      </div>
       <Bar
         data={data}
         yField={"name"}

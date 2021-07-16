@@ -19,6 +19,7 @@ const columns = [
 ];
 
 interface ChallengeRelatedDataProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -99,8 +100,10 @@ export default function ChallengeRelatedData(props: ChallengeRelatedDataProps) {
 
   return (
     <>
-      <div className={"chart-card"}>
-        <div className={"card-title"}>挑战相关数据</div>
+      <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+          挑战相关数据
+        </div>
         <Table
           rowClassName={getRowClassName}
           pagination={false}

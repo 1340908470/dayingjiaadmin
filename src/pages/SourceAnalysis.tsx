@@ -10,12 +10,12 @@ import FromInviter from "@/component/chart/FromInviter";
 import { exportComponentAsPNG } from "react-component-export-image";
 import PageSharePV from "@/component/chart/PageSharePV";
 
-interface ShareProps {
+interface SourceAnalysisProps {
   nowPage: string;
   resetPage: () => void;
 }
 
-export default function SourceAnalysis(props: ShareProps) {
+export default function SourceAnalysis(props: SourceAnalysisProps) {
   const [date, setDate] = useState({} as DateRange);
 
   function setDateRange(startTime: string, endTime: string) {

@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 
 interface FreeCourseAccessProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -29,8 +30,10 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
   };
 
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>免费课程访问数Top10</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        免费课程访问数Top10
+      </div>
       <Bar
         data={data}
         yField={"name"}

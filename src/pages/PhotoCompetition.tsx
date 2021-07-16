@@ -43,7 +43,7 @@ interface ChannelAccessNumbers {
   channel: string;
 }
 
-interface Competition {
+export interface Competition {
   id: number;
   name: string;
   投稿数量: number;

@@ -6,6 +6,7 @@ import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 
 interface ActiveUserAgeProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -126,8 +127,10 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
 
   // @ts-ignore}
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>作品拍摄器材分布</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        作品拍摄器材分布
+      </div>
       <br />
       <Row>
         <Col span={11}>

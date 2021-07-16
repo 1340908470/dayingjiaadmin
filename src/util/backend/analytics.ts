@@ -1,5 +1,6 @@
 import { EndPoint } from "./index";
 import RegisteredUserByDay from "@/component/chart/RegisteredUserByDay";
+import ex from "umi/dist";
 
 interface TestReq {
   Para1: string;
@@ -486,6 +487,30 @@ interface ShopInfoFreeCourse {
   访问次数: string;
 }
 
+interface WeeklyCompetitionReq {
+  id: number;
+}
+
+export interface WeeklyCompetition {
+  name: string;
+  total: number;
+  lastweek: number;
+}
+
+interface InviteKPIReq {
+  stage: string;
+}
+
+export interface InviteKPI {
+  name: string;
+  newphotos: number;
+  groupphotos: number;
+  groupcomments: number;
+  grouplikes: number;
+  total: number;
+  pass: boolean;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -573,4 +598,9 @@ export default {
     ShopInfoFreeCourseReq,
     ShopInfoFreeCourse[]
   >,
+  WeeklyCompetition: "analytics/competition" as EndPoint<
+    WeeklyCompetitionReq,
+    WeeklyCompetition
+  >,
+  InviteKPI: "analytics/invites" as EndPoint<InviteKPIReq, InviteKPI[]>,
 };

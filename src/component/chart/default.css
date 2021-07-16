@@ -8,7 +8,21 @@
     margin-bottom: 15px;
 }
 
+.card-title-ppt {
+    float: right;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
 .chart-card {
+    padding: 20px;
+    margin-bottom: 40px;
+    background-color: white;
+}
+
+.chart-card-ppt {
+    height: 1000px;
+    width: 2000px;
     padding: 20px;
     margin-bottom: 40px;
     background-color: white;

@@ -18,6 +18,8 @@ import Challenge from "@/pages/Challenge";
 import Shop from "@/pages/Shop";
 import Mine from "@/pages/Mine";
 import PhotoCompetition from "@/pages/PhotoCompetition";
+import WeekReport from "@/pages/WeekReport";
+import MonthlyReport from "@/pages/MonthlyReport";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -100,6 +102,12 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "我的"}>
               <Mine nowPage={nowPage} resetPage={resetPage} />
+            </div>
+            <div hidden={props.SiderNav !== "周报"}>
+              <WeekReport nowPage={nowPage} resetPage={resetPage} />
+            </div>
+            <div hidden={props.SiderNav !== "月报"}>
+              <MonthlyReport nowPage={nowPage} resetPage={resetPage} />
             </div>
           </div>
         </Content>

@@ -56,6 +56,7 @@ const columns = [
 ];
 
 interface ShopInfoFreeAvatarProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }

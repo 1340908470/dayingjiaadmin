@@ -7,6 +7,7 @@ import "./default.css";
 import style from "./default.css";
 
 interface FromInviterProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -64,8 +65,10 @@ export default function FromInviter(props: FromInviterProps) {
 
   return (
     <>
-      <div className={"chart-card"}>
-        <div className={"card-title"}>来自特邀影家渠道访问详情</div>
+      <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+          来自特邀影家渠道访问详情
+        </div>
         <Table pagination={false} dataSource={data} columns={columns} />
       </div>
     </>

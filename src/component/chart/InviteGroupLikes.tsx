@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 
 interface InviteGroupLikesProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -30,8 +31,10 @@ export default function InviteGroupLikes(props: InviteGroupLikesProps) {
   };
 
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>特邀影家点赞数</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        特邀影家点赞数
+      </div>
       <Bar
         data={data}
         yField={"name"}

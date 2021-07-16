@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 
 interface CourseExchangeProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -29,8 +30,10 @@ export default function CourseExchange(props: CourseExchangeProps) {
   };
 
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>精品课程兑换数Top10</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        精品课程兑换数Top10
+      </div>
       <Bar
         data={data}
         yField={"name"}

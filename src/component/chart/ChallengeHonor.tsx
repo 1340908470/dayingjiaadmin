@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 
 interface ChallengeHonorProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -29,8 +30,10 @@ export default function ChallengeHonor(props: ChallengeHonorProps) {
   };
 
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>各级别获取头衔用户数</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        各级别获取头衔用户数
+      </div>
       <Bar
         data={data}
         yField={"name"}

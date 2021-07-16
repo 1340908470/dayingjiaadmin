@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 
 interface InvitePhotosProps {
+  isMonthReport?: boolean;
   begin: string;
   end: string;
 }
@@ -30,8 +31,10 @@ export default function InvitePhotos(props: InvitePhotosProps) {
   };
 
   return (
-    <div className={"chart-card"}>
-      <div className={"card-title"}>发布作品数</div>
+    <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
+      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        发布作品数
+      </div>
       <Bar
         data={data}
         yField={"name"}
