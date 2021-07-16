@@ -34,21 +34,18 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         免费课程访问数Top10
       </div>
-
-      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-        <Bar
-          height={400}
-          data={data}
-          yField={"name"}
-          xField={"amount"}
-          yAxis={{
-            label: { autoRotate: false },
-          }}
-          color={() => {
-            return "#FF3E3E";
-          }}
-        />
-      </div>
+      <Bar
+        height={400}
+        data={data}
+        yField={"name"}
+        xField={"amount"}
+        yAxis={{
+          label: { autoRotate: false },
+        }}
+        color={() => {
+          return "#FF3E3E";
+        }}
+      />
     </div>
   );
 }

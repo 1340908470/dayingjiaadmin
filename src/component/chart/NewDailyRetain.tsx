@@ -24,7 +24,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text * 3 + ")",
+              backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -50,7 +50,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text * 3 + ")",
+              backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -76,7 +76,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text * 3 + ")",
+              backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -102,7 +102,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text * 3 + ")",
+              backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -128,7 +128,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text * 3 + ")",
+              backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -154,7 +154,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text * 3 + ")",
+              backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -180,7 +180,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text * 3 + ")",
+              backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,

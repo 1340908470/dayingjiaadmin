@@ -54,21 +54,89 @@ export default function MonthlyReport(props: MonthlyReportProps) {
     });
   }
 
-  const DataSummaryRef = useRef(null);
-  const UserAccessRef = useRef(null);
-  const RegisteredUserByDayRef = useRef(null);
-  const NewPhotoByDayRef = useRef(null);
+  const DataSummaryRefMonth = useRef(null);
+  const DataSummaryByMonthRefMonth = useRef(null);
+  const RegisteredUserByDayRefMonth = useRef(null);
+  const NumbersOfNewUserEveryWeekRefMonth = useRef(null);
+  const NumbersOfNewWorkEveryWeekRefMonth = useRef(null);
+  const PhotoTypesRefMonth = useRef(null);
+  const PhotoTagRefMonth = useRef(null);
+  const PhotoTypeByMonthRefMonth = useRef(null);
+  const PhotoEquipmentRefMonth = useRef(null);
+  const PhotoCompetitionTotalRefMonth = useRef(null);
+
+  const GiftRelatedDataRefMonth = useRef(null);
+  const FreeCourseAccessRefMonth = useRef(null);
+  const CourseExchangeRefMonth = useRef(null);
+  const AvatarExchangeRefMonth = useRef(null);
+
+  const UserAccessByChannelRefMonth = useRef(null);
+  const MonthlyChannelRefMonth = useRef(null);
+  const FromInviterRefMonth = useRef(null);
+
+  const ActiveUserGenderRefMonth = useRef(null);
+  const ActiveUserAgeRefMonth = useRef(null);
+  const ActiveUserDeviceRefMonth = useRef(null);
+
+  const ActiveDailyRetainRefMonth = useRef(null);
+  const NewDailyRetainRefMonth = useRef(null);
+
+  const InvitedKPIRefMonth = useRef(null);
+  const InviterFocusedRefMonth = useRef(null);
 
   if (props.nowPage === "月报") {
-    exportComponentAsPNG(DataSummaryRef)
+    console.log("111");
+    exportComponentAsPNG(DataSummaryRefMonth)
       .then(() => {
-        return exportComponentAsPNG(UserAccessRef);
+        return exportComponentAsPNG(PhotoTypeByMonthRefMonth);
       })
       .then(() => {
-        return exportComponentAsPNG(RegisteredUserByDayRef);
+        return exportComponentAsPNG(PhotoEquipmentRefMonth);
       })
       .then(() => {
-        return exportComponentAsPNG(NewPhotoByDayRef);
+        return exportComponentAsPNG(PhotoCompetitionTotalRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(GiftRelatedDataRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(FreeCourseAccessRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(CourseExchangeRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(AvatarExchangeRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(UserAccessByChannelRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(MonthlyChannelRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(FromInviterRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(ActiveUserGenderRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(ActiveUserAgeRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(ActiveUserDeviceRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(ActiveDailyRetainRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(NewDailyRetainRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(InvitedKPIRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(InviterFocusedRefMonth);
       })
       .then(() => {
         props.resetPage();
@@ -82,63 +150,63 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       }}
     >
       <DateRangeMonthlyFilter Title={"月报"} setDateRange={setDateRange} />
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={DataSummaryRefMonth}>
         <DataSummary
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={DataSummaryByMonthRefMonth}>
         <DataSummaryByMonth
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={NumbersOfNewUserEveryWeekRefMonth}>
         <NumbersOfNewUserEveryWeek
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={NumbersOfNewWorkEveryWeekRefMonth}>
         <NumbersOfNewWorkEveryWeek
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={PhotoTypesRefMonth}>
         <PhotoTypes
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={PhotoTagRefMonth}>
         <PhotoTag
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={PhotoTypeByMonthRefMonth}>
         <PhotoTypeByMonth
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={PhotoEquipmentRefMonth}>
         <PhotoEquipment
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={PhotoCompetitionTotalRefMonth}>
         <PhotoCompetitionTotal
           begin={date.StartTime}
           end={date.EndTime}
@@ -146,28 +214,28 @@ export default function MonthlyReport(props: MonthlyReportProps) {
         />
       </div>
 
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={GiftRelatedDataRefMonth}>
         <GiftRelatedData
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={FreeCourseAccessRefMonth}>
         <FreeCourseAccess
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={CourseExchangeRefMonth}>
         <CourseExchange
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={AvatarExchangeRefMonth}>
         <AvatarExchange
           isMonthReport={true}
           begin={date.StartTime}
@@ -175,21 +243,21 @@ export default function MonthlyReport(props: MonthlyReportProps) {
         />
       </div>
 
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={UserAccessByChannelRefMonth}>
         <UserAccessByChannel
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={MonthlyChannelRefMonth}>
         <MonthlyChannel
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={FromInviterRefMonth}>
         <FromInviter
           isMonthReport={true}
           begin={date.StartTime}
@@ -197,21 +265,21 @@ export default function MonthlyReport(props: MonthlyReportProps) {
         />
       </div>
 
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={ActiveUserGenderRefMonth}>
         <ActiveUserGender
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={ActiveUserAgeRefMonth}>
         <ActiveUserAge
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={ActiveUserDeviceRefMonth}>
         <ActiveUserDevice
           isMonthReport={true}
           begin={date.StartTime}
@@ -219,28 +287,29 @@ export default function MonthlyReport(props: MonthlyReportProps) {
         />
       </div>
 
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={ActiveDailyRetainRefMonth}>
         <ActiveDailyRetain
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={NewDailyRetainRefMonth}>
         <NewDailyRetain
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+
+      <div ref={InvitedKPIRefMonth}>
         <InvitedKPI
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
         />
       </div>
-      <div ref={RegisteredUserByDayRef}>
+      <div ref={InviterFocusedRefMonth}>
         <InviterFocused
           isMonthReport={true}
           begin={date.StartTime}

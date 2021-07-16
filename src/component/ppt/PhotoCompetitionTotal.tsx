@@ -55,9 +55,9 @@ export default function PhotoCompetitionTotal(
 
   return (
     <div style={{}}>
-      {totalCompetition.map((value) => {
+      {totalCompetition.map((value, index) => {
         return (
-          <>
+          <div key={index}>
             <CompetitionRelatedData
               isMonthReport={true}
               id={value.id}
@@ -76,7 +76,7 @@ export default function PhotoCompetitionTotal(
               begin={props.begin}
               end={props.end}
             />
-          </>
+          </div>
         );
       })}
     </div>

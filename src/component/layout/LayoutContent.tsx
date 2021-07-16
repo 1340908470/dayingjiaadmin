@@ -35,6 +35,8 @@ export default function LayoutContent(props: LayoutContentProps) {
     setNowPage("");
   };
 
+  console.log(nowPage);
+
   return (
     <>
       <Layout style={{ padding: "0 24px 24px", backgroundColor: "#F5F5F5" }}>
@@ -46,7 +48,7 @@ export default function LayoutContent(props: LayoutContentProps) {
             type="primary"
             icon={<DownloadOutlined />}
             onClick={() => {
-              setNowPage("总览");
+              setNowPage(props.SiderNav);
             }}
           >
             导出

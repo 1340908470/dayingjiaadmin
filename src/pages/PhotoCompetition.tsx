@@ -83,7 +83,7 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
   const PageSharePVRef = useRef(null);
   const PageShareUVRef = useRef(null);
 
-  if (props.nowPage === "分享") {
+  if (props.nowPage === "活动比赛") {
     exportComponentAsPNG(PageSharePVRef)
       .then(() => {
         return exportComponentAsPNG(PageShareUVRef);
@@ -99,7 +99,7 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"分享"} setDateRange={setDateRange} />
+      <DateRangeFilter Title={"活动比赛"} setDateRange={setDateRange} />
       <PhotoCompetitionNavigationButton
         competitionName={competitionName}
         competitionNames={competitionNames}
