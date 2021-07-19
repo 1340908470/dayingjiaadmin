@@ -35,6 +35,11 @@
     width: 100%;
 }
 
+.table-data {
+    font-size: large;
+    font-weight: bold;
+}
+
 .ant-table-thead > tr > th {
     background-color: #ececec;
 }

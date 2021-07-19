@@ -18,6 +18,7 @@ const columns = [
     dataIndex: "num",
     key: "num",
     align: "right",
+    className: "table-data",
   },
 ];
 
