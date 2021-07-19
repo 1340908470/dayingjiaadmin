@@ -2,6 +2,7 @@ import { Col, Row, Select, DatePicker } from "antd";
 import { useEffect, useState } from "react";
 import { call } from "@/util/client";
 import pandect from "@/util/backend/analytics";
+import moment, { Moment } from "moment";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -78,6 +79,16 @@ export default function DateRangeFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col hidden={rangeMod !== "自定义"}>
           <RangePicker
+            disabledDate={(current: Moment) => {
+              let startMoment = moment();
+              startMoment.set("year", 2021);
+              startMoment.set("month", 4);
+              startMoment.set("date", 12);
+
+              let EndMoment = moment();
+              EndMoment.set("month", moment().month());
+              return current < startMoment || current > EndMoment;
+            }}
             onChange={(e) => {
               let StartTime = "";
               let EndTime = "";

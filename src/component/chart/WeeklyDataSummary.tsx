@@ -17,6 +17,7 @@ const columns = [
     title: "统计",
     dataIndex: "num",
     key: "num",
+    align: "right",
   },
 ];
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Table, Tag, Space } from "antd";
 import { call } from "@/util/client";
@@ -16,6 +17,7 @@ const columns = [
     title: "统计",
     dataIndex: "num",
     key: "num",
+    align: "right",
   },
 ];
 

@@ -1,7 +1,6 @@
 import { Col, Row, Select, DatePicker } from "antd";
 import { useEffect, useState } from "react";
-import { call } from "@/util/client";
-import pandect from "@/util/backend/analytics";
+import moment from "moment";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -44,8 +43,36 @@ const getWeekDate = (year: number, week: number) => {
   return getWeekStartDate(year, week) + "-" + getWeekEndDate(year, week);
 };
 
+const getYearWeek = (year: number, month: number, date: number) => {
+  let dateNow = new Date(year, month, date);
+  let dateFirst = new Date(year, 0, 1);
+  let dataNumber = Math.round(
+    (dateNow.valueOf() - dateFirst.valueOf()) / 86400000
+  );
+  return Math.ceil((dataNumber + (dateFirst.getDay() + 1 - 1)) / 7);
+};
+
 export default function DateRangeWeeklyFilter(props: FilterProps) {
   const [dateRange, setDateRange] = useState({} as DateRange);
+
+  useEffect(() => {
+    const date = new Date();
+
+    const dateRanges = getWeekDate(
+      date.getFullYear(),
+      getYearWeek(date.getFullYear(), date.getMonth(), date.getDate()) - 1
+    ).split("-");
+
+    const StartTime = dateRanges[0].replaceAll("/", "-");
+    const EndTime = dateRanges[1].replaceAll("/", "-");
+
+    setDateRange({
+      StartTime: StartTime,
+      EndTime: EndTime,
+    });
+
+    props.setDateRange(StartTime, EndTime);
+  }, []);
 
   return (
     <>
@@ -56,6 +83,7 @@ export default function DateRangeWeeklyFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col>
           <DatePicker
+            defaultValue={moment()}
             picker="week"
             onChange={(date, dateString) => {
               dateString = dateString.replaceAll("周", "");

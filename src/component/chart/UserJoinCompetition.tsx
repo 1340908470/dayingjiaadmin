@@ -18,8 +18,10 @@ export default function UserJoinCompetition(props: UserJoinCompetitionProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    if (data.length === 0 && props.begin) asyncFetch();
+    if (data.length === 0 && props.begin) {
+      setLoading(true);
+      asyncFetch();
+    }
   }, [props.begin, data]);
 
   const asyncFetch = () => {
@@ -48,10 +50,10 @@ export default function UserJoinCompetition(props: UserJoinCompetitionProps) {
               },
             ];
             setData([...tmpData]);
-            if (data) setLoading(false);
           }
         });
       });
+      setLoading(false);
     });
   };
 
