@@ -1,5 +1,5 @@
 import { Row, Col, Form, Input, Button, Checkbox, Image } from "antd";
-import "./LayoutLogin.css";
+import "./default.css";
 import logo from "@/wwwroot/img/logo.png";
 import { call, setExpiresTime, setJwt } from "@/util/client";
 import auth from "../util/backend/auth";

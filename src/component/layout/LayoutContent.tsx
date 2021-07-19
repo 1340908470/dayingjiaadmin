@@ -37,7 +37,13 @@ export default function LayoutContent(props: LayoutContentProps) {
 
   return (
     <>
-      <Layout style={{ padding: "0 24px 24px", backgroundColor: "#F5F5F5" }}>
+      <Layout
+        style={{
+          padding: "0 24px 24px",
+          paddingLeft: "200px",
+          backgroundColor: "#F5F5F5",
+        }}
+      >
         <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>{props.HeaderNav}</Breadcrumb.Item>
           <Breadcrumb.Item>{props.SiderNav}</Breadcrumb.Item>
@@ -62,13 +68,7 @@ export default function LayoutContent(props: LayoutContentProps) {
             minHeight: 1200,
           }}
         >
-          <div
-            ref={contentRef}
-            style={{
-              width: "1280px",
-              margin: "auto",
-            }}
-          >
+          <div ref={contentRef} className={"sider-content"}>
             <div hidden={props.SiderNav !== "总览"}>
               <Pandect nowPage={nowPage} resetPage={resetPage} />
             </div>

@@ -27,8 +27,17 @@ export default function LayoutSider(props: LayoutSiderProps) {
 
   return (
     <>
-      <Layout style={{ backgroundColor: "red" }}>
-        <Sider width={200}>
+      <Layout hasSider style={{ backgroundColor: "red" }}>
+        <Sider
+          style={{
+            overflow: "auto",
+            height: "100vh",
+            position: "fixed",
+            top: 64,
+            left: 0,
+          }}
+          width={200}
+        >
           <Menu
             hidden={props.HeaderNav !== "数据统计"}
             mode="inline"
