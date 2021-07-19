@@ -89,7 +89,6 @@ export default class ChinaMap extends Component {
     // @ts-ignore
     return (
       <div>
-        <h1>China map</h1>
         <div id={this.props.uid} style={{ height: "500px", width: "140%" }} />
       </div>
     );

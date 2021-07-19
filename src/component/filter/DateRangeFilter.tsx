@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import { call } from "@/util/client";
 import pandect from "@/util/backend/analytics";
 import moment, { Moment } from "moment";
+import {
+  getWeekDate,
+  getYearWeek,
+} from "@/component/filter/DateRangeWeeklyFilter";
+import { getMonthDate } from "@/component/filter/DateRangeMonthlyFilter";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -21,39 +26,39 @@ export default function DateRangeFilter(props: FilterProps) {
   const [rangeMod, setRangeMod] = useState("上周");
   const [dateRange, setDateRange] = useState({} as DateRange);
 
-  function setDateRangeByFailed(type: string) {
-    const now = new Date();
-    let date = new Date();
-    if (type === "上周") {
-      date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
-    }
-    if (type === "上个月") {
-      date = new Date(now);
-      date.setMonth(now.getMonth() - 1);
-    }
-    const year = date.getFullYear();
-    const month = ("0" + date.getMonth()).slice(-2);
-    const day = ("0" + date.getDate()).slice(-2);
-
-    const startTime = year + "-" + month + "-" + day;
-    const endTime =
-      now.getFullYear() +
-      "-" +
-      ("0" + now.getMonth()).slice(-2) +
-      "-" +
-      ("0" + now.getDate()).slice(-2);
-
-    setDateRange({
-      StartTime: startTime,
-      EndTime: endTime,
-    });
-
-    props.setDateRange(startTime, endTime);
-  }
-
   useEffect(() => {
     setDateRangeByFailed("上周");
   }, []);
+
+  function setDateRangeByFailed(type: string) {
+    const date = new Date();
+
+    let dateRanges = [];
+    let StartTime = "";
+    let EndTime = "";
+
+    if (type === "上周") {
+      dateRanges = getWeekDate(
+        date.getFullYear(),
+        getYearWeek(date.getFullYear(), date.getMonth(), date.getDate()) - 2
+      ).split("-");
+
+      StartTime = dateRanges[0].replaceAll("/", "-");
+      EndTime = dateRanges[1].replaceAll("/", "-");
+    }
+    if (type === "上个月") {
+      dateRanges = getMonthDate(date.getFullYear(), date.getMonth()).split("/");
+
+      StartTime = dateRanges[0];
+      EndTime = dateRanges[1];
+    }
+
+    setDateRange({
+      StartTime: StartTime,
+      EndTime: EndTime,
+    });
+    props.setDateRange(StartTime, EndTime);
+  }
 
   return (
     <>
@@ -71,9 +76,15 @@ export default function DateRangeFilter(props: FilterProps) {
               setDateRangeByFailed(value);
             }}
           >
-            <Option value="上周">上周</Option>
-            <Option value="上个月">上个月</Option>
-            <Option value="自定义">自定义</Option>
+            <Option key={1} value="上周">
+              上周
+            </Option>
+            <Option key={1} value="上个月">
+              上个月
+            </Option>
+            <Option key={1} value="自定义">
+              自定义
+            </Option>
           </Select>
         </Col>
         <Col flex={"20px"} />

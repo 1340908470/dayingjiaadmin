@@ -17,7 +17,7 @@ export interface DateRange {
   EndTime: string; // 2021-05-19
 }
 
-const getMonthDate = (year: number, month: number) => {
+export const getMonthDate = (year: number, month: number) => {
   //获取周开始日期
   const getMonthStartDate = (year: number, month: number) => {
     return year + "-" + ("0" + month).slice(-2) + "-" + "01";

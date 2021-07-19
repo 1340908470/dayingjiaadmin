@@ -139,7 +139,7 @@ export default function NewUserAge(props: NewUserAgeProps) {
       {loading ? (
         <Loading />
       ) : (
-        <Row style={{ float: "left", width: "100%" }}>
+        <Row>
           <Col span={11}>
             <Pie {...config} />
           </Col>

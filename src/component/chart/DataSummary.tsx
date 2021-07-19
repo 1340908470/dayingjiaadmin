@@ -43,6 +43,8 @@ export default function DataSummary(props: DataSummaryProps) {
     return className;
   };
 
+  console.log(props);
+
   const asyncFetch = () => {
     if (props.begin) {
       call(analytics.DataSummary, {

@@ -1,6 +1,7 @@
 import { Col, Row, Select, DatePicker } from "antd";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import ex from "umi/dist";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -15,7 +16,7 @@ export interface DateRange {
   EndTime: string; // 2021-05-19
 }
 
-const getWeekDate = (year: number, week: number) => {
+export const getWeekDate = (year: number, week: number) => {
   //获取周开始日期
   const getWeekStartDate = (year: number, week: number) => {
     // Thursday in current week decides the year.
@@ -43,7 +44,7 @@ const getWeekDate = (year: number, week: number) => {
   return getWeekStartDate(year, week) + "-" + getWeekEndDate(year, week);
 };
 
-const getYearWeek = (year: number, month: number, date: number) => {
+export const getYearWeek = (year: number, month: number, date: number) => {
   let dateNow = new Date(year, month, date);
   let dateFirst = new Date(year, 0, 1);
   let dataNumber = Math.round(

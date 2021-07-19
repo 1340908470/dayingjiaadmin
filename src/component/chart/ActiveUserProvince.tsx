@@ -2,11 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
-import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
-import echarts from "echarts";
 import ChinaMap from "@/component/chart/ChinaMap";
-import auth from "@/util/backend/auth";
+import Loading from "@/component/layout/Loading";
 
 interface ActiveUserProvinceProps {
   isMonthReport?: boolean;
@@ -62,53 +60,6 @@ export default function ActiveUserProvince(props: ActiveUserProvinceProps) {
     }
   };
 
-  var config = {
-    appendPadding: 10,
-    data: data,
-    angleField: "value",
-    colorField: "type",
-    color: [
-      "#FD3D3B",
-      "#FD5254",
-      "#FD7374",
-      "#FE9292",
-      "#FEB1B2",
-      "#FED3D3",
-      "#DDDDDD",
-    ],
-    radius: 1,
-    innerRadius: 0.6,
-    label: {
-      type: "inner",
-      offset: "-50%",
-      content: "",
-      style: {
-        textAlign: "center",
-        fontSize: 14,
-      },
-    },
-    interactions: [{ type: "element-selected" }, { type: "element-active" }],
-    statistic: {
-      title: false,
-      content: {
-        style: {
-          whiteSpace: "pre-wrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        },
-        content: "",
-      },
-    },
-    legend: {
-      marker: {
-        symbol: "square",
-      },
-      flipPage: false,
-      layout: "horizontal",
-      position: "bottom",
-    },
-  };
-
   const columns = [
     {
       title: "年龄",
@@ -135,24 +86,23 @@ export default function ActiveUserProvince(props: ActiveUserProvinceProps) {
         访问用户地区分布
       </div>
       <br />
-
-      {loading ? (
-        <Loading />
-      ) : (
-        <Row>
-          <Col span={11}>
-            <ChinaMap uid={"ActiveUserProvince"} cityData={data} />
-          </Col>
-          <Col flex={"auto"} />
-          <Col
-            flex={"2px"}
-            style={{
-              backgroundColor: "#DDDDDD",
-              marginLeft: "2px",
-              marginRight: "20px",
-            }}
-          />
-          <Col span={10}>
+      <Row>
+        <Col span={11}>
+          <ChinaMap uid={"ActiveUserProvince"} cityData={data} />
+        </Col>
+        <Col flex={"auto"} />
+        <Col
+          flex={"2px"}
+          style={{
+            backgroundColor: "#DDDDDD",
+            marginLeft: "2px",
+            marginRight: "20px",
+          }}
+        />
+        <Col span={10}>
+          {loading ? (
+            <Loading />
+          ) : (
             <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
               <Table
                 dataSource={tableData}
@@ -160,9 +110,9 @@ export default function ActiveUserProvince(props: ActiveUserProvinceProps) {
                 bordered={false}
               />
             </div>
-          </Col>
-        </Row>
-      )}
+          )}
+        </Col>
+      </Row>
     </div>
   );
 }
