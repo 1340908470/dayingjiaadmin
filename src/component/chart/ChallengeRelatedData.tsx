@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -25,9 +26,11 @@ interface ChallengeRelatedDataProps {
 }
 
 export default function ChallengeRelatedData(props: ChallengeRelatedDataProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -94,6 +97,8 @@ export default function ChallengeRelatedData(props: ChallengeRelatedDataProps) {
             num: r.挑战相关数据[0].累计挑战成功作品数,
           },
         ]);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -104,13 +109,17 @@ export default function ChallengeRelatedData(props: ChallengeRelatedDataProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           挑战相关数据
         </div>
-        <Table
-          rowClassName={getRowClassName}
-          pagination={false}
-          showHeader={false}
-          dataSource={data}
-          columns={columns}
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <Table
+            rowClassName={getRowClassName}
+            pagination={false}
+            showHeader={false}
+            dataSource={data}
+            columns={columns}
+          />
+        )}
       </div>
     </>
   );

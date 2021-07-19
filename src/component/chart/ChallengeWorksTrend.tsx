@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Area, Bar } from "@ant-design/charts";
 import { call } from "@/util/client";
-import auth from "@/util/backend/auth";
 import analytics from "@/util/backend/analytics";
-import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface ChallengeWorksTrendProps {
   isMonthReport?: boolean;
@@ -14,7 +13,9 @@ interface ChallengeWorksTrendProps {
 
 export default function ChallengeWorksTrend(props: ChallengeWorksTrendProps) {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -24,6 +25,7 @@ export default function ChallengeWorksTrend(props: ChallengeWorksTrendProps) {
         end: props.end,
       }).then((r) => {
         setData(r.挑战作品发布趋势);
+        if (data) setLoading(false);
       });
     }
   };
@@ -46,7 +48,8 @@ export default function ChallengeWorksTrend(props: ChallengeWorksTrendProps) {
     data: data,
     xField: "date",
     yField: "amount",
-    xAxis: { tickCount: 5 },
+    yAxis: { tickCount: 5 },
+    xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
   return (
     <>
@@ -54,7 +57,7 @@ export default function ChallengeWorksTrend(props: ChallengeWorksTrendProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           挑战作品发布趋势
         </div>
-        <Area {...config} />
+        {loading ? <Loading /> : <Area {...config} />}
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
+import Loading from "@/component/layout/Loading";
 
 interface UserPhotosProps {
   isMonthReport?: boolean;
@@ -13,7 +14,9 @@ interface UserPhotosProps {
 
 export default function UserPhotos(props: UserPhotosProps) {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -47,6 +50,7 @@ export default function UserPhotos(props: UserPhotosProps) {
 
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
         // @ts-ignore
         setTableData(tmpDataTable);
       });
@@ -126,29 +130,33 @@ export default function UserPhotos(props: UserPhotosProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         用户发布作品数分布
       </div>
-      <Row className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-        <Col span={11}>
-          <Pie {...config} />
-        </Col>
-        <Col
-          flex={"2px"}
-          style={{
-            backgroundColor: "#DDDDDD",
-            marginLeft: "2px",
-            marginRight: "20px",
-          }}
-        />
-        <Col flex={"auto"}>
-          <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table
-              pagination={false}
-              dataSource={tableData}
-              columns={columns}
-              bordered={false}
-            />
-          </div>
-        </Col>
-      </Row>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Row className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Col span={11}>
+            <Pie {...config} />
+          </Col>
+          <Col
+            flex={"2px"}
+            style={{
+              backgroundColor: "#DDDDDD",
+              marginLeft: "2px",
+              marginRight: "20px",
+            }}
+          />
+          <Col flex={"auto"}>
+            <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
+              <Table
+                pagination={false}
+                dataSource={tableData}
+                columns={columns}
+                bordered={false}
+              />
+            </div>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

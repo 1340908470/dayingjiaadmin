@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface PhotoTypeProps {
   isMonthReport?: boolean;
@@ -13,7 +14,9 @@ interface PhotoTypeProps {
 export default function PhotoTypes(props: PhotoTypeProps) {
   let [data, setData] = useState([]);
 
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -34,6 +37,8 @@ export default function PhotoTypes(props: PhotoTypeProps) {
           // @ts-ignore
           { tag: "其它", amount: r.其它 },
         ]);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -43,20 +48,25 @@ export default function PhotoTypes(props: PhotoTypeProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         发布作品类型分布
       </div>
-      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-        <Bar
-          height={300}
-          color={() => {
-            return "#FF3E3E";
-          }}
-          data={data}
-          yField={"tag"}
-          xField={"amount"}
-          yAxis={{
-            label: { autoRotate: false },
-          }}
-        />
-      </div>
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Bar
+            height={300}
+            color={() => {
+              return "#FF3E3E";
+            }}
+            data={data}
+            yField={"tag"}
+            xField={"amount"}
+            yAxis={{
+              label: { autoRotate: false },
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

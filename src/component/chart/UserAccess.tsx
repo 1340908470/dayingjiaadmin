@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import auth from "@/util/backend/auth";
 import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface UserAccessProps {
   isMonthReport?: boolean;
@@ -13,8 +14,11 @@ interface UserAccessProps {
 }
 
 export default function UserAccess(props: UserAccessProps) {
+  const [loading, setLoading] = useState(true);
+
   const [data, setData] = useState([]);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -24,6 +28,7 @@ export default function UserAccess(props: UserAccessProps) {
         end: props.end,
       }).then((r) => {
         setData(r);
+        if (data) setLoading(false);
       });
     }
   };
@@ -46,7 +51,7 @@ export default function UserAccess(props: UserAccessProps) {
     data: data,
     xField: "日期",
     yField: "amount",
-    xAxis: { tickCount: 5 },
+    xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
   return (
     <>
@@ -54,7 +59,7 @@ export default function UserAccess(props: UserAccessProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           用户访问次数
         </div>
-        <Area {...config} />
+        {loading ? <Loading /> : <Area {...config} />}
       </div>
     </>
   );

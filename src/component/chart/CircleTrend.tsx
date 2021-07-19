@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import auth from "@/util/backend/auth";
 import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface CircleTrendProps {
   isMonthReport?: boolean;
@@ -13,8 +14,10 @@ interface CircleTrendProps {
 }
 
 export default function CircleTrend(props: CircleTrendProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -24,6 +27,7 @@ export default function CircleTrend(props: CircleTrendProps) {
         end: props.end,
       }).then((r) => {
         setData(r.圈子作品发布趋势);
+        if (data) setLoading(false);
       });
     }
   };
@@ -46,7 +50,8 @@ export default function CircleTrend(props: CircleTrendProps) {
     data: data,
     xField: "date",
     yField: "amount",
-    xAxis: { tickCount: 5 },
+    yAxis: { tickCount: 5 },
+    xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
   return (
     <>
@@ -54,7 +59,7 @@ export default function CircleTrend(props: CircleTrendProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           圈子作品发布趋势
         </div>
-        <Area {...config} />
+        {loading ? <Loading /> : <Area {...config} />}
       </div>
     </>
   );

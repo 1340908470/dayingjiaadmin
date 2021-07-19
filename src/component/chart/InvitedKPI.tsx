@@ -3,6 +3,7 @@ import { Table } from "antd";
 import { call } from "@/util/client";
 import analytics, { InviteKPI } from "@/util/backend/analytics";
 import "./default.css";
+import Loading from "@/component/layout/Loading";
 
 interface InvitedKPIProps {
   isMonthReport?: boolean;
@@ -11,10 +12,12 @@ interface InvitedKPIProps {
 }
 
 export default function InvitedKPI(props: InvitedKPIProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [kpi, setKpi] = useState([] as InviteKPI[]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -75,6 +78,7 @@ export default function InvitedKPI(props: InvitedKPIProps) {
         ];
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
       });
     }
   };
@@ -205,12 +209,17 @@ export default function InvitedKPI(props: InvitedKPIProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           特邀影家KPI考核
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-          <div style={{ float: "right", marginTop: "20px" }}>
-            （每周考核指标：发布作品数≥2，圈子内新作品数≥20，评论或点赞数≥20）
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table pagination={false} dataSource={data} columns={columns} />
+            <div style={{ float: "right", marginTop: "20px" }}>
+              （每周考核指标：发布作品数≥2，圈子内新作品数≥20，评论或点赞数≥20）
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

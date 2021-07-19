@@ -3,6 +3,7 @@ import { Table, Tag, Space } from "antd";
 import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -31,9 +32,11 @@ interface MonthActiveUserProvinceProps {
 export default function MonthActiveUserProvince(
   props: MonthActiveUserProvinceProps
 ) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -75,6 +78,7 @@ export default function MonthActiveUserProvince(
         }
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
       });
     }
   };
@@ -85,14 +89,19 @@ export default function MonthActiveUserProvince(
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           活跃用户地区分布
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table
-            rowClassName={getRowClassName}
-            pagination={false}
-            dataSource={data}
-            columns={columns}
-          />
-        </div>
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table
+              rowClassName={getRowClassName}
+              pagination={false}
+              dataSource={data}
+              columns={columns}
+            />
+          </div>
+        )}
       </div>
     </>
   );

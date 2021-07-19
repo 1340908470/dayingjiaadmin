@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import analytics from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface AvatarExchangeProps {
   isMonthReport?: boolean;
@@ -11,6 +12,7 @@ interface AvatarExchangeProps {
 }
 
 export default function AvatarExchange(props: AvatarExchangeProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
@@ -25,6 +27,8 @@ export default function AvatarExchange(props: AvatarExchangeProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r.头像挂件兑换数);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -35,20 +39,24 @@ export default function AvatarExchange(props: AvatarExchangeProps) {
         头像挂件兑换数Top10
       </div>
 
-      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-        <Bar
-          height={400}
-          data={data}
-          yField={"name"}
-          xField={"sales"}
-          yAxis={{
-            label: { autoRotate: false },
-          }}
-          color={() => {
-            return "#FF3E3E";
-          }}
-        />
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Bar
+            height={400}
+            data={data}
+            yField={"name"}
+            xField={"sales"}
+            yAxis={{
+              label: { autoRotate: false },
+            }}
+            color={() => {
+              return "#FF3E3E";
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

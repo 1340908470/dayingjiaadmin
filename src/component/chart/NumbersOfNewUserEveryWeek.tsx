@@ -6,6 +6,7 @@ import auth from "@/util/backend/auth";
 import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
 import { Table } from "antd";
+import Loading from "@/component/layout/Loading";
 
 interface NumbersOfNewUserEveryWeekProps {
   isMonthReport?: boolean;
@@ -16,8 +17,10 @@ interface NumbersOfNewUserEveryWeekProps {
 export default function NumbersOfNewUserEveryWeek(
   props: NumbersOfNewUserEveryWeekProps
 ) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -26,6 +29,8 @@ export default function NumbersOfNewUserEveryWeek(
         month: props.begin.split("-")[0] + "-" + props.begin.split("-")[1],
       }).then((r) => {
         setData(r);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -48,17 +53,23 @@ export default function NumbersOfNewUserEveryWeek(
     data: data,
     xField: "周数",
     yField: "amount",
-    xAxis: { tickCount: 5 },
+    yAxis: { tickCount: 5 },
+    xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           每周新增注册用户数
-        </div>{" "}
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Area {...config} />
         </div>
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Area {...config} />
+          </div>
+        )}
       </div>
     </>
   );

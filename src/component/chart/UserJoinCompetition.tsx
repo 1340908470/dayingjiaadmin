@@ -5,6 +5,7 @@ import analytics, { WeeklyCompetition } from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
 import { Competition } from "@/pages/PhotoCompetition";
+import Loading from "@/component/layout/Loading";
 
 interface UserJoinCompetitionProps {
   isMonthReport?: boolean;
@@ -14,8 +15,10 @@ interface UserJoinCompetitionProps {
 
 export default function UserJoinCompetition(props: UserJoinCompetitionProps) {
   let [data, setData] = useState([] as WeeklyCompetition[]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     if (data.length === 0 && props.begin) asyncFetch();
   }, [props.begin, data]);
 
@@ -45,6 +48,7 @@ export default function UserJoinCompetition(props: UserJoinCompetitionProps) {
               },
             ];
             setData([...tmpData]);
+            if (data) setLoading(false);
           }
         });
       });
@@ -75,7 +79,11 @@ export default function UserJoinCompetition(props: UserJoinCompetitionProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           用户参赛情况
         </div>
-        <Table pagination={false} dataSource={data} columns={columns} />
+        {loading ? (
+          <Loading />
+        ) : (
+          <Table pagination={false} dataSource={data} columns={columns} />
+        )}
       </div>
     </>
   );

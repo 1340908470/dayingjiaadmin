@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import analytics from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface FreeCourseAccessProps {
   isMonthReport?: boolean;
@@ -11,9 +12,11 @@ interface FreeCourseAccessProps {
 }
 
 export default function FreeCourseAccess(props: FreeCourseAccessProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -25,6 +28,8 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r.免费课程访问数);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -34,18 +39,23 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         免费课程访问数Top10
       </div>
-      <Bar
-        height={400}
-        data={data}
-        yField={"name"}
-        xField={"amount"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-      />
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <Bar
+          height={400}
+          data={data}
+          yField={"name"}
+          xField={"amount"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      )}
     </div>
   );
 }

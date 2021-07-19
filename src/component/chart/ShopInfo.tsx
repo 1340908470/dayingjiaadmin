@@ -15,7 +15,6 @@ interface ShopInfoProps {
 
 export default function ShopInfo(props: ShopInfoProps) {
   let [nowCategory, setNowCategory] = useState("免费课程");
-
   const menu = (
     <Menu>
       <Menu.Item key="0">

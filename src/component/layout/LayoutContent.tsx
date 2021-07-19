@@ -62,7 +62,13 @@ export default function LayoutContent(props: LayoutContentProps) {
             minHeight: 1200,
           }}
         >
-          <div ref={contentRef}>
+          <div
+            ref={contentRef}
+            style={{
+              width: "1280px",
+              margin: "auto",
+            }}
+          >
             <div hidden={props.SiderNav !== "总览"}>
               <Pandect nowPage={nowPage} resetPage={resetPage} />
             </div>

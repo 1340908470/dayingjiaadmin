@@ -3,6 +3,7 @@ import { Table } from "antd";
 import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -231,8 +232,10 @@ interface DailyRetain {
 export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
   let [data, setData] = useState([]);
   let [len, setLen] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -343,6 +346,8 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
           }
           // @ts-ignore
           setLen(tmpLen);
+
+          if (data) setLoading(false);
         });
     }
   };
@@ -360,14 +365,20 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
             {props.isMonthReport ? "访问用户留存数据" : "访问用户7日留存数据"}
           </div>
           <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-            <Table
-              pagination={false}
-              dataSource={data.slice(
-                value * 10,
-                (value + 1) * 10 > data.length ? data.length : (value + 1) * 10
-              )}
-              columns={columns}
-            />
+            {loading ? (
+              <Loading />
+            ) : (
+              <Table
+                pagination={false}
+                dataSource={data.slice(
+                  value * 10,
+                  (value + 1) * 10 > data.length
+                    ? data.length
+                    : (value + 1) * 10
+                )}
+                columns={columns}
+              />
+            )}
           </div>
         </div>
       ))}

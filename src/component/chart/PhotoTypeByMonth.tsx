@@ -3,6 +3,7 @@ import { Table } from "antd";
 import { call } from "@/util/client";
 import analytics, { InviteKPI } from "@/util/backend/analytics";
 import "./default.css";
+import Loading from "@/component/layout/Loading";
 
 interface PhotoTypeByMonthProps {
   isMonthReport?: boolean;
@@ -13,7 +14,9 @@ interface PhotoTypeByMonthProps {
 export default function PhotoTypeByMonth(props: PhotoTypeByMonthProps) {
   const [data, setData] = useState([]);
 
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -53,6 +56,7 @@ export default function PhotoTypeByMonth(props: PhotoTypeByMonthProps) {
         ];
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
       });
     }
   };
@@ -95,9 +99,14 @@ export default function PhotoTypeByMonth(props: PhotoTypeByMonthProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           用户数据月度对比
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-        </div>
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table pagination={false} dataSource={data} columns={columns} />
+          </div>
+        )}
       </div>
     </>
   );

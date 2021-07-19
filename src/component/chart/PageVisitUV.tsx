@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface PageVisitUVProps {
   isMonthReport?: boolean;
@@ -13,7 +14,9 @@ interface PageVisitUVProps {
 export default function PageVisitUV(props: PageVisitUVProps) {
   let [data, setData] = useState([]);
 
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -33,6 +36,8 @@ export default function PageVisitUV(props: PageVisitUVProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r.uv);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -42,20 +47,23 @@ export default function PageVisitUV(props: PageVisitUVProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         页面访问次数Top10对比
       </div>
-
-      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-        <Bar
-          data={data}
-          yField={"name"}
-          xField={"uv"}
-          yAxis={{
-            label: { autoRotate: false },
-          }}
-          color={() => {
-            return "#FF3E3E";
-          }}
-        />
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Bar
+            data={data}
+            yField={"name"}
+            xField={"uv"}
+            yAxis={{
+              label: { autoRotate: false },
+            }}
+            color={() => {
+              return "#FF3E3E";
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

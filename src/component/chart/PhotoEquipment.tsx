@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import { Area, Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
+import Loading from "@/component/layout/Loading";
 
 interface ActiveUserAgeProps {
   isMonthReport?: boolean;
@@ -13,7 +14,9 @@ interface ActiveUserAgeProps {
 
 export default function PhotoEquipment(props: ActiveUserAgeProps) {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -52,6 +55,7 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
         }
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
         // @ts-ignore
         setTableData(tmpDataTable);
       });
@@ -132,31 +136,36 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
         作品拍摄器材分布
       </div>
       <br />
-      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-        <Row>
-          <Col span={11}>
-            <Pie {...config} />
-          </Col>
-          <Col
-            flex={"2px"}
-            style={{
-              backgroundColor: "#DDDDDD",
-              marginLeft: "2px",
-              marginRight: "20px",
-            }}
-          />
-          <Col flex={"auto"}>
-            <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-              <Table
-                pagination={false}
-                dataSource={tableData}
-                columns={columns}
-                bordered={false}
-              />
-            </div>
-          </Col>
-        </Row>
-      </div>
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Row>
+            <Col span={11}>
+              <Pie {...config} />
+            </Col>
+            <Col
+              flex={"2px"}
+              style={{
+                backgroundColor: "#DDDDDD",
+                marginLeft: "2px",
+                marginRight: "20px",
+              }}
+            />
+            <Col flex={"auto"}>
+              <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
+                <Table
+                  pagination={false}
+                  dataSource={tableData}
+                  columns={columns}
+                  bordered={false}
+                />
+              </div>
+            </Col>
+          </Row>
+        </div>
+      )}
     </div>
   );
 }

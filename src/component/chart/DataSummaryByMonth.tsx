@@ -3,6 +3,7 @@ import { Table } from "antd";
 import { call } from "@/util/client";
 import analytics, { InviteKPI } from "@/util/backend/analytics";
 import "./default.css";
+import Loading from "@/component/layout/Loading";
 
 interface DataSummaryByMonthProps {
   isMonthReport?: boolean;
@@ -11,9 +12,11 @@ interface DataSummaryByMonthProps {
 }
 
 export default function DataSummaryByMonth(props: DataSummaryByMonthProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -59,6 +62,7 @@ export default function DataSummaryByMonth(props: DataSummaryByMonthProps) {
         ];
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
       });
     }
   };
@@ -101,9 +105,13 @@ export default function DataSummaryByMonth(props: DataSummaryByMonthProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           用户数据月度对比
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table pagination={false} dataSource={data} columns={columns} />
+          </div>
+        )}
       </div>
     </>
   );

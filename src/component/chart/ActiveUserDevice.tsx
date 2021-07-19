@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
+import Loading from "@/component/layout/Loading";
 
 interface ActiveUserDeviceProps {
   isMonthReport?: boolean;
@@ -12,8 +13,10 @@ interface ActiveUserDeviceProps {
 }
 
 export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -49,6 +52,7 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
           });
         }
         setData(tmpData);
+        if (data) setLoading(false);
         setTableData(tmpDataTable);
       });
     }
@@ -127,31 +131,35 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
         访问用户终端分布
       </div>
       <br />
-      <Row>
-        <Col span={11}>
-          <Pie {...config} />
-        </Col>
-        <Col
-          flex={"2px"}
-          style={{
-            backgroundColor: "#DDDDDD",
-            marginLeft: "2px",
-            marginRight: "20px",
-          }}
-        />
-        <Col flex={"auto"}>
-          <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table
-              dataSource={
-                props.isMonthReport ? tableData.slice(0, 9) : tableData
-              }
-              columns={columns}
-              pagination={!props.isMonthReport}
-              bordered={false}
-            />
-          </div>
-        </Col>
-      </Row>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Row>
+          <Col span={11}>
+            <Pie {...config} />
+          </Col>
+          <Col
+            flex={"2px"}
+            style={{
+              backgroundColor: "#DDDDDD",
+              marginLeft: "2px",
+              marginRight: "20px",
+            }}
+          />
+          <Col flex={"auto"}>
+            <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
+              <Table
+                dataSource={
+                  props.isMonthReport ? tableData.slice(0, 9) : tableData
+                }
+                columns={columns}
+                pagination={!props.isMonthReport}
+                bordered={false}
+              />
+            </div>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

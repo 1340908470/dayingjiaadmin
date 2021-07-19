@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface CircleNewMemberProps {
   isMonthReport?: boolean;
@@ -11,9 +12,11 @@ interface CircleNewMemberProps {
 }
 
 export default function CircleNewMember(props: CircleNewMemberProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -25,6 +28,7 @@ export default function CircleNewMember(props: CircleNewMemberProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r.新增成员数TOP10);
+        if (data) setLoading(false);
       });
     }
   };
@@ -35,20 +39,24 @@ export default function CircleNewMember(props: CircleNewMemberProps) {
         圈子新增成员数TOP10对比
       </div>
 
-      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-        <Bar
-          height={400}
-          data={data}
-          yField={"name"}
-          xField={"amount"}
-          yAxis={{
-            label: { autoRotate: false },
-          }}
-          color={() => {
-            return "#FF3E3E";
-          }}
-        />
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Bar
+            height={400}
+            data={data}
+            yField={"name"}
+            xField={"amount"}
+            yAxis={{
+              label: { autoRotate: false },
+            }}
+            color={() => {
+              return "#FF3E3E";
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

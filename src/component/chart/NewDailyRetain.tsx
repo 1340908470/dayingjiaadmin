@@ -3,6 +3,7 @@ import { Table } from "antd";
 import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -222,9 +223,11 @@ interface DailyRetain {
 }
 
 export default function NewDailyRetain(props: NewDailyRetainProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -321,6 +324,8 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
 
           // @ts-ignore
           setData(tmpD);
+
+          if (data) setLoading(false);
         });
     }
   };
@@ -331,9 +336,14 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           新用户7日留存数据
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-        </div>
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table pagination={false} dataSource={data} columns={columns} />
+          </div>
+        )}
       </div>
     </>
   );

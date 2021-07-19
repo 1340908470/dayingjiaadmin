@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface InvitePhotosProps {
   isMonthReport?: boolean;
@@ -11,9 +12,11 @@ interface InvitePhotosProps {
 }
 
 export default function InvitePhotos(props: InvitePhotosProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -26,6 +29,7 @@ export default function InvitePhotos(props: InvitePhotosProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r);
+        if (data) setLoading(false);
       });
     }
   };
@@ -35,17 +39,21 @@ export default function InvitePhotos(props: InvitePhotosProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         发布作品数
       </div>
-      <Bar
-        data={data}
-        yField={"name"}
-        xField={"data"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <Bar
+          data={data}
+          yField={"name"}
+          xField={"data"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      )}
     </div>
   );
 }

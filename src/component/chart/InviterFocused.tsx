@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -45,9 +46,11 @@ interface InviterFocusedProps {
 }
 
 export default function InviterFocused(props: InviterFocusedProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -60,6 +63,7 @@ export default function InviterFocused(props: InviterFocusedProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r);
+        if (data) setLoading(false);
       });
     }
   };
@@ -70,9 +74,14 @@ export default function InviterFocused(props: InviterFocusedProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           特邀影家关注度统计
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-        </div>
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table pagination={false} dataSource={data} columns={columns} />
+          </div>
+        )}
       </div>
     </>
   );

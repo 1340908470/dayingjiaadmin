@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import auth from "@/util/backend/auth";
 import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface RegisteredUserByDayProps {
   isMonthReport?: boolean;
@@ -14,7 +15,9 @@ interface RegisteredUserByDayProps {
 
 export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -25,10 +28,8 @@ export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r);
-        // if (data.length === 0) {
-        //     // @ts-ignore
-        //     setData(r)
-        // }
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -51,7 +52,9 @@ export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
     data: data,
     xField: "日期",
     yField: "amount",
-    xAxis: { tickCount: 5 },
+    xAxis: {
+      tickCount: data.length > 12 ? 12 : 7,
+    },
   };
   return (
     <>
@@ -59,7 +62,8 @@ export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           新增用户注册数
         </div>
-        <Area {...config} />
+
+        {loading ? <Loading /> : <Area {...config} />}
       </div>
     </>
   );

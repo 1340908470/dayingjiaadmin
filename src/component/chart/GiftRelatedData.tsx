@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -25,9 +26,11 @@ interface GiftRelatedDataProps {
 }
 
 export default function GiftRelatedData(props: GiftRelatedDataProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -94,6 +97,8 @@ export default function GiftRelatedData(props: GiftRelatedDataProps) {
             num: r.累计头像挂件数,
           },
         ]);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -104,15 +109,19 @@ export default function GiftRelatedData(props: GiftRelatedDataProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           礼品相关数据
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table
-            rowClassName={getRowClassName}
-            pagination={false}
-            showHeader={false}
-            dataSource={data}
-            columns={columns}
-          />
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table
+              rowClassName={getRowClassName}
+              pagination={false}
+              showHeader={false}
+              dataSource={data}
+              columns={columns}
+            />
+          </div>
+        )}
       </div>
     </>
   );

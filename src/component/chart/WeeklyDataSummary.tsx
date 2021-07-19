@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -27,6 +28,7 @@ interface WeeklyDataSummaryProps {
 
 export default function WeeklyDataSummary(props: WeeklyDataSummaryProps) {
   let [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (data.length === 0 && props.begin) asyncFetch();
@@ -119,6 +121,8 @@ export default function WeeklyDataSummary(props: WeeklyDataSummaryProps) {
             num: r.累计作品数,
           },
         ]);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -129,13 +133,17 @@ export default function WeeklyDataSummary(props: WeeklyDataSummaryProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           用户数据概况
         </div>
-        <Table
-          rowClassName={getRowClassName}
-          pagination={false}
-          showHeader={false}
-          dataSource={data}
-          columns={columns}
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <Table
+            rowClassName={getRowClassName}
+            pagination={false}
+            showHeader={false}
+            dataSource={data}
+            columns={columns}
+          />
+        )}
       </div>
     </>
   );

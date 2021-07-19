@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 interface FromInviterProps {
   isMonthReport?: boolean;
@@ -13,9 +14,11 @@ interface FromInviterProps {
 }
 
 export default function FromInviter(props: FromInviterProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -41,6 +44,7 @@ export default function FromInviter(props: FromInviterProps) {
         }
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
       });
     }
   };
@@ -70,9 +74,13 @@ export default function FromInviter(props: FromInviterProps) {
           来自特邀影家渠道访问详情
         </div>
 
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table pagination={false} dataSource={data} columns={columns} />
+          </div>
+        )}
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -25,9 +26,11 @@ interface DataSummaryProps {
 }
 
 export default function CircleRelatedData(props: DataSummaryProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -94,6 +97,7 @@ export default function CircleRelatedData(props: DataSummaryProps) {
             num: r.累计加入圈子的人数,
           },
         ]);
+        if (data) setLoading(false);
       });
     }
   };
@@ -104,13 +108,17 @@ export default function CircleRelatedData(props: DataSummaryProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           圈子相关数据
         </div>
-        <Table
-          rowClassName={getRowClassName}
-          pagination={false}
-          showHeader={false}
-          dataSource={data}
-          columns={columns}
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <Table
+            rowClassName={getRowClassName}
+            pagination={false}
+            showHeader={false}
+            dataSource={data}
+            columns={columns}
+          />
+        )}
       </div>
     </>
   );

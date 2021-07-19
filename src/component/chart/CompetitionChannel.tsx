@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -48,9 +49,11 @@ interface CompetitionChannelProps {
 }
 
 export default function CompetitionChannel(props: CompetitionChannelProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -62,6 +65,7 @@ export default function CompetitionChannel(props: CompetitionChannelProps) {
         end: props.end,
       }).then((r) => {
         setData(r);
+        if (data) setLoading(false);
       });
     }
   };
@@ -73,9 +77,13 @@ export default function CompetitionChannel(props: CompetitionChannelProps) {
           {props.name ? `"${props.name}" 各推广渠道数据` : "各推广渠道数据"}
         </div>
 
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table pagination={false} dataSource={data} columns={columns} />
+          </div>
+        )}
       </div>
     </>
   );

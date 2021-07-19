@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
+import Loading from "@/component/layout/Loading";
 
 interface NewUserAgeProps {
   isMonthReport?: boolean;
@@ -12,8 +13,10 @@ interface NewUserAgeProps {
 }
 
 export default function NewUserAge(props: NewUserAgeProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -52,6 +55,7 @@ export default function NewUserAge(props: NewUserAgeProps) {
         }
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
         // @ts-ignore
         setTableData(tmpDataTable);
       });
@@ -131,29 +135,34 @@ export default function NewUserAge(props: NewUserAgeProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         新用户年龄分布
       </div>
-      <Row style={{ float: "left", width: "100%" }}>
-        <Col span={11}>
-          <Pie {...config} />
-        </Col>
-        <Col
-          flex={"2px"}
-          style={{
-            backgroundColor: "#DDDDDD",
-            marginLeft: "2px",
-            marginRight: "20px",
-          }}
-        />
-        <Col flex={"auto"}>
-          <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table
-              pagination={false}
-              dataSource={tableData}
-              columns={columns}
-              bordered={false}
-            />
-          </div>
-        </Col>
-      </Row>
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <Row style={{ float: "left", width: "100%" }}>
+          <Col span={11}>
+            <Pie {...config} />
+          </Col>
+          <Col
+            flex={"2px"}
+            style={{
+              backgroundColor: "#DDDDDD",
+              marginLeft: "2px",
+              marginRight: "20px",
+            }}
+          />
+          <Col flex={"auto"}>
+            <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
+              <Table
+                pagination={false}
+                dataSource={tableData}
+                columns={columns}
+                bordered={false}
+              />
+            </div>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

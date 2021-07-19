@@ -7,6 +7,7 @@ import { Row, Col, Table } from "antd";
 import echarts from "echarts";
 import ChinaMap from "@/component/chart/ChinaMap";
 import auth from "@/util/backend/auth";
+import Loading from "@/component/layout/Loading";
 
 interface NewUserProvinceProps {
   isMonthReport?: boolean;
@@ -15,9 +16,11 @@ interface NewUserProvinceProps {
 }
 
 export default function NewUserProvince(props: NewUserProvinceProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -57,6 +60,7 @@ export default function NewUserProvince(props: NewUserProvinceProps) {
         }
         // @ts-ignore
         setData(tmpData);
+        if (data) setLoading(false);
         // @ts-ignore
         setTableData(tmpDataTable);
       });
@@ -137,25 +141,34 @@ export default function NewUserProvince(props: NewUserProvinceProps) {
         新用户地区分布
       </div>
       <br />
-      <Row>
-        <Col span={11}>
-          <ChinaMap uid={"newUserProvince"} cityData={data} />
-        </Col>
-        <Col flex={"auto"} />
-        <Col
-          flex={"2px"}
-          style={{
-            backgroundColor: "#DDDDDD",
-            marginLeft: "2px",
-            marginRight: "20px",
-          }}
-        />
-        <Col span={10}>
-          <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table dataSource={tableData} columns={columns} bordered={false} />
-          </div>
-        </Col>
-      </Row>
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <Row>
+          <Col span={11}>
+            <ChinaMap uid={"newUserProvince"} cityData={data} />
+          </Col>
+          <Col flex={"auto"} />
+          <Col
+            flex={"2px"}
+            style={{
+              backgroundColor: "#DDDDDD",
+              marginLeft: "2px",
+              marginRight: "20px",
+            }}
+          />
+          <Col span={10}>
+            <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
+              <Table
+                dataSource={tableData}
+                columns={columns}
+                bordered={false}
+              />
+            </div>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

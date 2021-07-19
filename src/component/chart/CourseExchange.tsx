@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import analytics from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface CourseExchangeProps {
   isMonthReport?: boolean;
@@ -11,9 +12,11 @@ interface CourseExchangeProps {
 }
 
 export default function CourseExchange(props: CourseExchangeProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -25,6 +28,7 @@ export default function CourseExchange(props: CourseExchangeProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r.精品课程兑换数);
+        if (data) setLoading(false);
       });
     }
   };
@@ -35,20 +39,24 @@ export default function CourseExchange(props: CourseExchangeProps) {
         精品课程兑换数Top10
       </div>
 
-      <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-        <Bar
-          height={400}
-          data={data}
-          yField={"name"}
-          xField={"sales"}
-          yAxis={{
-            label: { autoRotate: false },
-          }}
-          color={() => {
-            return "#FF3E3E";
-          }}
-        />
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+          <Bar
+            height={400}
+            data={data}
+            yField={"name"}
+            xField={"sales"}
+            yAxis={{
+              label: { autoRotate: false },
+            }}
+            color={() => {
+              return "#FF3E3E";
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface ChallengeHonorProps {
   isMonthReport?: boolean;
@@ -11,6 +12,7 @@ interface ChallengeHonorProps {
 }
 
 export default function ChallengeHonor(props: ChallengeHonorProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
@@ -25,6 +27,8 @@ export default function ChallengeHonor(props: ChallengeHonorProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r.各级别获取头衔用户数);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -34,17 +38,21 @@ export default function ChallengeHonor(props: ChallengeHonorProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         各级别获取头衔用户数
       </div>
-      <Bar
-        data={data}
-        yField={"name"}
-        xField={"amount"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <Bar
+          data={data}
+          yField={"name"}
+          xField={"amount"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      )}
     </div>
   );
 }

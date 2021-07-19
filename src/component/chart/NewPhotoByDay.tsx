@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import { Area } from "@ant-design/charts";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -26,8 +27,10 @@ interface NewPhotoByDayProps {
 }
 
 export default function NewPhotoByDay(props: NewPhotoByDayProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -38,6 +41,8 @@ export default function NewPhotoByDay(props: NewPhotoByDayProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -60,16 +65,17 @@ export default function NewPhotoByDay(props: NewPhotoByDayProps) {
     data: data,
     xField: "日期",
     yField: "amount",
-    xAxis: { tickCount: 5 },
+    yAxis: { tickCount: 5 },
+    xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
-  // @ts-ignore
   return (
     <div>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           新增作品数
         </div>
-        <Area {...config} />
+
+        {loading ? <Loading /> : <Area {...config} />}
       </div>
     </div>
   );

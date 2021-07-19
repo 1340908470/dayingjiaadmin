@@ -3,6 +3,7 @@ import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface InviteGroupPhotosProps {
   isMonthReport?: boolean;
@@ -11,9 +12,11 @@ interface InviteGroupPhotosProps {
 }
 
 export default function InviteGroupPhotos(props: InviteGroupPhotosProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -26,6 +29,8 @@ export default function InviteGroupPhotos(props: InviteGroupPhotosProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -35,17 +40,22 @@ export default function InviteGroupPhotos(props: InviteGroupPhotosProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         圈子内新作品数
       </div>
-      <Bar
-        data={data}
-        yField={"name"}
-        xField={"data"}
-        yAxis={{
-          label: { autoRotate: false },
-        }}
-        color={() => {
-          return "#FF3E3E";
-        }}
-      />
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <Bar
+          data={data}
+          yField={"name"}
+          xField={"data"}
+          yAxis={{
+            label: { autoRotate: false },
+          }}
+          color={() => {
+            return "#FF3E3E";
+          }}
+        />
+      )}
     </div>
   );
 }

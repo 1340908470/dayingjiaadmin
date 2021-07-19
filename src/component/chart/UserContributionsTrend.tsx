@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import auth from "@/util/backend/auth";
 import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
+import Loading from "@/component/layout/Loading";
 
 interface UserContributionsTrendProps {
   name?: string;
@@ -17,8 +18,10 @@ interface UserContributionsTrendProps {
 export default function UserContributionsTrend(
   props: UserContributionsTrendProps
 ) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -29,6 +32,8 @@ export default function UserContributionsTrend(
         end: props.end,
       }).then((r) => {
         setData(r);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -51,7 +56,8 @@ export default function UserContributionsTrend(
     data: data,
     xField: "日期",
     yField: "amount",
-    xAxis: { tickCount: 5 },
+    yAxis: { tickCount: 5 },
+    xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
   return (
     <>
@@ -59,9 +65,13 @@ export default function UserContributionsTrend(
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           {props.name ? `"${props.name}" 用户投稿趋势` : "用户投稿趋势"}
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Area {...config} />
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Area {...config} />
+          </div>
+        )}
       </div>
     </>
   );

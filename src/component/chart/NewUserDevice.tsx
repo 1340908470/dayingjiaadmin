@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
+import Loading from "@/component/layout/Loading";
 
 interface NewUserDeviceProps {
   isMonthReport?: boolean;
@@ -12,8 +13,10 @@ interface NewUserDeviceProps {
 }
 
 export default function NewUserDevice(props: NewUserDeviceProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
   const asyncFetch = () => {
@@ -49,6 +52,7 @@ export default function NewUserDevice(props: NewUserDeviceProps) {
           });
         }
         setData(tmpData);
+        if (data) setLoading(false);
         setTableData(tmpDataTable);
       });
     }
@@ -127,24 +131,33 @@ export default function NewUserDevice(props: NewUserDeviceProps) {
         新用户终端分布
       </div>
       <br />
-      <Row>
-        <Col span={11}>
-          <Pie {...config} />
-        </Col>
-        <Col
-          flex={"2px"}
-          style={{
-            backgroundColor: "#DDDDDD",
-            marginLeft: "2px",
-            marginRight: "20px",
-          }}
-        />
-        <Col flex={"auto"}>
-          <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table dataSource={tableData} columns={columns} bordered={false} />
-          </div>
-        </Col>
-      </Row>
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <Row>
+          <Col span={11}>
+            <Pie {...config} />
+          </Col>
+          <Col
+            flex={"2px"}
+            style={{
+              backgroundColor: "#DDDDDD",
+              marginLeft: "2px",
+              marginRight: "20px",
+            }}
+          />
+          <Col flex={"auto"}>
+            <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
+              <Table
+                dataSource={tableData}
+                columns={columns}
+                bordered={false}
+              />
+            </div>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Table } from "antd";
 import { call } from "@/util/client";
 import analytics, { InviteKPI } from "@/util/backend/analytics";
 import "./default.css";
+import Loading from "@/component/layout/Loading";
 
 interface MonthlyChannelProps {
   isMonthReport?: boolean;
@@ -11,9 +12,11 @@ interface MonthlyChannelProps {
 }
 
 export default function MonthlyChannel(props: MonthlyChannelProps) {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -27,6 +30,8 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
       }).then((r) => {
         // @ts-ignore
         setData(r);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -69,9 +74,14 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           不同渠道来源用户访问月度对比
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-        </div>
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table pagination={false} dataSource={data} columns={columns} />
+          </div>
+        )}
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -29,9 +30,11 @@ interface CompetitionRelatedDataProps {
 export default function CompetitionRelatedData(
   props: CompetitionRelatedDataProps
 ) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -99,6 +102,8 @@ export default function CompetitionRelatedData(
             num: r.比赛推广累计访问次数,
           },
         ]);
+
+        if (data) setLoading(false);
       });
     }
   };
@@ -109,15 +114,19 @@ export default function CompetitionRelatedData(
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           {props.name ? `"${props.name}" 相关数据` : "比赛相关数据"}
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table
-            rowClassName={getRowClassName}
-            pagination={false}
-            showHeader={false}
-            dataSource={data}
-            columns={columns}
-          />
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table
+              rowClassName={getRowClassName}
+              pagination={false}
+              showHeader={false}
+              dataSource={data}
+              columns={columns}
+            />
+          </div>
+        )}
       </div>
     </>
   );

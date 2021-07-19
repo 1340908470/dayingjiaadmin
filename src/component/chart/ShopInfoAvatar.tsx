@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -64,7 +65,9 @@ interface ShopInfoFreeAvatarProps {
 export default function ShopInfoAvatar(props: ShopInfoFreeAvatarProps) {
   let [data, setData] = useState([]);
 
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin]);
 
@@ -76,13 +79,19 @@ export default function ShopInfoAvatar(props: ShopInfoFreeAvatarProps) {
         end: props.end,
       }).then((r) => {
         setData(r);
+
+        if (data) setLoading(false);
       });
     }
   };
 
   return (
     <>
-      <Table pagination={false} dataSource={data} columns={columns} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <Table pagination={false} dataSource={data} columns={columns} />
+      )}
     </>
   );
 }

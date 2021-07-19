@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
+import Loading from "@/component/layout/Loading";
 
 const columns = [
   {
@@ -26,9 +27,11 @@ interface DataSummaryProps {
 }
 
 export default function DataSummary(props: DataSummaryProps) {
+  const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     asyncFetch();
   }, [props.begin, props]);
 
@@ -119,6 +122,7 @@ export default function DataSummary(props: DataSummaryProps) {
             num: r.累计作品数,
           },
         ]);
+        if (data) setLoading(false);
       });
     }
   };
@@ -129,15 +133,19 @@ export default function DataSummary(props: DataSummaryProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           用户数据概况
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table
-            rowClassName={getRowClassName}
-            pagination={false}
-            showHeader={false}
-            dataSource={data}
-            columns={columns}
-          />
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table
+              rowClassName={getRowClassName}
+              pagination={false}
+              showHeader={false}
+              dataSource={data}
+              columns={columns}
+            />
+          </div>
+        )}
       </div>
     </>
   );
