@@ -1,8 +1,13 @@
 import { Layout, Menu } from "antd";
 import {
-  LaptopOutlined,
+  AreaChartOutlined,
+  PictureOutlined,
   NotificationOutlined,
+  BarChartOutlined,
+  ShareAltOutlined,
   UserOutlined,
+  FileImageOutlined,
+  UsergroupDeleteOutlined,
 } from "@ant-design/icons";
 import "./LayoutSider.css";
 import { useState } from "react";
@@ -35,32 +40,29 @@ export default function LayoutSider(props: LayoutSiderProps) {
               props.HandleNavState(e.key);
             }}
           >
-            <Menu.Item key="总览" icon={<UserOutlined />}>
+            <Menu.Item key="总览" icon={<AreaChartOutlined />}>
               总览
             </Menu.Item>
-            <SubMenu key="用户" icon={<LaptopOutlined />} title="用户">
+            <SubMenu key="用户" icon={<UserOutlined />} title="用户">
               <Menu.Item key="来源分析">来源分析</Menu.Item>
               <Menu.Item key="用户画像">用户画像</Menu.Item>
               <Menu.Item key="行为分析">行为分析</Menu.Item>
               <Menu.Item key="留存分析">留存分析</Menu.Item>
-              <Menu.Item key="摄影设备">摄影设备</Menu.Item>
+              {/*<Menu.Item key="摄影设备">摄影设备</Menu.Item>*/}
               <Menu.Item key="特邀影家">特邀影家</Menu.Item>
             </SubMenu>
-            <Menu.Item key="作品" icon={<UserOutlined />}>
+            <Menu.Item key="作品" icon={<PictureOutlined />}>
               作品
             </Menu.Item>
-            <SubMenu
-              key="活动比赛"
-              icon={<NotificationOutlined />}
-              title="活动比赛"
-            >
-              <Menu.Item key="摄影比赛">摄影比赛</Menu.Item>
-              <Menu.Item key="其它活动">其它活动</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="分享" icon={<UserOutlined />}>
+
+            <Menu.Item key="活动比赛" icon={<UsergroupDeleteOutlined />}>
+              活动比赛
+            </Menu.Item>
+
+            <Menu.Item key="分享" icon={<ShareAltOutlined />}>
               分享
             </Menu.Item>
-            <SubMenu key="页面" icon={<NotificationOutlined />} title="页面">
+            <SubMenu key="页面" icon={<FileImageOutlined />} title="页面">
               <Menu.Item key="页面分析">页面分析</Menu.Item>
               <Menu.Item key="圈子">圈子</Menu.Item>
               <Menu.Item key="挑战">挑战</Menu.Item>
@@ -69,7 +71,7 @@ export default function LayoutSider(props: LayoutSiderProps) {
             </SubMenu>
             <SubMenu
               key="周期报告"
-              icon={<NotificationOutlined />}
+              icon={<BarChartOutlined />}
               title="周期报告"
             >
               <Menu.Item key="周报">周报</Menu.Item>

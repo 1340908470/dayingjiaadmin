@@ -7,6 +7,7 @@ import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
 
 interface UserContributionsTrendProps {
+  name?: string;
   isMonthReport?: boolean;
   id: number;
   begin: string;
@@ -56,7 +57,7 @@ export default function UserContributionsTrend(
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          用户投稿趋势
+          {props.name ? `"${props.name}" 用户投稿趋势` : "用户投稿趋势"}
         </div>
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Area {...config} />

@@ -81,7 +81,6 @@ export default class ChinaMap extends Component {
   }
 
   render() {
-    console.log(this.props);
     // @ts-ignore
     if (this.props.cityData && this.props.cityData.length > 0) {
       // @ts-ignore

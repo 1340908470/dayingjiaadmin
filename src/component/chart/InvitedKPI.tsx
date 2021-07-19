@@ -15,7 +15,7 @@ export default function InvitedKPI(props: InvitedKPIProps) {
   const [kpi, setKpi] = useState([] as InviteKPI[]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const asyncFetch = () => {
@@ -27,7 +27,6 @@ export default function InvitedKPI(props: InvitedKPIProps) {
         stage: "202104",
       }).then((r) => {
         setKpi(r);
-        console.log(r);
         let tmpData = [
           {
             list: "发布作品数",

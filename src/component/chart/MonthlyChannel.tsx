@@ -14,7 +14,7 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const asyncFetch = () => {
@@ -25,7 +25,6 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
       call(analytics.MonthlyChannel, {
         month: props.begin.split("-")[0] + "-" + props.begin.split("-")[1],
       }).then((r) => {
-        console.log(r);
         // @ts-ignore
         setData(r);
       });
@@ -56,7 +55,7 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
         return (
           <div style={{}}>
             <div style={text > 100 ? { color: "red" } : { color: "green" }}>
-              {text}%
+              {text}
             </div>
           </div>
         );

@@ -141,7 +141,14 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
         />
         <Col flex={"auto"}>
           <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
-            <Table dataSource={tableData} columns={columns} bordered={false} />
+            <Table
+              dataSource={
+                props.isMonthReport ? tableData.slice(0, 9) : tableData
+              }
+              columns={columns}
+              pagination={!props.isMonthReport}
+              bordered={false}
+            />
           </div>
         </Col>
       </Row>

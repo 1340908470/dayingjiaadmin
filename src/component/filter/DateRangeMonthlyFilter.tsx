@@ -70,7 +70,6 @@ export default function DateRangeMonthlyFilter(props: FilterProps) {
           <DatePicker
             picker="month"
             onChange={(date, dateString) => {
-              console.log(dateString);
               const dateStrings = dateString.split("-");
               const dateRanges = getMonthDate(
                 Number.parseInt(dateStrings[0]),

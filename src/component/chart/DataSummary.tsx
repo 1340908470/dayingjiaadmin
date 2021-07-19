@@ -29,8 +29,8 @@ export default function DataSummary(props: DataSummaryProps) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
-  }, [props.begin]);
+    asyncFetch();
+  }, [props.begin, props]);
 
   const getRowClassName = (record: any, index: number) => {
     let className = "";
@@ -39,7 +39,7 @@ export default function DataSummary(props: DataSummaryProps) {
   };
 
   const asyncFetch = () => {
-    if (props.begin && props.end) {
+    if (props.begin) {
       call(analytics.DataSummary, {
         begin: props.begin,
         end: props.end,

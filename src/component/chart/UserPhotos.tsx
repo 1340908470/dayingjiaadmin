@@ -126,7 +126,7 @@ export default function UserPhotos(props: UserPhotosProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         用户发布作品数分布
       </div>
-      <Row style={{ float: "left", width: "100%" }}>
+      <Row className={props.isMonthReport ? "inside-chart-ppt" : ""}>
         <Col span={11}>
           <Pie {...config} />
         </Col>

@@ -16,7 +16,7 @@ export default function FromInviter(props: FromInviterProps) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const asyncFetch = () => {

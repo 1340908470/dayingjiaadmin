@@ -225,7 +225,7 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const convertTime = (date: Date) => {
@@ -286,9 +286,6 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
           if (r.ref_date) {
             visit_uv_new_time.push(r.ref_date);
           }
-
-          console.log(visit_uv_news);
-          console.log(visit_uv_new_time);
 
           // @ts-ignore
           let tmpD = [];

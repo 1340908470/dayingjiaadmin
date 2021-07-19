@@ -40,6 +40,7 @@ const columns = [
 ];
 
 interface CompetitionChannelProps {
+  name?: string;
   isMonthReport?: boolean;
   id: number;
   begin: string;
@@ -50,7 +51,7 @@ export default function CompetitionChannel(props: CompetitionChannelProps) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const asyncFetch = () => {
@@ -69,7 +70,7 @@ export default function CompetitionChannel(props: CompetitionChannelProps) {
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          各推广渠道数据
+          {props.name ? `"${props.name}" 各推广渠道数据` : "各推广渠道数据"}
         </div>
 
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>

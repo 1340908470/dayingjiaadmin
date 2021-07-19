@@ -28,7 +28,7 @@ export default function GiftRelatedData(props: GiftRelatedDataProps) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const getRowClassName = (record: any, index: number) => {

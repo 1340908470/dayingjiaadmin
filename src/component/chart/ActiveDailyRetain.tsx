@@ -24,7 +24,8 @@ const columns = [
         <div style={{ width: "30px" }}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor:
+                text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -35,7 +36,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -50,7 +51,8 @@ const columns = [
         <div style={{ width: "30px" }}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor:
+                text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -61,7 +63,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -76,7 +78,8 @@ const columns = [
         <div style={{ width: "30px" }}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor:
+                text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -87,7 +90,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -102,7 +105,8 @@ const columns = [
         <div style={{ width: "30px" }}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor:
+                text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -113,7 +117,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -128,7 +132,8 @@ const columns = [
         <div style={{ width: "30px" }}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor:
+                text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -139,7 +144,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -154,7 +159,8 @@ const columns = [
         <div style={{ width: "30px" }}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor:
+                text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -165,7 +171,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -180,7 +186,8 @@ const columns = [
         <div style={{ width: "30px" }}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor:
+                text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
               top: 0,
               bottom: 0,
@@ -191,7 +198,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -223,9 +230,10 @@ interface DailyRetain {
 
 export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
   let [data, setData] = useState([]);
+  let [len, setLen] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const convertTime = (date: Date) => {
@@ -247,7 +255,7 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
     let visit_uvs = [] as VisitUvNew[][];
     let visit_uv_time = [] as string[];
     if (props.begin && props.begin.includes("-")) {
-      const timeStrings = props.begin.split("-");
+      const timeStrings = props.end.split("-");
       let time = new Date(
         Number.parseInt(timeStrings[0]),
         Number.parseInt(timeStrings[1]),
@@ -274,11 +282,18 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
         begin_date: timeString,
         end_date: timeString,
       })
-        .then(updateStack)
-        .then(updateStack)
-        .then(updateStack)
-        .then(updateStack)
-        .then(updateStack)
+        .then(async (r) => {
+          if (props.begin === props.end) {
+            for (let i = 0; i < 5; i++) {
+              r = await updateStack(r);
+            }
+          } else {
+            while (time.getDate() !== 1) {
+              r = await updateStack(r);
+            }
+          }
+          return r;
+        })
         .then((r) => {
           if (r.visit_uv) {
             visit_uvs.push(r.visit_uv);
@@ -286,9 +301,6 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
           if (r.ref_date) {
             visit_uv_time.push(r.ref_date);
           }
-
-          console.log(visit_uvs);
-          console.log(visit_uv_time);
 
           // @ts-ignore
           let tmpD = [];
@@ -324,20 +336,41 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
 
           // @ts-ignore
           setData(tmpD);
+
+          let tmpLen = [];
+          for (let i = 0; i < tmpD.length / 10; i++) {
+            tmpLen.push(i);
+          }
+          // @ts-ignore
+          setLen(tmpLen);
         });
     }
   };
 
   return (
     <>
-      <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          访问用户7日留存数据
+      {len.map((value, index) => (
+        <div
+          key={index}
+          className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}
+        >
+          <div
+            className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+          >
+            {props.isMonthReport ? "访问用户留存数据" : "访问用户7日留存数据"}
+          </div>
+          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+            <Table
+              pagination={false}
+              dataSource={data.slice(
+                value * 10,
+                (value + 1) * 10 > data.length ? data.length : (value + 1) * 10
+              )}
+              columns={columns}
+            />
+          </div>
         </div>
-        <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-          <Table pagination={false} dataSource={data} columns={columns} />
-        </div>
-      </div>
+      ))}
     </>
   );
 }

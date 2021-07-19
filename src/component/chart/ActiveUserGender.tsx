@@ -118,7 +118,7 @@ export default function ActiveUserGender(props: ActiveUserGenderProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         访问用户性别分布
       </div>
-      <Row style={{ float: "left", width: "100%" }}>
+      <Row className={props.isMonthReport ? "inside-chart-ppt" : ""}>
         <Col span={11}>
           <Pie {...config} />
         </Col>

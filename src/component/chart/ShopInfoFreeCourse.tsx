@@ -52,7 +52,7 @@ export default function ShopInfoFreeCourse(props: ShopInfoFreeCourseProps) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const asyncFetch = () => {

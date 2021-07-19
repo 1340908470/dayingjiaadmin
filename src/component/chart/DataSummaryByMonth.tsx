@@ -14,7 +14,7 @@ export default function DataSummaryByMonth(props: DataSummaryByMonthProps) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const asyncFetch = () => {
@@ -25,7 +25,6 @@ export default function DataSummaryByMonth(props: DataSummaryByMonthProps) {
       call(analytics.DataSummaryByMonth, {
         month: props.begin.split("-")[0] + "-" + props.begin.split("-")[1],
       }).then((r) => {
-        console.log(r);
         let tmpData = [
           {
             统计项目: "访问人数",

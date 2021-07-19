@@ -19,6 +19,7 @@ const columns = [
 ];
 
 interface CompetitionRelatedDataProps {
+  name?: string;
   isMonthReport?: boolean;
   id: number;
   begin: string;
@@ -31,7 +32,7 @@ export default function CompetitionRelatedData(
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    if (data.length === 0) asyncFetch();
+    asyncFetch();
   }, [props.begin]);
 
   const getRowClassName = (record: any, index: number) => {
@@ -106,7 +107,7 @@ export default function CompetitionRelatedData(
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          比赛相关数据
+          {props.name ? `"${props.name}" 相关数据` : "比赛相关数据"}
         </div>
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Table

@@ -125,7 +125,7 @@ export default function ActiveUserAge(props: ActiveUserAgeProps) {
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
         访问用户年龄分布
       </div>
-      <Row style={{ float: "left", width: "100%" }}>
+      <Row className={props.isMonthReport ? "inside-chart-ppt" : ""}>
         <Col span={11}>
           <Pie {...config} />
         </Col>

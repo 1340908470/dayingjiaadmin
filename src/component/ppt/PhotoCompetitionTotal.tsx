@@ -12,8 +12,10 @@ import PhotoCompetitionNavigationButton from "@/component/navigation/PhotoCompet
 import CompetitionRelatedData from "@/component/chart/CompetitionRelatedData";
 import UserContributionsTrend from "@/component/chart/UserContributionsTrend";
 import CompetitionChannel from "@/component/chart/CompetitionChannel";
+import PPTCover from "@/component/chart/PPTCover";
 
 interface PhotoCompetitionTotalProps {
+  nowPage: string;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -58,20 +60,33 @@ export default function PhotoCompetitionTotal(
       {totalCompetition.map((value, index) => {
         return (
           <div key={index}>
+            <div>
+              <PPTCover
+                nowPage={props.nowPage}
+                begin={props.begin}
+                end={props.begin}
+                title={"活动比赛"}
+                title2={value.name}
+              />
+            </div>
+
             <CompetitionRelatedData
               isMonthReport={true}
+              name={value.name}
               id={value.id}
               begin={props.begin}
               end={props.end}
             />
             <UserContributionsTrend
               isMonthReport={true}
+              name={value.name}
               id={value.id}
               begin={props.begin}
               end={props.end}
             />
             <CompetitionChannel
               isMonthReport={true}
+              name={value.name}
               id={value.id}
               begin={props.begin}
               end={props.end}

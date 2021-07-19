@@ -35,8 +35,6 @@ export default function LayoutContent(props: LayoutContentProps) {
     setNowPage("");
   };
 
-  console.log(nowPage);
-
   return (
     <>
       <Layout style={{ padding: "0 24px 24px", backgroundColor: "#F5F5F5" }}>
@@ -45,13 +43,15 @@ export default function LayoutContent(props: LayoutContentProps) {
           <Breadcrumb.Item>{props.SiderNav}</Breadcrumb.Item>
           <Button
             className="print"
-            type="primary"
+            danger
+            style={{ marginRight: "15px" }}
             icon={<DownloadOutlined />}
             onClick={() => {
               setNowPage(props.SiderNav);
             }}
+            hidden={props.SiderNav !== "月报"}
           >
-            导出
+            下载
           </Button>
         </Breadcrumb>
         <Content
@@ -84,7 +84,7 @@ export default function LayoutContent(props: LayoutContentProps) {
             <div hidden={props.SiderNav !== "作品"}>
               <Works nowPage={nowPage} resetPage={resetPage} />
             </div>
-            <div hidden={props.SiderNav !== "摄影比赛"}>
+            <div hidden={props.SiderNav !== "活动比赛"}>
               <PhotoCompetition nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "分享"}>

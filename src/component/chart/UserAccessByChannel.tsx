@@ -124,7 +124,7 @@ export default function UserAccessByChannel(props: UserAccessProps) {
         不同来源访问人数分布
       </div>
       <div className={props.isMonthReport ? "chart-title-ppt" : ""}>
-        <Row style={{ float: "left", width: "100%" }}>
+        <Row>
           <Col span={11}>
             <Pie {...config} />
           </Col>
