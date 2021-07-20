@@ -16,6 +16,7 @@ import ActiveUserDevice from "@/component/chart/ActiveUserDevice";
 import NewUserDevice from "@/component/chart/NewUserDevice";
 import { exportComponentAsPNG } from "react-component-export-image";
 import UserAccessByChannel from "@/component/chart/UserAccessByChannel";
+import DeviceSummary from "@/component/chart/DeviceSummary";
 
 const { TabPane } = Tabs;
 
@@ -137,6 +138,9 @@ export default function UserPortrait(props: UserPortraitProps) {
               </div>
               <div ref={ActiveUserGenderRef}>
                 <NewUserDevice begin={date.StartTime} end={date.EndTime} />
+              </div>
+              <div ref={ActiveUserGenderRef}>
+                <DeviceSummary begin={date.StartTime} end={date.EndTime} />
               </div>
             </TabPane>
           </Tabs>

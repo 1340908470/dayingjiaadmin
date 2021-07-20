@@ -21,7 +21,7 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
   }, [props.begin]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      call(analytics.UserDevice, {
+      call(analytics.UserPlatform, {
         begin: props.begin,
         end: props.end,
       }).then((r) => {
@@ -29,14 +29,14 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
         let tmpDataTable = [];
 
         let sum = 0;
-        if (r.活跃用户设备机型分布) {
-          r.活跃用户设备机型分布.forEach((value) => {
+        if (r.活跃用户终端分布) {
+          r.活跃用户终端分布.forEach((value) => {
             sum += Number.parseInt(value.amount);
           });
         }
 
-        if (r.活跃用户设备机型分布) {
-          r.活跃用户设备机型分布.forEach((value, index) => {
+        if (r.活跃用户终端分布) {
+          r.活跃用户终端分布.forEach((value, index) => {
             tmpData.push({
               key: index,
               type: value.name,
@@ -64,15 +64,7 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
     data: data,
     angleField: "value",
     colorField: "type",
-    color: [
-      "#FD3D3B",
-      "#FD5254",
-      "#FD7374",
-      "#FE9292",
-      "#FEB1B2",
-      "#FED3D3",
-      "#DDDDDD",
-    ],
+    color: ["#FD3D3B", "#FE9292", "#FEB1B2", "#FED3D3", "#DDDDDD"],
     radius: 1,
     innerRadius: 0.6,
     label: {
@@ -156,13 +148,7 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
                   props.isMonthReport ? tableData.slice(0, 9) : tableData
                 }
                 columns={columns}
-                pagination={
-                  props.isMonthReport
-                    ? false
-                    : {
-                        pageSize: 6,
-                      }
-                }
+                pagination={false}
                 bordered={false}
               />
             </div>

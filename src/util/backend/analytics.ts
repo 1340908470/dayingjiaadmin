@@ -608,6 +608,16 @@ interface InviterFocusedReq {
   stage: "202104";
 }
 
+interface Platform {
+  amount: string;
+  name: string;
+}
+
+interface UserPlatform {
+  活跃用户终端分布: Platform[];
+  新用户终端分布: Platform[];
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -643,6 +653,10 @@ export default {
   PhotoEquipment: "analytics/photoequipment" as EndPoint<
     DateRangeReq,
     PhotoEquipment[]
+  >,
+  UserPlatform: "analytics/userplatform" as EndPoint<
+    DateRangeReq,
+    UserPlatform
   >,
   DailyRetain: "analytics/dailyretain" as EndPoint<DailyRetainReq, DailyRetain>,
   InvitePhoto: "analytics/invitephotos" as EndPoint<

@@ -6,6 +6,7 @@ import { DownOutlined } from "@ant-design/icons";
 import ShopInfoFreeCourse from "@/component/chart/ShopInfoFreeCourse";
 import ShopInfoAvatar from "@/component/chart/ShopInfoAvatar";
 import ShopInfoCourse from "@/component/chart/ShopInfoCourse";
+import DeviceSummary from "@/component/chart/DeviceSummary";
 
 interface ShopInfoProps {
   isMonthReport?: boolean;
@@ -67,9 +68,6 @@ export default function ShopInfo(props: ShopInfoProps) {
       </div>
       <div hidden={nowCategory !== "头像挂件"}>
         <ShopInfoAvatar begin={props.begin} end={props.end} />
-      </div>
-      <div hidden={nowCategory !== "精品课程"}>
-        <ShopInfoCourse begin={props.begin} end={props.end} />
       </div>
     </div>
   );

@@ -35,11 +35,6 @@ export default function MonthActiveUserProvince(
   const [loading, setLoading] = useState(true);
   let [data, setData] = useState([]);
 
-  useEffect(() => {
-    setLoading(true);
-    asyncFetch();
-  }, [props.begin]);
-
   const getRowClassName = (record: any, index: number) => {
     let className = "";
     className = index % 2 === 0 ? "table-odd" : "table-even";
@@ -47,6 +42,11 @@ export default function MonthActiveUserProvince(
     if (index === 1 || index === 2) className = "table-light-red";
     return className;
   };
+
+  useEffect(() => {
+    setLoading(true);
+    asyncFetch();
+  }, [props.begin]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

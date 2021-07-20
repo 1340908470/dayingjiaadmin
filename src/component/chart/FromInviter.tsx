@@ -6,6 +6,7 @@ import analytics from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
 import Loading from "@/component/layout/Loading";
+import { getRowClassName } from "@/component/chart/MonthActiveUserProvince";
 
 interface FromInviterProps {
   isMonthReport?: boolean;
@@ -32,6 +33,7 @@ export default function FromInviter(props: FromInviterProps) {
         let tmpData = [];
         // @ts-ignore
         if (r) {
+          r.sort((a, b) => b.占比 - a.占比);
           r.forEach((value, index) => {
             // @ts-ignore
             tmpData.push({
@@ -67,6 +69,14 @@ export default function FromInviter(props: FromInviterProps) {
     },
   ];
 
+  const getRowClassName = (record: any, index: number) => {
+    let className = "";
+    className = index % 2 === 0 ? "table-odd" : "table-even";
+    if (index === 0) className = "table-deep-red";
+    if (index === 1 || index === 2) className = "table-light-red";
+    return className;
+  };
+
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
@@ -78,7 +88,12 @@ export default function FromInviter(props: FromInviterProps) {
           <Loading />
         ) : (
           <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-            <Table pagination={false} dataSource={data} columns={columns} />
+            <Table
+              rowClassName={getRowClassName}
+              pagination={false}
+              dataSource={data}
+              columns={columns}
+            />
           </div>
         )}
       </div>

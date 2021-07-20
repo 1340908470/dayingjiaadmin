@@ -6,6 +6,7 @@ import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 import Loading from "@/component/layout/Loading";
 import "./default.css";
+import { getRowClassName } from "@/component/chart/MonthActiveUserProvince";
 
 interface UserAccessProps {
   isMonthReport?: boolean;
@@ -31,6 +32,7 @@ export default function UserAccessByChannel(props: UserAccessProps) {
         // @ts-ignore
         let tmpDataTable = [];
         if (r) {
+          r.sort((a, b) => b.占比 - a.占比);
           r.forEach((value, index) => {
             tmpData.push({
               key: index,
@@ -149,6 +151,7 @@ export default function UserAccessByChannel(props: UserAccessProps) {
             <Col flex={"auto"}>
               <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
                 <Table
+                  rowClassName={getRowClassName}
                   pagination={{ pageSize: 5 }}
                   dataSource={tableData}
                   columns={columns}
