@@ -134,7 +134,7 @@ export default function NewUserAge(props: NewUserAgeProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        新用户年龄分布
+        新访问用户年龄分布
       </div>
 
       {loading ? (

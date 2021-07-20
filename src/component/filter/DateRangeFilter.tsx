@@ -1,13 +1,13 @@
-import { Col, Row, Select, DatePicker } from "antd";
+import { Col, Row, Select, DatePicker, notification } from "antd";
 import { useEffect, useState } from "react";
-import { call } from "@/util/client";
-import pandect from "@/util/backend/analytics";
+import { CalendarOutlined } from "@ant-design/icons";
 import moment, { Moment } from "moment";
 import {
   getWeekDate,
   getYearWeek,
 } from "@/component/filter/DateRangeWeeklyFilter";
 import { getMonthDate } from "@/component/filter/DateRangeMonthlyFilter";
+import { Simulate } from "react-dom/test-utils";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -62,6 +62,15 @@ export default function DateRangeFilter(props: FilterProps) {
     props.setDateRange(StartTime, EndTime);
   }
 
+  const openNotificationWithIcon = (type: string | number) => {
+    // @ts-ignore
+    notification[type]({
+      message: "请选择日期",
+      description: "请点击日期范围选择框以选择范围",
+      icon: <CalendarOutlined style={{ color: "#f59898" }} />,
+    });
+  };
+
   return (
     <>
       <Row className={"filter"}>
@@ -78,10 +87,11 @@ export default function DateRangeFilter(props: FilterProps) {
               setDateRangeByFailed(value);
               // @ts-ignore
               if (value === "自定义") {
+                openNotificationWithIcon("warning");
                 setIsOpen(true);
-                props.setDateRange("", "");
                 props.setIsHideState(true);
               } else {
+                props.setIsHideState(false);
                 setIsOpen(false);
               }
             }}
@@ -100,7 +110,6 @@ export default function DateRangeFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col hidden={rangeMod !== "自定义"}>
           <RangePicker
-            open={isOpen}
             disabledDate={(current: Moment) => {
               let startMoment = moment();
               startMoment.set("year", 2021);

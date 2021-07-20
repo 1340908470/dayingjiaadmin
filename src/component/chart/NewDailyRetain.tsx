@@ -5,6 +5,12 @@ import analytics from "@/util/backend/analytics";
 import "./default.css";
 import Loading from "@/component/layout/Loading";
 
+const convertText = (text: string) => {
+  const num = Number.parseFloat(text) / 100;
+  console.log(num);
+  return (num - 1) * (num - 1) * (num - 1) + 1;
+};
+
 const columns = [
   {
     title: "时间",
@@ -12,7 +18,7 @@ const columns = [
     key: "time",
   },
   {
-    title: "新用户数",
+    title: "新访问用户数",
     dataIndex: "num",
     key: "num",
   },
@@ -25,7 +31,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor: "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -52,7 +58,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor: "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -79,7 +85,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor: "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -106,7 +112,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor: "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -133,7 +139,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor: "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -160,7 +166,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor: "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -187,7 +193,7 @@ const columns = [
         <div style={{ width: "30px" }} key={index}>
           <div
             style={{
-              backgroundColor: "rgba(255,62,62," + text + ")",
+              backgroundColor: "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -362,7 +368,7 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          新用户7日留存数据
+          新访问用户7日留存数据
         </div>
         {loading ? (
           <Loading />

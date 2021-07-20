@@ -5,6 +5,12 @@ import analytics from "@/util/backend/analytics";
 import "./default.css";
 import Loading from "@/component/layout/Loading";
 
+const convertText = (text: string) => {
+  const num = Number.parseFloat(text) / 100;
+  console.log(num);
+  return (num - 1) * (num - 1) * (num - 1) + 1;
+};
+
 const columns = [
   {
     title: "时间",
@@ -26,7 +32,7 @@ const columns = [
           <div
             style={{
               backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + text + ")",
+                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -54,7 +60,7 @@ const columns = [
           <div
             style={{
               backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + text + ")",
+                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -82,7 +88,7 @@ const columns = [
           <div
             style={{
               backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + text + ")",
+                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -110,7 +116,7 @@ const columns = [
           <div
             style={{
               backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + text + ")",
+                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -138,7 +144,7 @@ const columns = [
           <div
             style={{
               backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + text + ")",
+                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -166,7 +172,7 @@ const columns = [
           <div
             style={{
               backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + text + ")",
+                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,
@@ -194,7 +200,7 @@ const columns = [
           <div
             style={{
               backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + text + ")",
+                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
               position: "absolute",
               color: text === "" ? "Gainsboro" : "",
               top: 0,

@@ -123,7 +123,7 @@ export default function NewUserDevice(props: NewUserDeviceProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        新用户终端分布
+        新访问用户终端分布
       </div>
       <br />
 

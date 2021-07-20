@@ -138,7 +138,7 @@ export default function NewUserProvince(props: NewUserProvinceProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        新用户地区分布
+        新访问用户地区分布
       </div>
       <br />
       <Row>
