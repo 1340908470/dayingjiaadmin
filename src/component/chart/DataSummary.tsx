@@ -4,7 +4,6 @@ import { Table, Tag, Space } from "antd";
 import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
-import style from "./default.css";
 import Loading from "@/component/layout/Loading";
 
 const columns = [
@@ -42,8 +41,6 @@ export default function DataSummary(props: DataSummaryProps) {
     className = index % 2 === 0 ? "table-odd" : "table-even";
     return className;
   };
-
-  console.log(props);
 
   const asyncFetch = () => {
     if (props.begin) {

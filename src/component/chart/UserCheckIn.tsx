@@ -93,49 +93,49 @@ export default function UserCheckIn(props: ActiveUserAgeProps) {
               key: 0,
               times: "签到0次",
               num: r.用户签到分布["0"],
-              percent: (r.用户签到分布["0"] / sum).toFixed(2),
+              percent: ((r.用户签到分布["0"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 1,
               times: "签到1次",
               num: r.用户签到分布["1"],
-              percent: (r.用户签到分布["1"] / sum).toFixed(2),
+              percent: ((r.用户签到分布["1"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 2,
               times: "签到2次",
               num: r.用户签到分布["2"],
-              percent: (r.用户签到分布["2"] / sum).toFixed(2),
+              percent: ((r.用户签到分布["2"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 3,
               times: "签到3次",
               num: r.用户签到分布["3"],
-              percent: (r.用户签到分布["3"] / sum).toFixed(2),
+              percent: ((r.用户签到分布["3"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 4,
               times: "签到4次",
               num: r.用户签到分布["4"],
-              percent: (r.用户签到分布["4"] / sum).toFixed(2),
+              percent: ((r.用户签到分布["4"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 5,
               times: "签到5次",
               num: r.用户签到分布["5"],
-              percent: (r.用户签到分布["5"] / sum).toFixed(2),
+              percent: ((r.用户签到分布["5"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 6,
               times: "签到6次",
               num: r.用户签到分布["6"],
-              percent: (r.用户签到分布["6"] / sum).toFixed(2),
+              percent: ((r.用户签到分布["6"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 7,
               times: "签到7次",
               num: r.用户签到分布["7"],
-              percent: (r.用户签到分布["7"] / sum).toFixed(2),
+              percent: ((r.用户签到分布["7"] / sum) * 100).toFixed(2) + "%",
             }
           );
         }
@@ -149,7 +149,7 @@ export default function UserCheckIn(props: ActiveUserAgeProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 100, 10],
     data: data,
     angleField: "value",
     colorField: "type",
@@ -227,9 +227,10 @@ export default function UserCheckIn(props: ActiveUserAgeProps) {
         <Loading />
       ) : (
         <Row>
-          <Col span={11}>
+          <Col flex={"44%"}>
             <Pie {...config} />
           </Col>
+          <Col flex={"20px"} />
           <Col
             flex={"2px"}
             style={{
@@ -238,7 +239,7 @@ export default function UserCheckIn(props: ActiveUserAgeProps) {
               marginRight: "20px",
             }}
           />
-          <Col flex={"auto"}>
+          <Col flex={"50%"}>
             <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
               <Table
                 dataSource={tableData}

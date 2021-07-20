@@ -42,7 +42,7 @@ export default function UserAccessDepth(props: UserAccessDepthProps) {
               key: index,
               source: value.来源,
               num: value.访问次数,
-              percent: value.占比,
+              percent: value.占比 + "%",
             });
           });
         }
@@ -56,10 +56,11 @@ export default function UserAccessDepth(props: UserAccessDepthProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 100, 10],
     data: data,
     angleField: "value",
     colorField: "type",
+    autoFit: true,
     color: [
       "#FD3D3B",
       "#FD5254",

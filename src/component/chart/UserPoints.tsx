@@ -93,49 +93,56 @@ export default function UserPoints(props: UserPointsProps) {
               key: 0,
               times: "141以上",
               num: r.用户获取积分分布["141"],
-              percent: (r.用户获取积分分布["141"] / sum).toFixed(2),
+              percent:
+                ((r.用户获取积分分布["141"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 1,
               times: "121-140",
               num: r.用户获取积分分布["121"],
-              percent: (r.用户获取积分分布["121"] / sum).toFixed(2),
+              percent:
+                ((r.用户获取积分分布["121"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 2,
               times: "101-120",
               num: r.用户获取积分分布["101"],
-              percent: (r.用户获取积分分布["101"] / sum).toFixed(2),
+              percent:
+                ((r.用户获取积分分布["101"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 3,
               times: "81-100",
               num: r.用户获取积分分布["81"],
-              percent: (r.用户获取积分分布["81"] / sum).toFixed(2),
+              percent:
+                ((r.用户获取积分分布["81"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 4,
               times: "61-80",
               num: r.用户获取积分分布["61"],
-              percent: (r.用户获取积分分布["61"] / sum).toFixed(2),
+              percent:
+                ((r.用户获取积分分布["61"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 5,
               times: "41-60",
               num: r.用户获取积分分布["41"],
-              percent: (r.用户获取积分分布["41"] / sum).toFixed(2),
+              percent:
+                ((r.用户获取积分分布["41"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 6,
               times: "21-40",
               num: r.用户获取积分分布["21"],
-              percent: (r.用户获取积分分布["21"] / sum).toFixed(2),
+              percent:
+                ((r.用户获取积分分布["21"] / sum) * 100).toFixed(2) + "%",
             },
             {
               key: 7,
               times: "1-20",
               num: r.用户获取积分分布["0"],
-              percent: (r.用户获取积分分布["0"] / sum).toFixed(2),
+              percent: ((r.用户获取积分分布["0"] / sum) * 100).toFixed(2) + "%",
             }
           );
         }
@@ -149,7 +156,7 @@ export default function UserPoints(props: UserPointsProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 100, 10],
     data: data,
     angleField: "value",
     colorField: "type",
@@ -226,9 +233,10 @@ export default function UserPoints(props: UserPointsProps) {
         <Loading />
       ) : (
         <Row>
-          <Col span={11}>
+          <Col flex={"44%"}>
             <Pie {...config} />
           </Col>
+          <Col flex={"20px"} />
           <Col
             flex={"2px"}
             style={{

@@ -28,6 +28,12 @@ interface ShareProps {
 export default function Share(props: ShareProps) {
   const [date, setDate] = useState({} as DateRange);
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   function setDateRange(startTime: string, endTime: string) {
     setDate({
       StartTime: startTime,
@@ -54,13 +60,25 @@ export default function Share(props: ShareProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"分享"} setDateRange={setDateRange} />
-      <div ref={PageSharePVRef}>
-        <PageSharePV begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={PageShareUVRef}>
-        <PageShareUV begin={date.StartTime} end={date.EndTime} />
-      </div>
+      <DateRangeFilter
+        Title={"分享"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
+
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={PageSharePVRef}>
+            <PageSharePV begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={PageShareUVRef}>
+            <PageShareUV begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

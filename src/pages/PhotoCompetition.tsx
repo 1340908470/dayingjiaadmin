@@ -40,6 +40,12 @@ export interface Competition {
 export default function PhotoCompetition(props: PhotoCompetitionProps) {
   const [date, setDate] = useState({} as DateRange);
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   const [competitionName, setCompetitionName] = useState("");
   const [competitionID, setCompetitionID] = useState(0);
   const [competitionNames, setCompetitionNames] = useState([] as string[]);
@@ -99,27 +105,39 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"活动比赛"} setDateRange={setDateRange} />
-      <PhotoCompetitionNavigationButton
-        competitionName={competitionName}
-        competitionNames={competitionNames}
-        setNowCompetitionName={setNowCompetitionName}
+      <DateRangeFilter
+        Title={"活动比赛"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
       />
-      <CompetitionRelatedData
-        id={competitionID}
-        begin={date.StartTime}
-        end={date.EndTime}
-      />
-      <UserContributionsTrend
-        id={competitionID}
-        begin={date.StartTime}
-        end={date.EndTime}
-      />
-      <CompetitionChannel
-        id={competitionID}
-        begin={date.StartTime}
-        end={date.EndTime}
-      />
+
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <PhotoCompetitionNavigationButton
+            competitionName={competitionName}
+            competitionNames={competitionNames}
+            setNowCompetitionName={setNowCompetitionName}
+          />
+          <CompetitionRelatedData
+            id={competitionID}
+            begin={date.StartTime}
+            end={date.EndTime}
+          />
+          <UserContributionsTrend
+            id={competitionID}
+            begin={date.StartTime}
+            end={date.EndTime}
+          />
+          <CompetitionChannel
+            id={competitionID}
+            begin={date.StartTime}
+            end={date.EndTime}
+          />
+        </>
+      )}
     </div>
   );
 }

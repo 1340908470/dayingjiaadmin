@@ -28,6 +28,12 @@ export default function UserPortrait(props: UserPortraitProps) {
   const [date, setDate] = useState({} as DateRange);
   const [tab, setTab] = useState("性别及年龄分布");
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   function setDateRange(startTime: string, endTime: string) {
     setDate({
       StartTime: startTime,
@@ -92,41 +98,50 @@ export default function UserPortrait(props: UserPortraitProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"用户画像"} setDateRange={setDateRange} />
-      <div style={{ marginTop: "-10px" }}>
-        <Tabs defaultActiveKey="性别及年龄分布" onChange={callback}>
-          <TabPane tab="性别及年龄分布" key="性别及年龄分布">
-            <div ref={ActiveUserGenderRef}>
-              <ActiveUserGender begin={date.StartTime} end={date.EndTime} />
-            </div>
-            <div ref={NewUserGenderRef}>
-              <NewUserGender begin={date.StartTime} end={date.EndTime} />
-            </div>
-            <div ref={ActiveUserAgeRef}>
-              <ActiveUserAge begin={date.StartTime} end={date.EndTime} />
-            </div>
-            <div ref={NewUserAgeRef}>
-              <NewUserAge begin={date.StartTime} end={date.EndTime} />
-            </div>
-          </TabPane>
-          <TabPane tab="地区分布" key="地区分布">
-            <div ref={ActiveUserGenderRef}>
-              <ActiveUserProvince begin={date.StartTime} end={date.EndTime} />
-            </div>
-            <div ref={ActiveUserGenderRef}>
-              <NewUserProvince begin={date.StartTime} end={date.EndTime} />
-            </div>
-          </TabPane>
-          <TabPane tab="终端及机型分布" key="终端及机型分布">
-            <div ref={ActiveUserGenderRef}>
-              <ActiveUserDevice begin={date.StartTime} end={date.EndTime} />
-            </div>
-            <div ref={ActiveUserGenderRef}>
-              <NewUserDevice begin={date.StartTime} end={date.EndTime} />
-            </div>
-          </TabPane>
-        </Tabs>
-      </div>
+      <DateRangeFilter
+        Title={"用户画像"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
+
+      {isHide ? (
+        ""
+      ) : (
+        <div style={{ marginTop: "-10px" }}>
+          <Tabs defaultActiveKey="性别及年龄分布" onChange={callback}>
+            <TabPane tab="性别及年龄分布" key="性别及年龄分布">
+              <div ref={ActiveUserGenderRef}>
+                <ActiveUserGender begin={date.StartTime} end={date.EndTime} />
+              </div>
+              <div ref={NewUserGenderRef}>
+                <NewUserGender begin={date.StartTime} end={date.EndTime} />
+              </div>
+              <div ref={ActiveUserAgeRef}>
+                <ActiveUserAge begin={date.StartTime} end={date.EndTime} />
+              </div>
+              <div ref={NewUserAgeRef}>
+                <NewUserAge begin={date.StartTime} end={date.EndTime} />
+              </div>
+            </TabPane>
+            <TabPane tab="地区分布" key="地区分布">
+              <div ref={ActiveUserGenderRef}>
+                <ActiveUserProvince begin={date.StartTime} end={date.EndTime} />
+              </div>
+              <div ref={ActiveUserGenderRef}>
+                <NewUserProvince begin={date.StartTime} end={date.EndTime} />
+              </div>
+            </TabPane>
+            <TabPane tab="终端及机型分布" key="终端及机型分布">
+              <div ref={ActiveUserGenderRef}>
+                <ActiveUserDevice begin={date.StartTime} end={date.EndTime} />
+              </div>
+              <div ref={ActiveUserGenderRef}>
+                <NewUserDevice begin={date.StartTime} end={date.EndTime} />
+              </div>
+            </TabPane>
+          </Tabs>
+        </div>
+      )}
     </div>
   );
 }

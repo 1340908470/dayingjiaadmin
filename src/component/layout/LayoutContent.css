@@ -11,13 +11,11 @@
 @media screen and (max-width: 1400px) {
     .sider-content {
         width: 980px;
-        margin: auto;
     }
 }
 
 @media screen and (max-width: 1030px) {
     .sider-content {
         width: 750px;
-        margin: auto;
     }
 }

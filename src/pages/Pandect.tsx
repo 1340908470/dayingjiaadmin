@@ -26,6 +26,12 @@ export default function Pandect(props: PandectProps) {
     });
   }
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   const DataSummaryRef = useRef(null);
   const UserAccessRef = useRef(null);
   const RegisteredUserByDayRef = useRef(null);
@@ -53,19 +59,31 @@ export default function Pandect(props: PandectProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"总览"} setDateRange={setDateRange} />
-      <div ref={DataSummaryRef}>
-        <DataSummary begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={UserAccessRef}>
-        <UserAccess begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={RegisteredUserByDayRef}>
-        <RegisteredUserByDay begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={NewPhotoByDayRef}>
-        <NewPhotoByDay begin={date.StartTime} end={date.EndTime} />
-      </div>
+      <DateRangeFilter
+        Title={"总览"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
+
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={DataSummaryRef}>
+            <DataSummary begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={UserAccessRef}>
+            <UserAccess begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={RegisteredUserByDayRef}>
+            <RegisteredUserByDay begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={NewPhotoByDayRef}>
+            <NewPhotoByDay begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

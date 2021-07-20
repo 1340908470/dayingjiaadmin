@@ -43,7 +43,7 @@ export default function UserPhotos(props: UserPhotosProps) {
               key: index,
               work: value.作品数量 + "张以上",
               num: value.用户数,
-              percent: value.占比,
+              percent: value.占比 + "%",
             });
           });
         }
@@ -58,7 +58,7 @@ export default function UserPhotos(props: UserPhotosProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 100, 10],
     data: data,
     angleField: "value",
     colorField: "type",

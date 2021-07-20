@@ -143,8 +143,6 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       })
       .then(() => {
         // @ts-ignore
-        console.log(ActiveDailyRetainRefMonth.current.childNodes);
-        // @ts-ignore
         ActiveDailyRetainRefMonth.current.childNodes.forEach(
           // @ts-ignore
           (value) => {

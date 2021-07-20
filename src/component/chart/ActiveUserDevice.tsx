@@ -47,7 +47,8 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
               key: index,
               device: value.name,
               num: value.amount,
-              percent: (Number.parseInt(value.amount) / sum).toFixed(2),
+              percent:
+                ((Number.parseInt(value.amount) / sum) * 100).toFixed(2) + "%",
             });
           });
         }
@@ -59,7 +60,7 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 20, 150, 20],
     data: data,
     angleField: "value",
     colorField: "type",
@@ -110,11 +111,13 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
       title: "终端",
       dataIndex: "device",
       key: "device",
+      width: "40%",
     },
     {
       title: "用户数",
       dataIndex: "num",
       key: "num",
+      width: "30%",
     },
     {
       title: "占比",
@@ -153,7 +156,13 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
                   props.isMonthReport ? tableData.slice(0, 9) : tableData
                 }
                 columns={columns}
-                pagination={!props.isMonthReport}
+                pagination={
+                  props.isMonthReport
+                    ? false
+                    : {
+                        pageSize: 6,
+                      }
+                }
                 bordered={false}
               />
             </div>

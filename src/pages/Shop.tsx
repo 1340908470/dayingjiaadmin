@@ -31,6 +31,12 @@ interface ShopProps {
 export default function Shop(props: ShopProps) {
   const [date, setDate] = useState({} as DateRange);
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   function setDateRange(startTime: string, endTime: string) {
     setDate({
       StartTime: startTime,
@@ -69,23 +75,34 @@ export default function Shop(props: ShopProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"积分商城"} setDateRange={setDateRange} />
+      <DateRangeFilter
+        Title={"积分商城"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
 
-      <div ref={GiftRelatedDataRef}>
-        <GiftRelatedData begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={FreeCourseAccessRef}>
-        <FreeCourseAccess begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={CourseExchangeRef}>
-        <CourseExchange begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={AvatarExchangeRef}>
-        <AvatarExchange begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={ShopInfoRef}>
-        <ShopInfo begin={date.StartTime} end={date.EndTime} />
-      </div>
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={GiftRelatedDataRef}>
+            <GiftRelatedData begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={FreeCourseAccessRef}>
+            <FreeCourseAccess begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={CourseExchangeRef}>
+            <CourseExchange begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={AvatarExchangeRef}>
+            <AvatarExchange begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={ShopInfoRef}>
+            <ShopInfo begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

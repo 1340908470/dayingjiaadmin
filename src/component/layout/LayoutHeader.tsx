@@ -3,7 +3,7 @@ import { Header } from "antd/es/layout/layout";
 import "./LayoutHeader.css";
 import { UserOutlined } from "@ant-design/icons";
 import { logout } from "@/util/client";
-import logo from "@/wwwroot/img/logo2.png";
+import logo from "@/wwwroot/img/logo.svg";
 
 interface LayoutHeaderProps {
   HandleNavState: (navState: string) => void;

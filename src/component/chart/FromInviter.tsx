@@ -38,7 +38,7 @@ export default function FromInviter(props: FromInviterProps) {
               key: index,
               person: value.特邀影家,
               num: value.amount,
-              percent: value.占比,
+              percent: value.占比 + "%",
             });
           });
         }

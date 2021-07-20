@@ -28,6 +28,7 @@ const columns = [
               backgroundColor:
                 text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -55,6 +56,7 @@ const columns = [
               backgroundColor:
                 text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -82,6 +84,7 @@ const columns = [
               backgroundColor:
                 text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -109,6 +112,7 @@ const columns = [
               backgroundColor:
                 text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -136,6 +140,7 @@ const columns = [
               backgroundColor:
                 text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -163,6 +168,7 @@ const columns = [
               backgroundColor:
                 text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -190,6 +196,7 @@ const columns = [
               backgroundColor:
                 text === "" ? "" : "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -234,10 +241,13 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
   let [len, setLen] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log(data);
+
   useEffect(() => {
     setLoading(true);
+    console.log(props);
     asyncFetch();
-  }, [props.begin]);
+  }, [props]);
 
   const convertTime = (date: Date) => {
     return (
@@ -255,6 +265,8 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
   };
 
   const asyncFetch = () => {
+    console.log(props);
+
     let visit_uvs = [] as VisitUvNew[][];
     let visit_uv_time = [] as string[];
     if (props.begin && props.begin.includes("-")) {
@@ -314,25 +326,32 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
               time: visit_uv_time[visit_uv_index],
               num: visit_uv[0] ? visit_uv[0].value : "",
               day1: visit_uv[1]
-                ? (visit_uv[1].value / visit_uv[0].value).toFixed(2)
+                ? ((visit_uv[1].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
                 : "",
               day2: visit_uv[2]
-                ? (visit_uv[2].value / visit_uv[0].value).toFixed(2)
+                ? ((visit_uv[2].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
                 : "",
               day3: visit_uv[3]
-                ? (visit_uv[3].value / visit_uv[0].value).toFixed(2)
+                ? ((visit_uv[3].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
                 : "",
               day4: visit_uv[4]
-                ? (visit_uv[4].value / visit_uv[0].value).toFixed(2)
+                ? ((visit_uv[4].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
                 : "",
               day5: visit_uv[5]
-                ? (visit_uv[5].value / visit_uv[0].value).toFixed(2)
+                ? ((visit_uv[5].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
                 : "",
               day6: visit_uv[6]
-                ? (visit_uv[6].value / visit_uv[0].value).toFixed(2)
+                ? ((visit_uv[6].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
                 : "",
               day7: visit_uv[7]
-                ? (visit_uv[7].value / visit_uv[0].value).toFixed(2)
+                ? ((visit_uv[7].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
                 : "",
             });
           });
@@ -354,8 +373,18 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
 
   return (
     <>
+      <div
+        hidden={!loading}
+        className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}
+      >
+        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+          {props.isMonthReport ? "访问用户留存数据" : "访问用户7日留存数据"}
+        </div>
+        {loading ? <Loading /> : ""}
+      </div>
       {len.map((value, index) => (
         <div
+          hidden={loading && !props.isMonthReport}
           key={index}
           className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}
         >
@@ -364,22 +393,33 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
           >
             {props.isMonthReport ? "访问用户留存数据" : "访问用户7日留存数据"}
           </div>
-          <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
-            {loading ? (
-              <Loading />
-            ) : (
-              <Table
-                pagination={false}
-                dataSource={data.slice(
-                  value * 10,
-                  (value + 1) * 10 > data.length
-                    ? data.length
-                    : (value + 1) * 10
-                )}
-                columns={columns}
-              />
-            )}
-          </div>
+          {props.isMonthReport ? (
+            <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
+              {loading ? (
+                <Loading />
+              ) : (
+                <Table
+                  pagination={false}
+                  dataSource={data.slice(
+                    value * 10,
+                    (value + 1) * 10 > data.length
+                      ? data.length
+                      : (value + 1) * 10
+                  )}
+                  columns={columns}
+                />
+              )}
+            </div>
+          ) : (
+            <Table
+              pagination={false}
+              dataSource={data.slice(
+                value * 10,
+                (value + 1) * 10 > data.length ? data.length : (value + 1) * 10
+              )}
+              columns={columns}
+            />
+          )}
         </div>
       ))}
     </>

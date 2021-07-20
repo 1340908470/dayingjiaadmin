@@ -27,6 +27,12 @@ export default function Circle(props: CircleProps) {
     });
   }
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   const CircleRelatedDataRef = useRef(null);
   const CircleTrendRef = useRef(null);
   const CircleNewMemberRef = useRef(null);
@@ -58,23 +64,34 @@ export default function Circle(props: CircleProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"圈子"} setDateRange={setDateRange} />
+      <DateRangeFilter
+        Title={"圈子"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
 
-      <div ref={CircleRelatedDataRef}>
-        <CircleRelatedData begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={CircleTrendRef}>
-        <CircleTrend begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={CircleNewMemberRef}>
-        <CircleNewMember begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={CircleNewWorksRef}>
-        <CircleNewWorks begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={CircleMemberRef}>
-        <CircleMember begin={date.StartTime} end={date.EndTime} />
-      </div>
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={CircleRelatedDataRef}>
+            <CircleRelatedData begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={CircleTrendRef}>
+            <CircleTrend begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={CircleNewMemberRef}>
+            <CircleNewMember begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={CircleNewWorksRef}>
+            <CircleNewWorks begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={CircleMemberRef}>
+            <CircleMember begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

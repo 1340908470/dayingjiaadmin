@@ -1,6 +1,6 @@
 import { Col, Row, Select, DatePicker } from "antd";
 import { useEffect, useState } from "react";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import ex from "umi/dist";
 
 const { RangePicker } = DatePicker;
@@ -26,7 +26,7 @@ export const getWeekDate = (year: number, week: number) => {
     const y = date.getFullYear();
     const m = date.getMonth() + 1;
     const d = date.getDate();
-    return y + "/" + m + "/" + d;
+    return y + "/" + ("0" + m).slice(-2) + "/" + ("0" + d).slice(-2);
   };
 
   //获取周结束日期
@@ -38,7 +38,7 @@ export const getWeekDate = (year: number, week: number) => {
     const y = date.getFullYear();
     const m = date.getMonth() + 1;
     const d = date.getDate();
-    return y + "/" + m + "/" + d;
+    return y + "/" + ("0" + m).slice(-2) + "/" + ("0" + d).slice(-2);
   };
 
   return getWeekStartDate(year, week) + "-" + getWeekEndDate(year, week);
@@ -84,6 +84,17 @@ export default function DateRangeWeeklyFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col>
           <DatePicker
+            disabledDate={(current: Moment) => {
+              let startMoment = moment();
+              startMoment.set("year", 2021);
+              startMoment.set("month", 4);
+              startMoment.set("date", 12);
+
+              let EndMoment = moment();
+              EndMoment.set("month", moment().month());
+              EndMoment.set("date", moment().date() - 1);
+              return current < startMoment || current > EndMoment;
+            }}
             defaultValue={moment()}
             picker="week"
             onChange={(date, dateString) => {

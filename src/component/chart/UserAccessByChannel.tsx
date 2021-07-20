@@ -5,6 +5,7 @@ import analytics from "@/util/backend/analytics";
 import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 import Loading from "@/component/layout/Loading";
+import "./default.css";
 
 interface UserAccessProps {
   isMonthReport?: boolean;
@@ -41,7 +42,7 @@ export default function UserAccessByChannel(props: UserAccessProps) {
               key: index,
               source: value.来源,
               num: value.访问次数,
-              percent: value.占比,
+              percent: value.占比 + "%",
             });
           });
         }
@@ -55,7 +56,7 @@ export default function UserAccessByChannel(props: UserAccessProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 130, 10],
     data: data,
     angleField: "value",
     colorField: "type",
@@ -106,6 +107,7 @@ export default function UserAccessByChannel(props: UserAccessProps) {
       title: "来源",
       dataIndex: "source",
       key: "source",
+      width: "40%",
     },
     {
       title: "访问次数",
@@ -147,10 +149,9 @@ export default function UserAccessByChannel(props: UserAccessProps) {
             <Col flex={"auto"}>
               <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
                 <Table
-                  pagination={false}
+                  pagination={{ pageSize: 5 }}
                   dataSource={tableData}
                   columns={columns}
-                  size={"small"}
                   bordered={false}
                 />
               </div>

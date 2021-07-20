@@ -15,6 +15,7 @@ const { Option } = Select;
 interface FilterProps {
   Title: string;
   setDateRange: (startTime: string, endTime: string) => void;
+  setIsHideState: (isHide: boolean) => void;
 }
 
 export interface DateRange {
@@ -25,6 +26,7 @@ export interface DateRange {
 export default function DateRangeFilter(props: FilterProps) {
   const [rangeMod, setRangeMod] = useState("上周");
   const [dateRange, setDateRange] = useState({} as DateRange);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setDateRangeByFailed("上周");
@@ -40,7 +42,7 @@ export default function DateRangeFilter(props: FilterProps) {
     if (type === "上周") {
       dateRanges = getWeekDate(
         date.getFullYear(),
-        getYearWeek(date.getFullYear(), date.getMonth(), date.getDate()) - 2
+        getYearWeek(date.getFullYear(), date.getMonth(), date.getDate() - 14)
       ).split("-");
 
       StartTime = dateRanges[0].replaceAll("/", "-");
@@ -74,6 +76,14 @@ export default function DateRangeFilter(props: FilterProps) {
             onChange={(value) => {
               setRangeMod(value);
               setDateRangeByFailed(value);
+              // @ts-ignore
+              if (value === "自定义") {
+                setIsOpen(true);
+                props.setDateRange("", "");
+                props.setIsHideState(true);
+              } else {
+                setIsOpen(false);
+              }
             }}
           >
             <Option key={1} value="上周">
@@ -90,6 +100,7 @@ export default function DateRangeFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col hidden={rangeMod !== "自定义"}>
           <RangePicker
+            open={isOpen}
             disabledDate={(current: Moment) => {
               let startMoment = moment();
               startMoment.set("year", 2021);
@@ -98,6 +109,7 @@ export default function DateRangeFilter(props: FilterProps) {
 
               let EndMoment = moment();
               EndMoment.set("month", moment().month());
+              EndMoment.set("date", moment().date() - 1);
               return current < startMoment || current > EndMoment;
             }}
             onChange={(e) => {
@@ -108,6 +120,8 @@ export default function DateRangeFilter(props: FilterProps) {
                 if (i === 1) EndTime = r?.format("YYYY-MM-DD") || "";
               });
               props.setDateRange(StartTime, EndTime);
+              setIsOpen(false);
+              props.setIsHideState(false);
             }}
           />
         </Col>

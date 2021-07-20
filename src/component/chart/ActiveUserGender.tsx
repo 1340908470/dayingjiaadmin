@@ -47,7 +47,8 @@ export default function ActiveUserGender(props: ActiveUserGenderProps) {
               key: index,
               gender: value.name,
               num: value.amount,
-              percent: (Number.parseInt(value.amount) / sum).toFixed(2),
+              percent:
+                ((Number.parseInt(value.amount) / sum) * 100).toFixed(2) + "%",
             });
           });
         }
@@ -59,7 +60,7 @@ export default function ActiveUserGender(props: ActiveUserGenderProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 100, 10],
     data: data,
     angleField: "value",
     colorField: "type",

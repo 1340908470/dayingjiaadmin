@@ -29,6 +29,12 @@ export default function Mine(props: MineProps) {
     });
   }
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   const UserCheckInRef = useRef(null);
   const UserPointsRef = useRef(null);
 
@@ -48,14 +54,25 @@ export default function Mine(props: MineProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"我的"} setDateRange={setDateRange} />
+      <DateRangeFilter
+        Title={"我的"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
 
-      <div ref={UserCheckInRef}>
-        <UserCheckIn begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={UserPointsRef}>
-        <UserPoints begin={date.StartTime} end={date.EndTime} />
-      </div>
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={UserCheckInRef}>
+            <UserCheckIn begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={UserPointsRef}>
+            <UserPoints begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

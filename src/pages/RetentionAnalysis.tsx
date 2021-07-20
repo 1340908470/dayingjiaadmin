@@ -18,6 +18,12 @@ interface RetentionAnalysisProps {
 export default function RetentionAnalysis(props: RetentionAnalysisProps) {
   const [date, setDate] = useState({} as DateRange);
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   function setDateRange(startTime: string, endTime: string) {
     setDate({
       StartTime: startTime,

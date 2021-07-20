@@ -36,6 +36,12 @@ export default function PageAnalysis(props: PageAnalysisProps) {
     });
   }
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   const PageVisitPVRef = useRef(null);
   const PageVisitUVRef = useRef(null);
 
@@ -55,13 +61,25 @@ export default function PageAnalysis(props: PageAnalysisProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"页面分析"} setDateRange={setDateRange} />
-      <div ref={PageVisitPVRef}>
-        <PageVisitPV begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={PageVisitUVRef}>
-        <PageVisitUV begin={date.StartTime} end={date.EndTime} />
-      </div>
+      <DateRangeFilter
+        Title={"页面分析"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
+
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={PageVisitPVRef}>
+            <PageVisitPV begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={PageVisitUVRef}>
+            <PageVisitUV begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

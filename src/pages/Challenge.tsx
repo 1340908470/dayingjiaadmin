@@ -28,6 +28,11 @@ export default function Challenge(props: ChallengeProps) {
     });
   }
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
   const ChallengeRelatedDataRef = useRef(null);
   const ChallengeWorksTrendRef = useRef(null);
   const ChallengeJoinMemberRef = useRef(null);
@@ -63,26 +68,37 @@ export default function Challenge(props: ChallengeProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"挑战"} setDateRange={setDateRange} />
+      <DateRangeFilter
+        Title={"挑战"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
 
-      <div ref={ChallengeRelatedDataRef}>
-        <ChallengeRelatedData begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={ChallengeWorksTrendRef}>
-        <ChallengeWorksTrend begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={ChallengeJoinMemberRef}>
-        <ChallengeJoinMember begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={ChallengeHonorRef}>
-        <ChallengeHonor begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={ChallengeJoinWorksRef}>
-        <ChallengeJoinWorks begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={ChallengeSuccessWorksRef}>
-        <ChallengeSuccessWorks begin={date.StartTime} end={date.EndTime} />
-      </div>
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={ChallengeRelatedDataRef}>
+            <ChallengeRelatedData begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={ChallengeWorksTrendRef}>
+            <ChallengeWorksTrend begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={ChallengeJoinMemberRef}>
+            <ChallengeJoinMember begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={ChallengeHonorRef}>
+            <ChallengeHonor begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={ChallengeJoinWorksRef}>
+            <ChallengeJoinWorks begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={ChallengeSuccessWorksRef}>
+            <ChallengeSuccessWorks begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

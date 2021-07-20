@@ -49,7 +49,7 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
               key: index,
               band: value.name,
               num: value.amount,
-              percent: (value.amount / sum).toFixed(2),
+              percent: ((value.amount / sum) * 100).toFixed(2) + "%",
             });
           });
         }
@@ -63,7 +63,7 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 100, 10],
     data: data,
     angleField: "value",
     colorField: "type",
@@ -114,11 +114,13 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
       title: "品牌",
       dataIndex: "band",
       key: "band",
+      width: "40%",
     },
     {
       title: "作品数",
       dataIndex: "num",
       key: "num",
+      width: "40%",
     },
     {
       title: "占比",
@@ -156,7 +158,7 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
             <Col flex={"auto"}>
               <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
                 <Table
-                  pagination={false}
+                  pagination={{ pageSize: 6 }}
                   dataSource={tableData}
                   columns={columns}
                   bordered={false}

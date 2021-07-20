@@ -42,7 +42,7 @@ export default function UserAccessTime(props: UserAccessTimeProps) {
               key: index,
               accessTime: value.访问时长,
               num: value.访问次数,
-              percent: value.占比,
+              percent: value.占比 + "%",
             });
           });
         }
@@ -56,7 +56,7 @@ export default function UserAccessTime(props: UserAccessTimeProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 130, 10],
     data: data,
     angleField: "value",
     colorField: "type",

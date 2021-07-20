@@ -27,6 +27,7 @@ const columns = [
             style={{
               backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -36,7 +37,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -53,6 +54,7 @@ const columns = [
             style={{
               backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -62,7 +64,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -79,6 +81,7 @@ const columns = [
             style={{
               backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -88,7 +91,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -105,6 +108,7 @@ const columns = [
             style={{
               backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -114,7 +118,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -131,6 +135,7 @@ const columns = [
             style={{
               backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -140,7 +145,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -157,6 +162,7 @@ const columns = [
             style={{
               backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -166,7 +172,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -183,6 +189,7 @@ const columns = [
             style={{
               backgroundColor: "rgba(255,62,62," + text + ")",
               position: "absolute",
+              color: text === "" ? "Gainsboro" : "",
               top: 0,
               bottom: 0,
               left: 0,
@@ -192,7 +199,7 @@ const columns = [
               fontSize: "16px",
             }}
           >
-            {text}
+            {text === "" ? "一" : text}
           </div>
         </div>
       );
@@ -299,25 +306,46 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
               time: visit_uv_new_time[visit_uv_new_index],
               num: visit_uv_new[0] ? visit_uv_new[0].value : "",
               day1: visit_uv_new[1]
-                ? (visit_uv_new[1].value / visit_uv_new[0].value).toFixed(2)
+                ? (
+                    (visit_uv_new[1].value / visit_uv_new[0].value) *
+                    100
+                  ).toFixed(2) + "%"
                 : "",
               day2: visit_uv_new[2]
-                ? (visit_uv_new[2].value / visit_uv_new[0].value).toFixed(2)
+                ? (
+                    (visit_uv_new[2].value / visit_uv_new[0].value) *
+                    100
+                  ).toFixed(2) + "%"
                 : "",
               day3: visit_uv_new[3]
-                ? (visit_uv_new[3].value / visit_uv_new[0].value).toFixed(2)
+                ? (
+                    (visit_uv_new[3].value / visit_uv_new[0].value) *
+                    100
+                  ).toFixed(2) + "%"
                 : "",
               day4: visit_uv_new[4]
-                ? (visit_uv_new[4].value / visit_uv_new[0].value).toFixed(2)
+                ? (
+                    (visit_uv_new[4].value / visit_uv_new[0].value) *
+                    100
+                  ).toFixed(2) + "%"
                 : "",
               day5: visit_uv_new[5]
-                ? (visit_uv_new[5].value / visit_uv_new[0].value).toFixed(2)
+                ? (
+                    (visit_uv_new[5].value / visit_uv_new[0].value) *
+                    100
+                  ).toFixed(2) + "%"
                 : "",
               day6: visit_uv_new[6]
-                ? (visit_uv_new[6].value / visit_uv_new[0].value).toFixed(2)
+                ? (
+                    (visit_uv_new[6].value / visit_uv_new[0].value) *
+                    100
+                  ).toFixed(2) + "%"
                 : "",
               day7: visit_uv_new[7]
-                ? (visit_uv_new[7].value / visit_uv_new[0].value).toFixed(2)
+                ? (
+                    (visit_uv_new[7].value / visit_uv_new[0].value) *
+                    100
+                  ).toFixed(2) + "%"
                 : "",
             });
           });
@@ -336,7 +364,6 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
           新用户7日留存数据
         </div>
-
         {loading ? (
           <Loading />
         ) : (

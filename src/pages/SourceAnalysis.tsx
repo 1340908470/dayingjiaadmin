@@ -18,6 +18,12 @@ interface SourceAnalysisProps {
 export default function SourceAnalysis(props: SourceAnalysisProps) {
   const [date, setDate] = useState({} as DateRange);
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   function setDateRange(startTime: string, endTime: string) {
     setDate({
       StartTime: startTime,
@@ -44,13 +50,25 @@ export default function SourceAnalysis(props: SourceAnalysisProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"来源分析"} setDateRange={setDateRange} />
-      <div ref={UserAccessByChannelRef}>
-        <UserAccessByChannel begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={FromInviterRef}>
-        <FromInviter begin={date.StartTime} end={date.EndTime} />
-      </div>
+      <DateRangeFilter
+        Title={"来源分析"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
+
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={UserAccessByChannelRef}>
+            <UserAccessByChannel begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={FromInviterRef}>
+            <FromInviter begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

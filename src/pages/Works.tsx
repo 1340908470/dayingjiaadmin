@@ -24,6 +24,12 @@ interface WorksProps {
 export default function Works(props: WorksProps) {
   const [date, setDate] = useState({} as DateRange);
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   function setDateRange(startTime: string, endTime: string) {
     setDate({
       StartTime: startTime,
@@ -54,16 +60,27 @@ export default function Works(props: WorksProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"作品"} setDateRange={setDateRange} />
-      <div ref={PhotoTypesRef}>
-        <PhotoTypes begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={PhotoTagRef}>
-        <PhotoTag begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={PhotoEquipmentRef}>
-        <PhotoEquipment begin={date.StartTime} end={date.EndTime} />
-      </div>
+      <DateRangeFilter
+        Title={"作品"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
+
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          <div ref={PhotoTypesRef}>
+            <PhotoTypes begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={PhotoTagRef}>
+            <PhotoTag begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={PhotoEquipmentRef}>
+            <PhotoEquipment begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -32,6 +32,12 @@ export default function InvitedPhotographer(props: InvitedPhotographerProps) {
     });
   }
 
+  const [isHide, setIsHide] = useState(false);
+
+  function setIsHideState(isHide: boolean) {
+    setIsHide(isHide);
+  }
+
   const InvitePhotosRef = useRef(null);
   const InviteGroupPhotosRef = useRef(null);
   const InviteGroupCommentsRef = useRef(null);
@@ -59,19 +65,31 @@ export default function InvitedPhotographer(props: InvitedPhotographerProps) {
         minHeight: "1000px",
       }}
     >
-      <DateRangeFilter Title={"特邀影家"} setDateRange={setDateRange} />
-      <div ref={InvitePhotosRef}>
-        <InvitePhotos begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={InviteGroupPhotosRef}>
-        <InviteGroupPhotos begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={InviteGroupCommentsRef}>
-        <InviteGroupComments begin={date.StartTime} end={date.EndTime} />
-      </div>
-      <div ref={InviteGroupLikesRef}>
-        <InviteGroupLikes begin={date.StartTime} end={date.EndTime} />
-      </div>
+      <DateRangeFilter
+        Title={"特邀影家"}
+        setDateRange={setDateRange}
+        setIsHideState={setIsHideState}
+      />
+
+      {isHide ? (
+        ""
+      ) : (
+        <>
+          {" "}
+          <div ref={InvitePhotosRef}>
+            <InvitePhotos begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={InviteGroupPhotosRef}>
+            <InviteGroupPhotos begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={InviteGroupCommentsRef}>
+            <InviteGroupComments begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={InviteGroupLikesRef}>
+            <InviteGroupLikes begin={date.StartTime} end={date.EndTime} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

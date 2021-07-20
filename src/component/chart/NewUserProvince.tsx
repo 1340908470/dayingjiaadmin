@@ -51,7 +51,8 @@ export default function NewUserProvince(props: NewUserProvinceProps) {
               key: index,
               age: value.name,
               num: value.amount,
-              percent: (Number.parseInt(value.amount) / sum).toFixed(2),
+              percent:
+                ((Number.parseInt(value.amount) / sum) * 100).toFixed(2) + "%",
             });
           });
         }
@@ -65,7 +66,7 @@ export default function NewUserProvince(props: NewUserProvinceProps) {
   };
 
   var config = {
-    appendPadding: 10,
+    padding: [10, 10, 100, 10],
     data: data,
     angleField: "value",
     colorField: "type",
@@ -113,14 +114,16 @@ export default function NewUserProvince(props: NewUserProvinceProps) {
 
   const columns = [
     {
-      title: "年龄",
+      title: "省份",
       dataIndex: "age",
       key: "age",
+      width: "40%",
     },
     {
       title: "用户数",
       dataIndex: "num",
       key: "num",
+      width: "30%",
     },
     {
       title: "占比",
@@ -160,6 +163,7 @@ export default function NewUserProvince(props: NewUserProvinceProps) {
                 dataSource={tableData}
                 columns={columns}
                 bordered={false}
+                pagination={{ pageSize: 7 }}
               />
             </div>
           )}
