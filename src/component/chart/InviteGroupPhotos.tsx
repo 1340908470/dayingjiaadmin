@@ -45,6 +45,7 @@ export default function InviteGroupPhotos(props: InviteGroupPhotosProps) {
         <Loading />
       ) : (
         <Bar
+          height={320}
           data={data}
           yField={"name"}
           xField={"data"}
@@ -52,7 +53,7 @@ export default function InviteGroupPhotos(props: InviteGroupPhotosProps) {
             label: { autoRotate: false },
           }}
           color={() => {
-            return "#FF3E3E";
+            return "#FF7474";
           }}
         />
       )}

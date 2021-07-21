@@ -45,6 +45,7 @@ export default function InviteGroupComments(props: InviteGroupCommentsProps) {
         <Loading />
       ) : (
         <Bar
+          height={320}
           data={data}
           yField={"name"}
           xField={"data"}
@@ -52,7 +53,7 @@ export default function InviteGroupComments(props: InviteGroupCommentsProps) {
             label: { autoRotate: false },
           }}
           color={() => {
-            return "#FF3E3E";
+            return "#FF7474";
           }}
         />
       )}

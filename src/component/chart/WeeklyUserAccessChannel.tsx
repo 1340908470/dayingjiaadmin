@@ -52,7 +52,7 @@ export default function WeeklyUserAccessChannel(
             label: { autoRotate: false },
           }}
           color={() => {
-            return "#FF3E3E";
+            return "#FF7474";
           }}
         />
       )}

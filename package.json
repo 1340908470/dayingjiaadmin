@@ -19,6 +19,20 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "ie 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "ie 11"
+    ]
+  },
   "dependencies": {
     "@ant-design/charts": "^1.1.20",
     "@ant-design/pro-layout": "^6.5.0",
@@ -28,6 +42,7 @@
     "@umijs/preset-react": "1.x",
     "ant-design": "^1.0.0",
     "base-64": "^1.0.0",
+    "browserslist": "^4.16.6",
     "echarts": "^5.1.2",
     "echarts-for-react": "^3.0.1",
     "http-proxy-middleware": "^2.0.1",
@@ -37,6 +52,7 @@
     "postcss-plugin-px2rem": "^0.8.1",
     "postcss-px2rem-exclude": "^0.0.6",
     "react-activation": "^0.9.4",
+    "react-app-polyfill": "^2.0.0",
     "react-component-export-image": "^1.0.6",
     "react-echarts-map-china": "^0.1.9",
     "react-to-print": "^2.12.6",

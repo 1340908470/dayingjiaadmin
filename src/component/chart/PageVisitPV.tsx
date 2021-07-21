@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
@@ -35,7 +36,15 @@ export default function PageVisitPV(props: PageVisitPVProps) {
           "",
       }).then((r) => {
         // @ts-ignore
-        setData(r.pv);
+        setData(
+          r.pv.map((value) => {
+            let { name, pv } = value;
+            return {
+              name: name,
+              pv: Number.parseInt(pv),
+            };
+          })
+        );
 
         if (data) setLoading(false);
       });
@@ -59,7 +68,7 @@ export default function PageVisitPV(props: PageVisitPVProps) {
               label: { autoRotate: false },
             }}
             color={() => {
-              return "#FF3E3E";
+              return "#FF7474";
             }}
           />
         </div>

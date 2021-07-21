@@ -21,43 +21,41 @@ export default function LayoutHeader(props: LayoutHeaderProps) {
   );
 
   return (
-    <>
-      <Header
-        className="header"
-        style={{ position: "fixed", zIndex: 1, width: "100%" }}
+    <Header
+      className="header"
+      style={{ position: "fixed", zIndex: 1, width: "100%" }}
+    >
+      <div className="logo">
+        <Image
+          preview={false}
+          height={40}
+          width={95}
+          style={{ marginTop: "15px", marginLeft: "-10px" }}
+          src={logo}
+          alt={logo}
+        />
+      </div>
+      <div style={{ float: "right" }}>
+        <Dropdown overlay={menu}>
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={(e) => e.preventDefault()}
+          >
+            <Avatar icon={<UserOutlined />} />
+            <div style={{ marginLeft: "10px", float: "right" }}>admin</div>
+          </div>
+        </Dropdown>
+      </div>
+      <Menu
+        theme="light"
+        mode="horizontal"
+        defaultSelectedKeys={["数据统计"]}
+        onClick={(e) => props.HandleNavState(e.key)}
       >
-        <div className="logo">
-          <Image
-            preview={false}
-            height={40}
-            width={95}
-            style={{ marginTop: "15px", marginLeft: "-10px" }}
-            src={logo}
-            alt={logo}
-          />
-        </div>
-        <div style={{ float: "right" }}>
-          <Dropdown overlay={menu}>
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={(e) => e.preventDefault()}
-            >
-              <Avatar icon={<UserOutlined />} />
-              <div style={{ marginLeft: "10px", float: "right" }}>admin</div>
-            </div>
-          </Dropdown>
-        </div>
-        <Menu
-          theme="light"
-          mode="horizontal"
-          defaultSelectedKeys={["数据统计"]}
-          onClick={(e) => props.HandleNavState(e.key)}
-        >
-          <Menu.Item style={{ marginLeft: "90px" }} key="数据统计">
-            数据统计
-          </Menu.Item>
-        </Menu>
-      </Header>
-    </>
+        <Menu.Item style={{ marginLeft: "90px" }} key="数据统计">
+          数据统计
+        </Menu.Item>
+      </Menu>
+    </Header>
   );
 }

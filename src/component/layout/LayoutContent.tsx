@@ -39,6 +39,8 @@ export default function LayoutContent(props: LayoutContentProps) {
     <>
       <Layout
         style={{
+          overflowY: "hidden",
+          overflowX: "hidden",
           padding: "0 24px 24px",
           paddingLeft: "210px",
           backgroundColor: "#F5F5F5",
@@ -119,6 +121,9 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
           </div>
         </Content>
+        <div className={"footer"}>
+          ©️2021水滴云科技（北京）有限公司 版权所有 京公网安备 11010502037570号
+        </div>
       </Layout>
     </>
   );

@@ -52,6 +52,8 @@ export async function call<P, Q>(
     body: undefined as any,
   };
 
+  // console.log(localStorage.getItem("jwt"));
+
   if (Options && Options.get) {
     fetchOptions.method = "GET";
     if (endpoint.includes("login")) {

@@ -7,11 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import { exportComponentAsPNG } from "react-component-export-image";
 import { call } from "@/util/client";
-import analytics from "@/util/backend/analytics";
+import analytics, { CompetitionSimple } from "@/util/backend/analytics";
 import PhotoCompetitionNavigationButton from "@/component/navigation/PhotoCompetitionNavigationButton";
 import CompetitionRelatedData from "@/component/chart/CompetitionRelatedData";
 import UserContributionsTrend from "@/component/chart/UserContributionsTrend";
 import CompetitionChannel from "@/component/chart/CompetitionChannel";
+import NewUserRegister from "@/component/chart/NewUserRegister";
 
 interface PhotoCompetitionProps {
   nowPage: string;
@@ -48,18 +49,22 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
 
   const [competitionName, setCompetitionName] = useState("");
   const [competitionID, setCompetitionID] = useState(0);
+  const [competitionCategory, setCompetitionCategory] = useState(0);
   const [competitionNames, setCompetitionNames] = useState([] as string[]);
-  const [totalCompetition, setTotalCompetition] = useState([] as Competition[]);
+  const [totalCompetition, setTotalCompetition] = useState(
+    [] as CompetitionSimple[]
+  );
 
   useEffect(() => {
-    call(analytics.TotalCompetition, {
+    call(analytics.CompetitionList, {
       begin: date.StartTime,
       end: date.EndTime,
     }).then((r) => {
       setTotalCompetition(r);
-      if (r) {
+      if (r && r[0]) {
         setCompetitionName(r[0].name);
         setCompetitionID(r[0].id);
+        setCompetitionCategory(r[0].category);
         let tmpCompetitionNames = [] as string[];
         r.forEach((value) => {
           tmpCompetitionNames.push(value.name);
@@ -75,6 +80,7 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
     totalCompetition.forEach((value) => {
       if (value.name == name) {
         setCompetitionID(value.id);
+        setCompetitionCategory(value.category);
       }
     });
   };
@@ -115,7 +121,6 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
         ""
       ) : (
         <>
-          {" "}
           <PhotoCompetitionNavigationButton
             competitionName={competitionName}
             competitionNames={competitionNames}
@@ -127,11 +132,18 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
             end={date.EndTime}
           />
           <UserContributionsTrend
+            category={competitionCategory}
+            id={competitionID}
+            begin={date.StartTime}
+            end={date.EndTime}
+          />
+          <NewUserRegister
             id={competitionID}
             begin={date.StartTime}
             end={date.EndTime}
           />
           <CompetitionChannel
+            category={competitionCategory}
             id={competitionID}
             begin={date.StartTime}
             end={date.EndTime}

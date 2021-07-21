@@ -6,7 +6,6 @@ import { Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 import Loading from "@/component/layout/Loading";
 import "./default.css";
-import { getRowClassName } from "@/component/chart/MonthActiveUserProvince";
 
 interface UserAccessProps {
   isMonthReport?: boolean;
@@ -123,6 +122,13 @@ export default function UserAccessByChannel(props: UserAccessProps) {
     },
   ];
 
+  const getRowClassName = (record: any, index: number) => {
+    let className = "";
+    className = index % 2 === 0 ? "table-odd" : "table-even";
+    if (index === 0) className = "table-deep-red";
+    if (index === 1 || index === 2) className = "table-light-red";
+    return className;
+  };
   const [tableData, setTableData] = useState([]);
 
   // @ts-ignore}

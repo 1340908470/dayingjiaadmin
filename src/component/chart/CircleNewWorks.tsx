@@ -51,7 +51,7 @@ export default function CircleNewWorks(props: CircleNewWorksProps) {
               label: { autoRotate: false },
             }}
             color={() => {
-              return "#FF3E3E";
+              return "#FF7474";
             }}
           />
         </div>

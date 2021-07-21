@@ -16,7 +16,7 @@ export default function LayoutHeaderSider() {
 
   return (
     <>
-      <Layout>
+      <Layout style={{ overflowX: "hidden" }}>
         <LayoutHeader
           HandleNavState={(navState: string) => {
             setHeaderNav(navState);
@@ -30,9 +30,6 @@ export default function LayoutHeaderSider() {
           }}
           SiderNav={siderNav || ""}
         />
-        <div className={"footer"}>
-          ©️2021水滴云科技（北京）有限公司 版权所有 京公网安备 11010502037570号
-        </div>
       </Layout>
     </>
   );

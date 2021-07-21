@@ -5,7 +5,8 @@ import "./index.less";
 import "moment/locale/zh-cn";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/es/locale/zh_CN"; // 引入中文包
-
+import "react-app-polyfill/ie9";
+import "react-app-polyfill/stable";
 import { hasLogged } from "@/util/client";
 import LayoutLogin from "@/layout/LayoutLogin";
 import { AliveScope } from "react-activation";

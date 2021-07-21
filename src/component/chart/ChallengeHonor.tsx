@@ -42,6 +42,7 @@ export default function ChallengeHonor(props: ChallengeHonorProps) {
         <Loading />
       ) : (
         <Bar
+          height={240}
           data={data}
           yField={"name"}
           xField={"amount"}
@@ -49,7 +50,7 @@ export default function ChallengeHonor(props: ChallengeHonorProps) {
             label: { autoRotate: false },
           }}
           color={() => {
-            return "#FF3E3E";
+            return "#FF7474";
           }}
         />
       )}

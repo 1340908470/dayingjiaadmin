@@ -12,6 +12,7 @@ const columns = [
     title: "礼品名称",
     dataIndex: "礼品名称",
     key: "礼品名称",
+    width: "30%",
   },
   {
     title: "上架时间",
@@ -90,7 +91,11 @@ export default function ShopInfoAvatar(props: ShopInfoFreeAvatarProps) {
       {loading ? (
         <Loading />
       ) : (
-        <Table pagination={false} dataSource={data} columns={columns} />
+        <Table
+          pagination={{ pageSize: 10 }}
+          dataSource={data}
+          columns={columns}
+        />
       )}
     </>
   );

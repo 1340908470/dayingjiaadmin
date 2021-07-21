@@ -39,7 +39,7 @@ export default function CompetitionRelatedData(
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.id]);
 
   const getRowClassName = (record: any, index: number) => {
     let className = "";

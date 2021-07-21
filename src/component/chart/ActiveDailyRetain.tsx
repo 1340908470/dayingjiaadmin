@@ -7,7 +7,6 @@ import Loading from "@/component/layout/Loading";
 
 const convertText = (text: string) => {
   const num = Number.parseFloat(text) / 100;
-  console.log(num);
   return (num - 1) * (num - 1) * (num - 1) + 1;
 };
 
@@ -247,11 +246,8 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
   let [len, setLen] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log(data);
-
   useEffect(() => {
     setLoading(true);
-    console.log(props);
     asyncFetch();
   }, [props]);
 
@@ -271,8 +267,6 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
   };
 
   const asyncFetch = () => {
-    console.log(props);
-
     let visit_uvs = [] as VisitUvNew[][];
     let visit_uv_time = [] as string[];
     if (props.begin && props.begin.includes("-")) {

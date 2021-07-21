@@ -17,7 +17,7 @@ export default function PhotoCompetitionNavigationButton(
           danger={props.competitionName === value}
           style={{
             marginRight: "10px",
-            marginBottom: "10px",
+            marginBottom: "30px",
             borderRadius: "20px",
           }}
           onClick={() => {

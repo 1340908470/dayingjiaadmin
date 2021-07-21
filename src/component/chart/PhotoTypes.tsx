@@ -54,9 +54,9 @@ export default function PhotoTypes(props: PhotoTypeProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
-            height={300}
+            height={160}
             color={() => {
-              return "#FF3E3E";
+              return "#FF7474";
             }}
             data={data}
             yField={"tag"}

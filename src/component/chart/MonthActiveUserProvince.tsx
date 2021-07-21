@@ -70,9 +70,11 @@ export default function MonthActiveUserProvince(
               key: index,
               province: r.活跃用户地区分布[index].name,
               num: r.活跃用户地区分布[index].amount,
-              percent: (
-                Number.parseInt(r.活跃用户地区分布[index].amount) / sum
-              ).toFixed(2),
+              percent:
+                (
+                  (Number.parseInt(r.活跃用户地区分布[index].amount) / sum) *
+                  100
+                ).toFixed(2) + "%",
             });
           }
         }

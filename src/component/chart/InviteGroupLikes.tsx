@@ -45,6 +45,7 @@ export default function InviteGroupLikes(props: InviteGroupLikesProps) {
         <Loading />
       ) : (
         <Bar
+          height={320}
           data={data}
           yField={"name"}
           xField={"data"}
@@ -52,7 +53,7 @@ export default function InviteGroupLikes(props: InviteGroupLikesProps) {
             label: { autoRotate: false },
           }}
           color={() => {
-            return "#FF3E3E";
+            return "#FF7474";
           }}
         />
       )}

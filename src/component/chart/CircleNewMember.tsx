@@ -52,7 +52,7 @@ export default function CircleNewMember(props: CircleNewMemberProps) {
               label: { autoRotate: false },
             }}
             color={() => {
-              return "#FF3E3E";
+              return "#FF7474";
             }}
           />
         </div>

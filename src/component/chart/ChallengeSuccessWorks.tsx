@@ -44,6 +44,7 @@ export default function ChallengeSuccessWorks(
         <Loading />
       ) : (
         <Bar
+          height={240}
           data={data}
           yField={"name"}
           xField={"amount"}
@@ -51,7 +52,7 @@ export default function ChallengeSuccessWorks(
             label: { autoRotate: false },
           }}
           color={() => {
-            return "#FF3E3E";
+            return "#FF7474";
           }}
         />
       )}

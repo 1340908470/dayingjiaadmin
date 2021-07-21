@@ -7,7 +7,6 @@ import Loading from "@/component/layout/Loading";
 
 const convertText = (text: string) => {
   const num = Number.parseFloat(text) / 100;
-  console.log(num);
   return (num - 1) * (num - 1) * (num - 1) + 1;
 };
 

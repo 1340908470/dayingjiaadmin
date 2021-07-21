@@ -7,18 +7,15 @@ import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
 import Loading from "@/component/layout/Loading";
 
-interface UserContributionsTrendProps {
+interface NewUserRegisterProps {
   name?: string;
   isMonthReport?: boolean;
   id: number;
-  category: number;
   begin: string;
   end: string;
 }
 
-export default function UserContributionsTrend(
-  props: UserContributionsTrendProps
-) {
+export default function NewUserRegister(props: NewUserRegisterProps) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -27,13 +24,13 @@ export default function UserContributionsTrend(
   }, [props.begin, props.id]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      call(analytics.CompetitionParticipate, {
-        category: props.category,
+      call(analytics.CompetitionRegister, {
         id: props.id,
         begin: props.begin,
         end: props.end,
       }).then((r) => {
         setData(r);
+
         if (data) setLoading(false);
       });
     }
@@ -64,13 +61,7 @@ export default function UserContributionsTrend(
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          {props.category === 1
-            ? props.name
-              ? `"${props.name}" 用户参与趋势`
-              : "用户参与趋势"
-            : props.name
-            ? `"${props.name}" 用户投稿趋势`
-            : "用户投稿趋势"}
+          {props.name ? `"${props.name}" 新增注册用户` : "新增注册用户"}
         </div>
         {loading ? (
           <Loading />

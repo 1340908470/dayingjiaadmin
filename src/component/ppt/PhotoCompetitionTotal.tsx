@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import { exportComponentAsPNG } from "react-component-export-image";
 import { call } from "@/util/client";
-import analytics from "@/util/backend/analytics";
+import analytics, { CompetitionSimple } from "@/util/backend/analytics";
 import PhotoCompetitionNavigationButton from "@/component/navigation/PhotoCompetitionNavigationButton";
 import CompetitionRelatedData from "@/component/chart/CompetitionRelatedData";
 import UserContributionsTrend from "@/component/chart/UserContributionsTrend";
@@ -44,10 +44,12 @@ export default function PhotoCompetitionTotal(
   props: PhotoCompetitionTotalProps
 ) {
   const [date, setDate] = useState({} as DateRange);
-  const [totalCompetition, setTotalCompetition] = useState([] as Competition[]);
+  const [totalCompetition, setTotalCompetition] = useState(
+    [] as CompetitionSimple[]
+  );
 
   useEffect(() => {
-    call(analytics.TotalCompetition, {
+    call(analytics.CompetitionList, {
       begin: props.begin,
       end: props.begin,
     }).then((r) => {
@@ -78,6 +80,7 @@ export default function PhotoCompetitionTotal(
               end={props.end}
             />
             <UserContributionsTrend
+              category={value.category}
               isMonthReport={true}
               name={value.name}
               id={value.id}
@@ -88,6 +91,7 @@ export default function PhotoCompetitionTotal(
               isMonthReport={true}
               name={value.name}
               id={value.id}
+              category={value.category}
               begin={props.begin}
               end={props.end}
             />

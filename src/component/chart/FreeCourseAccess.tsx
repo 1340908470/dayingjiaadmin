@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Bar } from "@ant-design/charts";
 import analytics from "@/util/backend/analytics";
@@ -29,6 +30,17 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
         // @ts-ignore
         setData(r.免费课程访问数);
 
+        // @ts-ignore
+        setData(
+          r.免费课程访问数.map((value) => {
+            let { name, amount } = value;
+            return {
+              name: name,
+              amount: Number.parseInt(amount),
+            };
+          })
+        );
+
         if (data) setLoading(false);
       });
     }
@@ -52,7 +64,7 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
             label: { autoRotate: false },
           }}
           color={() => {
-            return "#FF3E3E";
+            return "#FF7474";
           }}
         />
       )}

@@ -26,8 +26,9 @@ export default function CourseExchange(props: CourseExchangeProps) {
         begin: props.begin,
         end: props.end,
       }).then((r) => {
+        let tmpData = [...r.精品课程兑换数];
         // @ts-ignore
-        setData(r.精品课程兑换数);
+        setData(tmpData);
         if (data) setLoading(false);
       });
     }
@@ -44,7 +45,7 @@ export default function CourseExchange(props: CourseExchangeProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
-            height={400}
+            height={40 * data.length}
             data={data}
             yField={"name"}
             xField={"sales"}
@@ -52,7 +53,7 @@ export default function CourseExchange(props: CourseExchangeProps) {
               label: { autoRotate: false },
             }}
             color={() => {
-              return "#FF3E3E";
+              return "#FF7474";
             }}
           />
         </div>

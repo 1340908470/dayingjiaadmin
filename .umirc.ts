@@ -3,6 +3,10 @@ import { defineConfig } from "umi";
 export default defineConfig({
   nodeModulesTransform: {
     type: "none",
+    exclude: ["@umijs/utils"],
+  },
+  targets: {
+    ie: 9,
   },
   routes: [{ exact: true, path: "/", component: "@/index" }],
   proxy: {

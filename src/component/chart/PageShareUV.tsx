@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
@@ -35,7 +36,15 @@ export default function PageShareUV(props: PageShareUVProps) {
           "",
       }).then((r) => {
         // @ts-ignore
-        setData(r.uv);
+        setData(
+          r.uv.map((value) => {
+            let { name, uv } = value;
+            return {
+              name: name,
+              uv: Number.parseInt(uv),
+            };
+          })
+        );
 
         if (data) setLoading(false);
       });
@@ -60,7 +69,7 @@ export default function PageShareUV(props: PageShareUVProps) {
               label: { autoRotate: false },
             }}
             color={() => {
-              return "#FF3E3E";
+              return "#FF7474";
             }}
           />
         </div>

@@ -421,6 +421,7 @@ interface CompetitionData {
 }
 
 interface CompetitionParticipateReq {
+  category: number;
   begin: string;
   end: string;
   id: number;
@@ -432,6 +433,7 @@ interface CompetitionParticipate {
 }
 
 interface CompetitionChannelReq {
+  category: number;
   begin: string;
   end: string;
   id: number;
@@ -618,6 +620,12 @@ interface UserPlatform {
   新用户终端分布: Platform[];
 }
 
+export interface CompetitionSimple {
+  id: number;
+  name: string;
+  category: number;
+}
+
 export default {
   PhotoType: {} as PhotoType,
   Test: "" as EndPoint<TestReq, TestRes>,
@@ -685,11 +693,19 @@ export default {
     DateRangeReq,
     Competition[]
   >,
+  CompetitionList: "analytics/competitionlist" as EndPoint<
+    DateRangeReq,
+    CompetitionSimple[]
+  >,
   CompetitionData: "analytics/competitiondata" as EndPoint<
     CompetitionDataReq,
     CompetitionData
   >,
   CompetitionParticipate: "analytics/competitionparticipate" as EndPoint<
+    CompetitionParticipateReq,
+    CompetitionParticipate[]
+  >,
+  CompetitionRegister: "analytics/competitionregister" as EndPoint<
     CompetitionParticipateReq,
     CompetitionParticipate[]
   >,
