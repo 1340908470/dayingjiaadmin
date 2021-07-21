@@ -110,6 +110,17 @@ export default function DataSummaryByMonth(props: DataSummaryByMonthProps) {
         ) : (
           <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
             <Table pagination={false} dataSource={data} columns={columns} />
+            <div
+              style={{
+                marginTop: "10px",
+                color: "grey",
+                fontSize: "8px",
+                marginBottom: "10px",
+              }}
+            >
+              {" "}
+              ■ 环比增长：统计月数据/上个统计月的百分比
+            </div>
           </div>
         )}
       </div>

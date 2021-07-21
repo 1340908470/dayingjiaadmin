@@ -41,7 +41,7 @@
 }
 
 .ant-table-thead > tr > th {
-    background-color: #ececec;
+    background-color: #ececec !important;
 }
 
 .table-even {
@@ -54,3 +54,4 @@
 .table-light-red {
     background-color: rgb(255, 224, 224);
 }
+

@@ -10,215 +10,6 @@ const convertText = (text: string) => {
   return (num - 1) * (num - 1) * (num - 1) + 1;
 };
 
-const columns = [
-  {
-    title: "时间",
-    dataIndex: "time",
-    key: "time",
-  },
-  {
-    title: "访问用户数",
-    dataIndex: "num",
-    key: "num",
-  },
-  {
-    title: "1天后",
-    dataIndex: "day1",
-    key: "day1",
-    render: (text: any, row: any, index: number) => {
-      return (
-        <div style={{ width: "30px" }}>
-          <div
-            style={{
-              backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
-              position: "absolute",
-              color: text === "" ? "Gainsboro" : "",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              paddingTop: "12%",
-              textAlign: "center",
-              fontSize: "16px",
-            }}
-          >
-            {text === "" ? "一" : text}
-          </div>
-        </div>
-      );
-    },
-  },
-  {
-    title: "2天后",
-    dataIndex: "day2",
-    key: "day2",
-    render: (text: any, row: any, index: number) => {
-      return (
-        <div style={{ width: "30px" }}>
-          <div
-            style={{
-              backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
-              position: "absolute",
-              color: text === "" ? "Gainsboro" : "",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              paddingTop: "12%",
-              textAlign: "center",
-              fontSize: "16px",
-            }}
-          >
-            {text === "" ? "一" : text}
-          </div>
-        </div>
-      );
-    },
-  },
-  {
-    title: "3天后",
-    dataIndex: "day3",
-    key: "day3",
-    render: (text: any, row: any, index: number) => {
-      return (
-        <div style={{ width: "30px" }}>
-          <div
-            style={{
-              backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
-              position: "absolute",
-              color: text === "" ? "Gainsboro" : "",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              paddingTop: "12%",
-              textAlign: "center",
-              fontSize: "16px",
-            }}
-          >
-            {text === "" ? "一" : text}
-          </div>
-        </div>
-      );
-    },
-  },
-  {
-    title: "4天后",
-    dataIndex: "day4",
-    key: "day4",
-    render: (text: any, row: any, index: number) => {
-      return (
-        <div style={{ width: "30px" }}>
-          <div
-            style={{
-              backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
-              position: "absolute",
-              color: text === "" ? "Gainsboro" : "",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              paddingTop: "12%",
-              textAlign: "center",
-              fontSize: "16px",
-            }}
-          >
-            {text === "" ? "一" : text}
-          </div>
-        </div>
-      );
-    },
-  },
-  {
-    title: "5天后",
-    dataIndex: "day5",
-    key: "day5",
-    render: (text: any, row: any, index: number) => {
-      return (
-        <div style={{ width: "30px" }}>
-          <div
-            style={{
-              backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
-              position: "absolute",
-              color: text === "" ? "Gainsboro" : "",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              paddingTop: "12%",
-              textAlign: "center",
-              fontSize: "16px",
-            }}
-          >
-            {text === "" ? "一" : text}
-          </div>
-        </div>
-      );
-    },
-  },
-  {
-    title: "6天后",
-    dataIndex: "day6",
-    key: "day6",
-    render: (text: any, row: any, index: number) => {
-      return (
-        <div style={{ width: "30px" }}>
-          <div
-            style={{
-              backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
-              position: "absolute",
-              color: text === "" ? "Gainsboro" : "",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              paddingTop: "12%",
-              textAlign: "center",
-              fontSize: "16px",
-            }}
-          >
-            {text === "" ? "一" : text}
-          </div>
-        </div>
-      );
-    },
-  },
-  {
-    title: "7天后",
-    dataIndex: "day7",
-    key: "day7",
-    render: (text: any, row: any, index: number) => {
-      return (
-        <div style={{ width: "30px" }}>
-          <div
-            style={{
-              backgroundColor:
-                text === "" ? "" : "rgba(255,62,62," + convertText(text) + ")",
-              position: "absolute",
-              color: text === "" ? "Gainsboro" : "",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              paddingTop: "12%",
-              textAlign: "center",
-              fontSize: "16px",
-            }}
-          >
-            {text === "" ? "一" : text}
-          </div>
-        </div>
-      );
-    },
-  },
-];
-
 interface ActiveDailyRetainProps {
   isMonthReport?: boolean;
   begin: string;
@@ -249,7 +40,7 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props]);
+  }, [props.begin]);
 
   const convertTime = (date: Date) => {
     return (
@@ -265,6 +56,293 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
     //格式化
     return new Date(date.getTime() - 1000 * 60 * 60 * 24);
   };
+
+  const columns = [
+    {
+      title: "时间",
+      dataIndex: "time",
+      key: "time",
+    },
+    {
+      title: "访问用户数",
+      dataIndex: "num",
+      key: "num",
+    },
+    {
+      title: "1天后",
+      dataIndex: "day1",
+      key: "day1",
+      render: (text: any, row: any, index: number) => {
+        return (
+          <div style={{ width: "30px" }}>
+            <div
+              style={{
+                backgroundColor:
+                  text === ""
+                    ? ""
+                    : "rgba(255,62,62," + convertText(text) + ")",
+                position: "absolute",
+                color: text === "" ? "Gainsboro" : "",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                paddingTop: "12%",
+                textAlign: "center",
+                fontSize: "16px",
+              }}
+            >
+              {text === "" ? "一" : text}
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "2天后",
+      dataIndex: "day2",
+      key: "day2",
+      render: (text: any, row: any, index: number) => {
+        return (
+          <div style={{ width: "30px" }}>
+            <div
+              style={{
+                backgroundColor:
+                  text === ""
+                    ? ""
+                    : "rgba(255,62,62," + convertText(text) + ")",
+                position: "absolute",
+                color: text === "" ? "Gainsboro" : "",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                paddingTop: "12%",
+                textAlign: "center",
+                fontSize: "16px",
+              }}
+            >
+              {text === "" ? "一" : text}
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "3天后",
+      dataIndex: "day3",
+      key: "day3",
+      render: (text: any, row: any, index: number) => {
+        return (
+          <div style={{ width: "30px" }}>
+            <div
+              style={{
+                backgroundColor:
+                  text === ""
+                    ? ""
+                    : "rgba(255,62,62," + convertText(text) + ")",
+                position: "absolute",
+                color: text === "" ? "Gainsboro" : "",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                paddingTop: "12%",
+                textAlign: "center",
+                fontSize: "16px",
+              }}
+            >
+              {text === "" ? "一" : text}
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "4天后",
+      dataIndex: "day4",
+      key: "day4",
+      render: (text: any, row: any, index: number) => {
+        return (
+          <div style={{ width: "30px" }}>
+            <div
+              style={{
+                backgroundColor:
+                  text === ""
+                    ? ""
+                    : "rgba(255,62,62," + convertText(text) + ")",
+                position: "absolute",
+                color: text === "" ? "Gainsboro" : "",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                paddingTop: "12%",
+                textAlign: "center",
+                fontSize: "16px",
+              }}
+            >
+              {text === "" ? "一" : text}
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "5天后",
+      dataIndex: "day5",
+      key: "day5",
+      render: (text: any, row: any, index: number) => {
+        return (
+          <div style={{ width: "30px" }}>
+            <div
+              style={{
+                backgroundColor:
+                  text === ""
+                    ? ""
+                    : "rgba(255,62,62," + convertText(text) + ")",
+                position: "absolute",
+                color: text === "" ? "Gainsboro" : "",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                paddingTop: "12%",
+                textAlign: "center",
+                fontSize: "16px",
+              }}
+            >
+              {text === "" ? "一" : text}
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "6天后",
+      dataIndex: "day6",
+      key: "day6",
+      render: (text: any, row: any, index: number) => {
+        return (
+          <div style={{ width: "30px" }}>
+            <div
+              style={{
+                backgroundColor:
+                  text === ""
+                    ? ""
+                    : "rgba(255,62,62," + convertText(text) + ")",
+                position: "absolute",
+                color: text === "" ? "Gainsboro" : "",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                paddingTop: "12%",
+                textAlign: "center",
+                fontSize: "16px",
+              }}
+            >
+              {text === "" ? "一" : text}
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "7天后",
+      dataIndex: "day7",
+      key: "day7",
+      render: (text: any, row: any, index: number) => {
+        return (
+          <div style={{ width: "30px" }}>
+            <div
+              style={{
+                backgroundColor:
+                  text === ""
+                    ? ""
+                    : "rgba(255,62,62," + convertText(text) + ")",
+                position: "absolute",
+                color: text === "" ? "Gainsboro" : "",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                paddingTop: "12%",
+                textAlign: "center",
+                fontSize: "16px",
+              }}
+            >
+              {text === "" ? "一" : text}
+            </div>
+          </div>
+        );
+      },
+    },
+    props.isMonthReport
+      ? {
+          title: "14天后",
+          dataIndex: "day14",
+          key: "day14",
+          render: (text: any, row: any, index: number) => {
+            return (
+              <div style={{ width: "30px" }}>
+                <div
+                  style={{
+                    backgroundColor:
+                      text === ""
+                        ? ""
+                        : "rgba(255,62,62," + convertText(text) + ")",
+                    position: "absolute",
+                    color: text === "" ? "Gainsboro" : "",
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    paddingTop: "12%",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                >
+                  {text === "" ? "一" : text}
+                </div>
+              </div>
+            );
+          },
+        }
+      : {},
+    props.isMonthReport
+      ? {
+          title: "30天后",
+          dataIndex: "day30",
+          key: "day30",
+          render: (text: any, row: any, index: number) => {
+            return (
+              <div style={{ width: "30px" }}>
+                <div
+                  style={{
+                    backgroundColor:
+                      text === ""
+                        ? ""
+                        : "rgba(255,62,62," + convertText(text) + ")",
+                    position: "absolute",
+                    color: text === "" ? "Gainsboro" : "",
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    paddingTop: "12%",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                >
+                  {text === "" ? "一" : text}
+                </div>
+              </div>
+            );
+          },
+        }
+      : {},
+  ];
 
   const asyncFetch = () => {
     let visit_uvs = [] as VisitUvNew[][];
@@ -353,6 +431,14 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
                 ? ((visit_uv[7].value / visit_uv[0].value) * 100).toFixed(2) +
                   "%"
                 : "",
+              day14: visit_uv[8]
+                ? ((visit_uv[8].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
+                : "",
+              day30: visit_uv[9]
+                ? ((visit_uv[7].value / visit_uv[0].value) * 100).toFixed(2) +
+                  "%"
+                : "",
             });
           });
 
@@ -417,7 +503,7 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
                 value * 10,
                 (value + 1) * 10 > data.length ? data.length : (value + 1) * 10
               )}
-              columns={columns}
+              columns={columns.slice(0, 9)}
             />
           )}
         </div>

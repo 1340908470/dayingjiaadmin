@@ -12,7 +12,7 @@ import PhotoCompetitionNavigationButton from "@/component/navigation/PhotoCompet
 import CompetitionRelatedData from "@/component/chart/CompetitionRelatedData";
 import UserContributionsTrend from "@/component/chart/UserContributionsTrend";
 import CompetitionChannel from "@/component/chart/CompetitionChannel";
-import PPTCover from "@/component/chart/PPTCover";
+import PPTCover from "@/component/ppt/PPTCover";
 
 interface PhotoCompetitionTotalProps {
   nowPage: string;

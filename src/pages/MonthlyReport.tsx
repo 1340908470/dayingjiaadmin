@@ -39,7 +39,8 @@ import ActiveDailyRetain from "@/component/chart/ActiveDailyRetain";
 import NewDailyRetain from "@/component/chart/NewDailyRetain";
 import InviterFocused from "@/component/chart/InviterFocused";
 import MonthActiveUserProvince from "@/component/chart/MonthActiveUserProvince";
-import PPTCover from "@/component/chart/PPTCover";
+import PPTCover from "@/component/ppt/PPTCover";
+import UserPhotos from "@/component/chart/UserPhotos";
 
 interface MonthlyReportProps {
   nowPage: string;
@@ -59,8 +60,9 @@ export default function MonthlyReport(props: MonthlyReportProps) {
   const DataSummaryRefMonth = useRef(null);
   const DataSummaryByMonthRefMonth = useRef(null);
   const RegisteredUserByDayRefMonth = useRef(null);
-  const NumbersOfNewUserEveryWeekRefMonth = useRef(null);
-  const NumbersOfNewWorkEveryWeekRefMonth = useRef(null);
+  const NewPhotoByDayRefMonth = useRef(null);
+  // const NumbersOfNewUserEveryWeekRefMonth = useRef(null);
+  // const NumbersOfNewWorkEveryWeekRefMonth = useRef(null);
   const PhotoTypesRefMonth = useRef(null);
   const PhotoTagRefMonth = useRef(null);
   const PhotoTypeByMonthRefMonth = useRef(null);
@@ -82,12 +84,22 @@ export default function MonthlyReport(props: MonthlyReportProps) {
   const MonthActiveUserProvinceRefMonth = useRef(null);
 
   const ActiveDailyRetainRefMonth = useRef(null);
+  const UserPhotosRefMonth = useRef(null);
 
   const InvitedKPIRefMonth = useRef(null);
   const InviterFocusedRefMonth = useRef(null);
 
   if (props.nowPage === "月报") {
     exportComponentAsPNG(DataSummaryRefMonth)
+      .then(() => {
+        return exportComponentAsPNG(DataSummaryByMonthRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(RegisteredUserByDayRefMonth);
+      })
+      .then(() => {
+        return exportComponentAsPNG(NewPhotoByDayRefMonth);
+      })
       .then(() => {
         return exportComponentAsPNG(PhotoTypeByMonthRefMonth);
       })
@@ -154,6 +166,9 @@ export default function MonthlyReport(props: MonthlyReportProps) {
         );
       })
       .then(() => {
+        return exportComponentAsPNG(UserPhotosRefMonth);
+      })
+      .then(() => {
         return exportComponentAsPNG(InvitedKPIRefMonth);
       })
       .then(() => {
@@ -195,20 +210,35 @@ export default function MonthlyReport(props: MonthlyReportProps) {
           isMonthReport={true}
         />
       </div>
-      <div ref={NumbersOfNewUserEveryWeekRefMonth}>
-        <NumbersOfNewUserEveryWeek
+      <div ref={RegisteredUserByDayRefMonth}>
+        <RegisteredUserByDay
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={NumbersOfNewWorkEveryWeekRefMonth}>
-        <NumbersOfNewWorkEveryWeek
+      <div ref={NewPhotoByDayRefMonth}>
+        <NewPhotoByDay
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
+
+      {/*<div ref={NumbersOfNewUserEveryWeekRefMonth}>*/}
+      {/*  <NumbersOfNewUserEveryWeek*/}
+      {/*    begin={date.StartTime}*/}
+      {/*    end={date.EndTime}*/}
+      {/*    isMonthReport={true}*/}
+      {/*  />*/}
+      {/*</div>*/}
+      {/*<div ref={NumbersOfNewWorkEveryWeekRefMonth}>*/}
+      {/*  <NumbersOfNewWorkEveryWeek*/}
+      {/*    begin={date.StartTime}*/}
+      {/*    end={date.EndTime}*/}
+      {/*    isMonthReport={true}*/}
+      {/*  />*/}
+      {/*</div>*/}
 
       <div>
         <PPTCover
@@ -378,6 +408,22 @@ export default function MonthlyReport(props: MonthlyReportProps) {
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
+        />
+      </div>
+      <div ref={UserPhotosRefMonth}>
+        <UserPhotos
+          isMonthReport={true}
+          begin={date.StartTime}
+          end={date.EndTime}
+        />
+      </div>
+
+      <div>
+        <PPTCover
+          nowPage={props.nowPage}
+          begin={date.StartTime}
+          end={date.EndTime}
+          title={"特邀影家"}
         />
       </div>
 

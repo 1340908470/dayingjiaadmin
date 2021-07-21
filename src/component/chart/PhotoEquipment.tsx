@@ -158,7 +158,8 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
             <Col flex={"auto"}>
               <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
                 <Table
-                  pagination={{ pageSize: 6 }}
+                  size={props.isMonthReport ? "small" : ""}
+                  pagination={props.isMonthReport ? false : { pageSize: 6 }}
                   dataSource={tableData}
                   columns={columns}
                   bordered={false}

@@ -157,8 +157,9 @@ export default function UserAccessByChannel(props: UserAccessProps) {
             <Col flex={"auto"}>
               <div style={{ borderLeftWidth: "2px", marginBottom: "15px" }}>
                 <Table
-                  rowClassName={getRowClassName}
-                  pagination={{ pageSize: 5 }}
+                  // rowClassName={getRowClassName}
+                  size={props.isMonthReport ? "small" : ""}
+                  pagination={props.isMonthReport ? false : { pageSize: 5 }}
                   dataSource={tableData}
                   columns={columns}
                   bordered={false}
