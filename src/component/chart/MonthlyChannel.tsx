@@ -6,6 +6,7 @@ import "./default.css";
 import Loading from "@/component/layout/Loading";
 
 interface MonthlyChannelProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -28,6 +29,8 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
       call(analytics.MonthlyChannel, {
         month: props.begin.split("-")[0] + "-" + props.begin.split("-")[1],
       }).then((r) => {
+        console.log(r);
+
         // @ts-ignore
         setData(r);
 
@@ -59,8 +62,16 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
       render: (text: any, row: any, index: number) => {
         return (
           <div style={{}}>
-            <div style={text > 100 ? { color: "red" } : { color: "green" }}>
-              {text}
+            <div
+              style={
+                text.split("%")[0] > 100
+                  ? { color: "red" }
+                  : text === "0%"
+                  ? { color: "grey" }
+                  : { color: "green" }
+              }
+            >
+              {text === "0%" ? "——" : text}
             </div>
           </div>
         );
@@ -80,6 +91,16 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
         ) : (
           <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
             <Table pagination={false} dataSource={data} columns={columns} />
+            <div
+              style={{
+                marginTop: "10px",
+                color: "grey",
+                fontSize: "8px",
+                marginBottom: "10px",
+              }}
+            >
+              ■ 环比增长：统计月数据/上个统计月的百分比
+            </div>
           </div>
         )}
       </div>

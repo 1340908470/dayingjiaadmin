@@ -68,7 +68,6 @@ export default function DeviceSummary(props: DeviceSummaryProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-    console.log(data);
   }, [props.begin]);
 
   const asyncFetch = () => {
@@ -108,7 +107,6 @@ export default function DeviceSummary(props: DeviceSummaryProps) {
 
         // @ts-ignore
         setData(tmpData);
-        console.log(data);
 
         setLoading(false);
       });

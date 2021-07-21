@@ -35,8 +35,6 @@ export default function LayoutContent(props: LayoutContentProps) {
     setNowPage("");
   };
 
-  console.log(props.SiderNav);
-
   return (
     <>
       <Layout
@@ -61,17 +59,17 @@ export default function LayoutContent(props: LayoutContentProps) {
           }}
         >
           <div ref={contentRef} className={"sider-content"}>
-            <Button
-              className="print"
-              danger
-              icon={<DownloadOutlined />}
-              onClick={() => {
-                setNowPage(props.SiderNav);
-              }}
-              hidden={props.SiderNav !== "月报"}
-            >
-              下载
-            </Button>
+            {/*<Button*/}
+            {/*  className="print"*/}
+            {/*  danger*/}
+            {/*  icon={<DownloadOutlined />}*/}
+            {/*  onClick={() => {*/}
+            {/*    setNowPage(props.SiderNav);*/}
+            {/*  }}*/}
+            {/*  hidden={props.SiderNav !== "月报"}*/}
+            {/*>*/}
+            {/*  下载*/}
+            {/*</Button>*/}
             <div hidden={props.SiderNav !== "总览"}>
               <Pandect nowPage={nowPage} resetPage={resetPage} />
             </div>

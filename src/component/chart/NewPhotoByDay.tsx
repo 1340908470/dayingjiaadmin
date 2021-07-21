@@ -23,6 +23,7 @@ const columns = [
 ];
 
 interface NewPhotoByDayProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -73,7 +74,10 @@ export default function NewPhotoByDay(props: NewPhotoByDayProps) {
   return (
     <div>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           新增作品数
         </div>
 

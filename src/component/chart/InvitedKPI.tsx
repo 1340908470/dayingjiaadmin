@@ -6,6 +6,7 @@ import "./default.css";
 import Loading from "@/component/layout/Loading";
 
 interface InvitedKPIProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -170,7 +171,10 @@ export default function InvitedKPI(props: InvitedKPIProps) {
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           特邀影家KPI考核
         </div>
 

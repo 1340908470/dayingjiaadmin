@@ -5,20 +5,13 @@
 import "./Default.css";
 import { useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
-import UserAccess from "@/component/chart/UserAccess";
 import DataSummary from "@/component/chart/DataSummary";
 import RegisteredUserByDay from "@/component/chart/RegisteredUserByDay";
 import NewPhotoByDay from "@/component/chart/NewPhotoByDay";
 import { exportComponentAsPNG } from "react-component-export-image";
-import DateRangeWeeklyFilter from "@/component/filter/DateRangeWeeklyFilter";
-import WeeklyDataSummary from "@/component/chart/WeeklyDataSummary";
-import UserJoinCompetition from "@/component/chart/UserJoinCompetition";
-import WeeklyUserAccessChannel from "@/component/chart/WeeklyUserAccessChannel";
 import DateRangeMonthlyFilter from "@/component/filter/DateRangeMonthlyFilter";
 import InvitedKPI from "@/component/chart/InvitedKPI";
 import DataSummaryByMonth from "@/component/chart/DataSummaryByMonth";
-import NumbersOfNewUserEveryWeek from "@/component/chart/NumbersOfNewUserEveryWeek";
-import NumbersOfNewWorkEveryWeek from "@/component/chart/NumbersOfNewWorkEveryWeek";
 import PhotoTypes from "@/component/chart/PhotoTypes";
 import PhotoTag from "@/component/chart/PhotoTag";
 import PhotoTypeByMonth from "@/component/chart/PhotoTypeByMonth";
@@ -33,14 +26,14 @@ import FromInviter from "@/component/chart/FromInviter";
 import MonthlyChannel from "@/component/chart/MonthlyChannel";
 import ActiveUserGender from "@/component/chart/ActiveUserGender";
 import ActiveUserAge from "@/component/chart/ActiveUserAge";
-import ActiveUserProvince from "@/component/chart/ActiveUserProvince";
 import ActiveUserDevice from "@/component/chart/ActiveUserDevice";
 import ActiveDailyRetain from "@/component/chart/ActiveDailyRetain";
-import NewDailyRetain from "@/component/chart/NewDailyRetain";
 import InviterFocused from "@/component/chart/InviterFocused";
 import MonthActiveUserProvince from "@/component/chart/MonthActiveUserProvince";
 import PPTCover from "@/component/ppt/PPTCover";
 import UserPhotos from "@/component/chart/UserPhotos";
+import { Button } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
 
 interface MonthlyReportProps {
   nowPage: string;
@@ -49,6 +42,8 @@ interface MonthlyReportProps {
 
 export default function MonthlyReport(props: MonthlyReportProps) {
   const [date, setDate] = useState({} as DateRange);
+
+  const [isPrint, setIsPrint] = useState(false);
 
   function setDateRange(startTime: string, endTime: string) {
     setDate({
@@ -89,94 +84,116 @@ export default function MonthlyReport(props: MonthlyReportProps) {
   const InvitedKPIRefMonth = useRef(null);
   const InviterFocusedRefMonth = useRef(null);
 
-  if (props.nowPage === "月报") {
-    exportComponentAsPNG(DataSummaryRefMonth)
-      .then(() => {
-        return exportComponentAsPNG(DataSummaryByMonthRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(RegisteredUserByDayRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(NewPhotoByDayRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(PhotoTypeByMonthRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(PhotoEquipmentRefMonth);
-      })
-      .then(() => {
+  async function setPrint() {
+    setIsPrint(true);
+  }
+
+  async function exportPNG() {
+    await exportComponentAsPNG(DataSummaryRefMonth, {
+      fileName: "用户数据概况",
+    });
+    await exportComponentAsPNG(DataSummaryByMonthRefMonth, {
+      fileName: "用户数据月度对比",
+    });
+    await exportComponentAsPNG(RegisteredUserByDayRefMonth, {
+      fileName: "新增用户注册数",
+    });
+    await exportComponentAsPNG(NewPhotoByDayRefMonth, {
+      fileName: "新增作品数",
+    });
+
+    await exportComponentAsPNG(PhotoTypesRefMonth, {
+      fileName: "发布作品类型分布",
+    });
+    await exportComponentAsPNG(PhotoTagRefMonth, {
+      fileName: "不同标签作品数统计",
+    });
+    await exportComponentAsPNG(PhotoTypeByMonthRefMonth, {
+      fileName: "发布作品类型月度对比",
+    });
+    await exportComponentAsPNG(PhotoEquipmentRefMonth, {
+      fileName: "作品拍摄器材分布",
+    });
+    // @ts-ignore
+    PhotoCompetitionTotalRefMonth.current.childNodes[0].childNodes.forEach(
+      // @ts-ignore
+      (value) => {
         // @ts-ignore
-        PhotoCompetitionTotalRefMonth.current.childNodes[0].childNodes.forEach(
-          // @ts-ignore
-          (value) => {
-            // @ts-ignore
-            value.childNodes.forEach((card) => {
-              exportComponentAsPNG({
-                current: card,
-              }).then();
-            });
-          }
-        );
-      })
-      .then(() => {
-        return exportComponentAsPNG(GiftRelatedDataRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(FreeCourseAccessRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(CourseExchangeRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(AvatarExchangeRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(UserAccessByChannelRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(MonthlyChannelRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(FromInviterRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(ActiveUserGenderRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(ActiveUserAgeRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(ActiveUserDeviceRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(MonthActiveUserProvinceRefMonth);
-      })
-      .then(() => {
+        value.childNodes.forEach((card) => {
+          exportComponentAsPNG(
+            {
+              current: card,
+            },
+            { fileName: card.childNodes[0].innerHTML }
+          ).then();
+        });
+      }
+    );
+
+    await exportComponentAsPNG(GiftRelatedDataRefMonth, {
+      fileName: "礼品相关数据",
+    });
+    await exportComponentAsPNG(FreeCourseAccessRefMonth, {
+      fileName: "免费课程访问数Top10",
+    });
+    await exportComponentAsPNG(CourseExchangeRefMonth, {
+      fileName: "精品课程兑换数Top10",
+    });
+    await exportComponentAsPNG(AvatarExchangeRefMonth, {
+      fileName: "头像挂件兑换数Top10",
+    });
+
+    await exportComponentAsPNG(UserAccessByChannelRefMonth, {
+      fileName: "不同来源访问人数分布",
+    });
+    await exportComponentAsPNG(MonthlyChannelRefMonth, {
+      fileName: "不同渠道来源用户访问月度对比",
+    });
+    await exportComponentAsPNG(FromInviterRefMonth, {
+      fileName: "来自特邀影家渠道访问详情",
+    });
+
+    await exportComponentAsPNG(ActiveUserGenderRefMonth, {
+      fileName: "访问用户性别分布",
+    });
+    await exportComponentAsPNG(ActiveUserAgeRefMonth, {
+      fileName: "访问用户年龄分布",
+    });
+    await exportComponentAsPNG(ActiveUserDeviceRefMonth, {
+      fileName: "访问用户终端分布",
+    });
+    await exportComponentAsPNG(MonthActiveUserProvinceRefMonth, {
+      fileName: "访问用户地区分布",
+    });
+
+    await exportComponentAsPNG(DataSummaryRefMonth, { fileName: "月报" });
+
+    // @ts-ignore
+    ActiveDailyRetainRefMonth.current.childNodes.forEach(
+      // @ts-ignore
+      (value) => {
         // @ts-ignore
-        ActiveDailyRetainRefMonth.current.childNodes.forEach(
-          // @ts-ignore
-          (value) => {
-            // @ts-ignore
-            exportComponentAsPNG({
-              current: value,
-            }).then();
+        exportComponentAsPNG(
+          {
+            current: value,
+          },
+          {
+            fileName: "访问用户留存数据",
           }
-        );
-      })
-      .then(() => {
-        return exportComponentAsPNG(UserPhotosRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(InvitedKPIRefMonth);
-      })
-      .then(() => {
-        return exportComponentAsPNG(InviterFocusedRefMonth);
-      })
-      .then(() => {
-        props.resetPage();
-      });
+        ).then();
+      }
+    );
+
+    await exportComponentAsPNG(UserPhotosRefMonth, {
+      fileName: "用户发布作品数分布",
+    });
+
+    await exportComponentAsPNG(InvitedKPIRefMonth, {
+      fileName: "特邀影家KPI考核",
+    });
+    await exportComponentAsPNG(InviterFocusedRefMonth, {
+      fileName: "特邀影家关注度统计",
+    });
   }
 
   return (
@@ -185,6 +202,22 @@ export default function MonthlyReport(props: MonthlyReportProps) {
         minHeight: "1000px",
       }}
     >
+      <Button
+        className="print"
+        danger
+        icon={<DownloadOutlined />}
+        onClick={() => {
+          setPrint()
+            .then(() => {
+              return exportPNG();
+            })
+            .then(() => {
+              setIsPrint(false);
+            });
+        }}
+      >
+        下载
+      </Button>
       <DateRangeMonthlyFilter Title={"月报"} setDateRange={setDateRange} />
 
       <div>
@@ -198,6 +231,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div ref={DataSummaryRefMonth}>
         <DataSummary
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
@@ -205,6 +239,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={DataSummaryByMonthRefMonth}>
         <DataSummaryByMonth
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
@@ -212,6 +247,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={RegisteredUserByDayRefMonth}>
         <RegisteredUserByDay
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
@@ -219,6 +255,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={NewPhotoByDayRefMonth}>
         <NewPhotoByDay
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
@@ -251,6 +288,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div ref={PhotoTypesRefMonth}>
         <PhotoTypes
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
@@ -258,6 +296,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={PhotoTagRefMonth}>
         <PhotoTag
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
@@ -265,6 +304,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={PhotoTypeByMonthRefMonth}>
         <PhotoTypeByMonth
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
@@ -272,6 +312,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={PhotoEquipmentRefMonth}>
         <PhotoEquipment
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
@@ -298,6 +339,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div ref={GiftRelatedDataRefMonth}>
         <GiftRelatedData
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -305,6 +347,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={FreeCourseAccessRefMonth}>
         <FreeCourseAccess
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -312,6 +355,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={CourseExchangeRefMonth}>
         <CourseExchange
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -319,6 +363,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={AvatarExchangeRefMonth}>
         <AvatarExchange
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -336,6 +381,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div ref={UserAccessByChannelRefMonth}>
         <UserAccessByChannel
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -343,6 +389,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={MonthlyChannelRefMonth}>
         <MonthlyChannel
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -350,6 +397,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={FromInviterRefMonth}>
         <FromInviter
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -367,6 +415,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div ref={ActiveUserGenderRefMonth}>
         <ActiveUserGender
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -374,6 +423,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={ActiveUserAgeRefMonth}>
         <ActiveUserAge
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -381,6 +431,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={ActiveUserDeviceRefMonth}>
         <ActiveUserDevice
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -388,6 +439,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={MonthActiveUserProvinceRefMonth}>
         <MonthActiveUserProvince
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -405,6 +457,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div ref={ActiveDailyRetainRefMonth}>
         <ActiveDailyRetain
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -412,6 +465,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={UserPhotosRefMonth}>
         <UserPhotos
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -429,6 +483,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div ref={InvitedKPIRefMonth}>
         <InvitedKPI
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}
@@ -436,6 +491,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       </div>
       <div ref={InviterFocusedRefMonth}>
         <InviterFocused
+          nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}
           end={date.EndTime}

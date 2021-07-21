@@ -8,6 +8,7 @@ import style from "@/component/chart/default.css";
 import Loading from "@/component/layout/Loading";
 
 interface RegisteredUserByDayProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -59,7 +60,10 @@ export default function RegisteredUserByDay(props: RegisteredUserByDayProps) {
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           新增用户注册数
         </div>
 

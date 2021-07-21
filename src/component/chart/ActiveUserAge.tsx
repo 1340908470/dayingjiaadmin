@@ -7,6 +7,7 @@ import { Row, Col, Table } from "antd";
 import Loading from "@/component/layout/Loading";
 
 interface ActiveUserAgeProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;

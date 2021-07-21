@@ -8,6 +8,7 @@ import Loading from "@/component/layout/Loading";
 import "./default.css";
 
 interface UserAccessProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;

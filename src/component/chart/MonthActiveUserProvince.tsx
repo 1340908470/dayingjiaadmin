@@ -24,6 +24,7 @@ const columns = [
 ];
 
 interface MonthActiveUserProvinceProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -89,7 +90,7 @@ export default function MonthActiveUserProvince(
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          活跃用户地区分布
+          访问用户地区分布
         </div>
 
         {loading ? (

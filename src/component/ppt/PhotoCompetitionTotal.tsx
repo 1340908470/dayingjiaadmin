@@ -13,6 +13,7 @@ import CompetitionRelatedData from "@/component/chart/CompetitionRelatedData";
 import UserContributionsTrend from "@/component/chart/UserContributionsTrend";
 import CompetitionChannel from "@/component/chart/CompetitionChannel";
 import PPTCover from "@/component/ppt/PPTCover";
+import { data } from "browserslist";
 
 interface PhotoCompetitionTotalProps {
   nowPage: string;
@@ -55,7 +56,7 @@ export default function PhotoCompetitionTotal(
     }).then((r) => {
       setTotalCompetition(r);
     });
-  }, [date.StartTime]);
+  }, [props.begin]);
 
   return (
     <div style={{}}>

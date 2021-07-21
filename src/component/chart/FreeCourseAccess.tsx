@@ -7,6 +7,7 @@ import style from "@/component/chart/default.css";
 import Loading from "@/component/layout/Loading";
 
 interface FreeCourseAccessProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;

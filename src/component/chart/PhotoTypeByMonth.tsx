@@ -6,6 +6,7 @@ import "./default.css";
 import Loading from "@/component/layout/Loading";
 
 interface PhotoTypeByMonthProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -97,7 +98,7 @@ export default function PhotoTypeByMonth(props: PhotoTypeByMonthProps) {
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
         <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          用户数据月度对比
+          发布作品类型月度对比
         </div>
 
         {loading ? (
@@ -105,6 +106,16 @@ export default function PhotoTypeByMonth(props: PhotoTypeByMonthProps) {
         ) : (
           <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
             <Table pagination={false} dataSource={data} columns={columns} />
+            <div
+              style={{
+                marginTop: "10px",
+                color: "grey",
+                fontSize: "8px",
+                marginBottom: "10px",
+              }}
+            >
+              ■ 环比增长：统计月数据/上个统计月的百分比
+            </div>
           </div>
         )}
       </div>

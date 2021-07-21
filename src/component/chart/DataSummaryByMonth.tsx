@@ -6,6 +6,7 @@ import "./default.css";
 import Loading from "@/component/layout/Loading";
 
 interface DataSummaryByMonthProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -102,7 +103,10 @@ export default function DataSummaryByMonth(props: DataSummaryByMonthProps) {
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           用户数据月度对比
         </div>
         {loading ? (
@@ -118,7 +122,6 @@ export default function DataSummaryByMonth(props: DataSummaryByMonthProps) {
                 marginBottom: "10px",
               }}
             >
-              {" "}
               ■ 环比增长：统计月数据/上个统计月的百分比
             </div>
           </div>

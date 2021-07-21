@@ -23,6 +23,7 @@ const columns = [
 ];
 
 interface GiftRelatedDataProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;

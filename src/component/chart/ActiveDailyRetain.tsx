@@ -11,6 +11,7 @@ const convertText = (text: string) => {
 };
 
 interface ActiveDailyRetainProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -463,7 +464,10 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
         hidden={!loading}
         className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}
       >
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           {props.isMonthReport ? "访问用户留存数据" : "访问用户7日留存数据"}
         </div>
         {loading ? <Loading /> : ""}
@@ -475,6 +479,7 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
           className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}
         >
           <div
+            hidden={props.nowPage}
             className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
           >
             {props.isMonthReport ? "访问用户留存数据" : "访问用户7日留存数据"}

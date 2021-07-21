@@ -40,6 +40,7 @@ const columns = [
 ];
 
 interface InviterFocusedProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -71,7 +72,10 @@ export default function InviterFocused(props: InviterFocusedProps) {
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           特邀影家关注度统计
         </div>
 

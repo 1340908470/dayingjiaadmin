@@ -9,6 +9,7 @@ import Loading from "@/component/layout/Loading";
 import { getRowClassName } from "@/component/chart/MonthActiveUserProvince";
 
 interface FromInviterProps {
+  nowPage?: boolean;
   isMonthReport?: boolean;
   begin: string;
   end: string;
@@ -80,7 +81,10 @@ export default function FromInviter(props: FromInviterProps) {
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           来自特邀影家渠道访问详情
         </div>
 

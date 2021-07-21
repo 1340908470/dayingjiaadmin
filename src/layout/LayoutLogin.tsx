@@ -1,16 +1,19 @@
-import { Row, Col, Form, Input, Button, Checkbox, Image } from "antd";
+import { Row, Col, Form, Input, Button, Checkbox, Image, Spin } from "antd";
 import "./default.css";
 import logo from "@/wwwroot/img/logo.png";
 import { call, setExpiresTime, setJwt } from "@/util/client";
 import auth from "../util/backend/auth";
 import Base64 from "base-64";
-
+import { useState } from "react";
+import { LoadingOutlined } from "@ant-design/icons";
 interface LoginForm {
   phoneID: string;
   password: string;
 }
 
 export default function LayoutLogin() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const onFinish = (values: LoginForm) => {
     call(
       auth.Login,
@@ -21,6 +24,7 @@ export default function LayoutLogin() {
       }
     )
       .then((r) => {
+        setIsLoading(false);
         setJwt(r.data.jwt).then();
         return r;
       })
@@ -81,10 +85,14 @@ export default function LayoutLogin() {
                 <Button
                   className={"input"}
                   block
-                  type="primary"
+                  type={isLoading ? "default" : "primary"}
                   htmlType="submit"
+                  onClick={() => {
+                    setIsLoading(true);
+                  }}
+                  style={{ color: "white" }}
                 >
-                  登陆
+                  {isLoading ? <Spin /> : "登陆"}
                 </Button>
               </Form.Item>
             </Form>
