@@ -563,7 +563,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div ref={PhotoCompetitionTotalRefMonth}>
         <PhotoCompetitionTotal
-          nowPage={props.nowPage}
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
