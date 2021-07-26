@@ -162,26 +162,40 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
     // 活动比赛
 
-    // @ts-ignore
-    PhotoCompetitionTotalRefMonth.current.childNodes[0].childNodes.forEach(
-      // @ts-ignore
-      (value) => {
-        // @ts-ignore
-        value.childNodes.forEach((card, index) => {
-          if (index !== 0) {
-            exportComponentAsPNG(
-              {
-                current: card,
-              },
-              { fileName: "活动比赛||" + card.childNodes[0].innerHTML }
-            ).then((r) => {
-              uris.push(r);
-              setRate(37);
-            });
-          }
-        });
+    for (
+      let i = 0;
+      i < PhotoCompetitionTotalRefMonth.current.childNodes[0].childNodes.length;
+      i++
+    ) {
+      for (
+        let j = 1;
+        j <
+        PhotoCompetitionTotalRefMonth.current.childNodes[0].childNodes[i]
+          .childNodes.length;
+        j++
+      ) {
+        if (j !== 0) {
+          await exportComponentAsPNG(
+            {
+              current:
+                PhotoCompetitionTotalRefMonth.current.childNodes[0].childNodes[
+                  i
+                ].childNodes[j],
+            },
+            {
+              fileName:
+                "活动比赛||" +
+                PhotoCompetitionTotalRefMonth.current.childNodes[0].childNodes[
+                  i
+                ].childNodes[j].childNodes[0].innerHTML,
+            }
+          ).then((r) => {
+            uris.push(r);
+            setRate(37);
+          });
+        }
       }
-    );
+    }
 
     // 积分商城相关数据
 
@@ -258,26 +272,27 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       setRate(84);
     });
 
-    // 用户留存行为分析
+    // 用户留存行为分析;
 
-    // @ts-ignore
-    ActiveDailyRetainRefMonth.current.childNodes.forEach(
+    for (
+      let i = 1;
+      i < ActiveDailyRetainRefMonth.current.childNodes.length;
+      i++
+    ) {
       // @ts-ignore
-      (value) => {
-        // @ts-ignore
-        exportComponentAsPNG(
-          {
-            current: value,
-          },
-          {
-            fileName: "用户留存行为分析||访问用户留存数据",
-          }
-        ).then((r) => {
-          uris.push(r);
-          setRate(87);
-        });
-      }
-    );
+      await exportComponentAsPNG(
+        {
+          current: ActiveDailyRetainRefMonth.current.childNodes[i],
+        },
+        {
+          fileName: "用户留存行为分析||访问用户留存数据(" + i + ")",
+        }
+      ).then((r) => {
+        uris.push(r);
+        setRate(87);
+      });
+    }
+
     await exportComponentAsPNG(UserPhotosRefMonth, {
       fileName: "用户留存行为分析||用户发布作品数分布",
     }).then((r) => {
@@ -544,16 +559,16 @@ export default function MonthlyReport(props: MonthlyReportProps) {
           isMonthReport={true}
         />
       </div>
-      <div ref={PhotoTypeByMonthRefMonth}>
-        <PhotoTypeByMonth
+      <div ref={PhotoEquipmentRefMonth}>
+        <PhotoEquipment
           nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
         />
       </div>
-      <div ref={PhotoEquipmentRefMonth}>
-        <PhotoEquipment
+      <div ref={PhotoTypeByMonthRefMonth}>
+        <PhotoTypeByMonth
           nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
