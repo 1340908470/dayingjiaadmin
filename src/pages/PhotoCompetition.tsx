@@ -127,11 +127,14 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
             setNowCompetitionName={setNowCompetitionName}
           />
           <CompetitionRelatedData
+            category={competitionCategory}
+            nowPage={props.nowPage}
             id={competitionID}
             begin={date.StartTime}
             end={date.EndTime}
           />
           <UserContributionsTrend
+            nowPage={props.nowPage}
             category={competitionCategory}
             id={competitionID}
             begin={date.StartTime}
@@ -143,6 +146,7 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
             end={date.EndTime}
           />
           <CompetitionChannel
+            nowPage={props.nowPage}
             category={competitionCategory}
             id={competitionID}
             begin={date.StartTime}

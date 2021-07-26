@@ -52,7 +52,7 @@ export default function PhotoCompetitionTotal(
   useEffect(() => {
     call(analytics.CompetitionList, {
       begin: props.begin,
-      end: props.begin,
+      end: props.end,
     }).then((r) => {
       setTotalCompetition(r);
     });
@@ -67,13 +67,15 @@ export default function PhotoCompetitionTotal(
               <PPTCover
                 nowPage={props.nowPage}
                 begin={props.begin}
-                end={props.begin}
+                end={props.end}
                 title={"活动比赛"}
                 title2={value.name}
               />
             </div>
 
             <CompetitionRelatedData
+              category={value.category}
+              nowPage={props.nowPage}
               isMonthReport={true}
               name={value.name}
               id={value.id}
@@ -81,6 +83,7 @@ export default function PhotoCompetitionTotal(
               end={props.end}
             />
             <UserContributionsTrend
+              nowPage={props.nowPage}
               category={value.category}
               isMonthReport={true}
               name={value.name}
@@ -89,6 +92,7 @@ export default function PhotoCompetitionTotal(
               end={props.end}
             />
             <CompetitionChannel
+              nowPage={props.nowPage}
               isMonthReport={true}
               name={value.name}
               id={value.id}

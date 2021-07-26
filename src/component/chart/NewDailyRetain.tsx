@@ -247,7 +247,7 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
     return (
       date.getFullYear() +
       "" +
-      ("0" + date.getMonth()).slice(-2) +
+      ("0" + (date.getMonth() + 1)).slice(-2) +
       "" +
       ("0" + date.getDate()).slice(-2)
     );
@@ -265,7 +265,7 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
       const timeStrings = props.begin.split("-");
       let time = new Date(
         Number.parseInt(timeStrings[0]),
-        Number.parseInt(timeStrings[1]),
+        Number.parseInt(timeStrings[1]) - 1,
         Number.parseInt(timeStrings[2])
       );
       let timeString = convertTime(time);

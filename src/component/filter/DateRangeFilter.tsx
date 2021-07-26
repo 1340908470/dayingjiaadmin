@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Col, Row, Select, DatePicker, notification } from "antd";
 import { useEffect, useState } from "react";
 import { CalendarOutlined } from "@ant-design/icons";
@@ -27,6 +28,7 @@ export default function DateRangeFilter(props: FilterProps) {
   const [rangeMod, setRangeMod] = useState("上周");
   const [dateRange, setDateRange] = useState({} as DateRange);
   const [isOpen, setIsOpen] = useState(false);
+  const [keyVal, setKeyVal] = useState(new Date());
 
   useEffect(() => {
     setDateRangeByFailed("上周");
@@ -87,6 +89,7 @@ export default function DateRangeFilter(props: FilterProps) {
               setDateRangeByFailed(value);
               // @ts-ignore
               if (value === "自定义") {
+                setKeyVal(new Date());
                 openNotificationWithIcon("warning");
                 setIsOpen(true);
                 props.setIsHideState(true);
@@ -110,6 +113,7 @@ export default function DateRangeFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col hidden={rangeMod !== "自定义"}>
           <RangePicker
+            key={keyVal}
             disabledDate={(current: Moment) => {
               let startMoment = moment();
               startMoment.set("year", 2021);
@@ -127,6 +131,10 @@ export default function DateRangeFilter(props: FilterProps) {
               e?.forEach((r, i) => {
                 if (i === 0) StartTime = r?.format("YYYY-MM-DD") || "";
                 if (i === 1) EndTime = r?.format("YYYY-MM-DD") || "";
+              });
+              setDateRange({
+                StartTime: StartTime,
+                EndTime: EndTime,
               });
               props.setDateRange(StartTime, EndTime);
               setIsOpen(false);

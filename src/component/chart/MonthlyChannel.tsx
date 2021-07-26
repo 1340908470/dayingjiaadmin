@@ -29,8 +29,6 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
       call(analytics.MonthlyChannel, {
         month: props.begin.split("-")[0] + "-" + props.begin.split("-")[1],
       }).then((r) => {
-        console.log(r);
-
         // @ts-ignore
         setData(r);
 
@@ -82,7 +80,10 @@ export default function MonthlyChannel(props: MonthlyChannelProps) {
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           不同渠道来源用户访问月度对比
         </div>
 

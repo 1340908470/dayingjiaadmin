@@ -37,7 +37,10 @@ export default function CourseExchange(props: CourseExchangeProps) {
 
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+      <div
+        hidden={props.nowPage}
+        className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+      >
         精品课程兑换数Top10
       </div>
 

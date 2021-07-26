@@ -89,7 +89,10 @@ export default function MonthActiveUserProvince(
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           访问用户地区分布
         </div>
 

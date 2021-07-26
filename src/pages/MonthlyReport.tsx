@@ -1,14 +1,15 @@
+// @ts-nocheck
 /*
  * 页面：总览
  * */
-
+import html2canvas from "html2canvas";
 import "./Default.css";
 import { useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import DataSummary from "@/component/chart/DataSummary";
 import RegisteredUserByDay from "@/component/chart/RegisteredUserByDay";
 import NewPhotoByDay from "@/component/chart/NewPhotoByDay";
-import { exportComponentAsPNG } from "react-component-export-image";
+import { exportComponentAsPNG } from "@/util/export/ExportComponent";
 import DateRangeMonthlyFilter from "@/component/filter/DateRangeMonthlyFilter";
 import InvitedKPI from "@/component/chart/InvitedKPI";
 import DataSummaryByMonth from "@/component/chart/DataSummaryByMonth";
@@ -32,8 +33,13 @@ import InviterFocused from "@/component/chart/InviterFocused";
 import MonthActiveUserProvince from "@/component/chart/MonthActiveUserProvince";
 import PPTCover from "@/component/ppt/PPTCover";
 import UserPhotos from "@/component/chart/UserPhotos";
-import { Button } from "antd";
+import { Button, Col, message, notification, Row } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
+import JSZip from "jszip";
+import FileSaver from "file-saver";
+import { ExportOutlined } from "@ant-design/icons";
+import { Progress } from "antd";
+import InvitedKPIMonth from "@/component/chart/InvitedKPIMonth";
 
 interface MonthlyReportProps {
   nowPage: string;
@@ -44,6 +50,8 @@ export default function MonthlyReport(props: MonthlyReportProps) {
   const [date, setDate] = useState({} as DateRange);
 
   const [isPrint, setIsPrint] = useState(false);
+
+  const [rate, setRate] = useState(0);
 
   function setDateRange(startTime: string, endTime: string) {
     setDate({
@@ -56,8 +64,6 @@ export default function MonthlyReport(props: MonthlyReportProps) {
   const DataSummaryByMonthRefMonth = useRef(null);
   const RegisteredUserByDayRefMonth = useRef(null);
   const NewPhotoByDayRefMonth = useRef(null);
-  // const NumbersOfNewUserEveryWeekRefMonth = useRef(null);
-  // const NumbersOfNewWorkEveryWeekRefMonth = useRef(null);
   const PhotoTypesRefMonth = useRef(null);
   const PhotoTagRefMonth = useRef(null);
   const PhotoTypeByMonthRefMonth = useRef(null);
@@ -81,92 +87,178 @@ export default function MonthlyReport(props: MonthlyReportProps) {
   const ActiveDailyRetainRefMonth = useRef(null);
   const UserPhotosRefMonth = useRef(null);
 
-  const InvitedKPIRefMonth = useRef(null);
+  const InvitedKPIMonthRefMonth = useRef(null);
   const InviterFocusedRefMonth = useRef(null);
 
   async function setPrint() {
     setIsPrint(true);
   }
 
+  const openNotification = () => {
+    notification.open({
+      message: "下载完成",
+      description:
+        "已将月报数据打包并成功下载至您的个人电脑，您现在可以打开压缩包查看",
+      icon: <CheckSquareOutlined style={{ color: "#f59898" }} />,
+    });
+  };
+
   async function exportPNG() {
+    let uris = [];
+
+    // 用户访问总览
+
     await exportComponentAsPNG(DataSummaryRefMonth, {
-      fileName: "用户数据概况",
+      fileName: "用户访问总览||用户数据概况",
+    }).then((r) => {
+      uris.push(r);
+      setRate(4);
     });
     await exportComponentAsPNG(DataSummaryByMonthRefMonth, {
-      fileName: "用户数据月度对比",
+      fileName: "用户访问总览||用户数据月度对比",
+    }).then((r) => {
+      uris.push(r);
+      setRate(8);
     });
     await exportComponentAsPNG(RegisteredUserByDayRefMonth, {
-      fileName: "新增用户注册数",
+      fileName: "用户访问总览||新增用户注册数",
+    }).then((r) => {
+      uris.push(r);
+      setRate(14);
     });
     await exportComponentAsPNG(NewPhotoByDayRefMonth, {
-      fileName: "新增作品数",
+      fileName: "用户访问总览||新增作品数",
+    }).then((r) => {
+      uris.push(r);
+      setRate(18);
     });
 
+    // 发布作品统计
+
     await exportComponentAsPNG(PhotoTypesRefMonth, {
-      fileName: "发布作品类型分布",
+      fileName: "发布作品统计||发布作品类型分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(22);
     });
     await exportComponentAsPNG(PhotoTagRefMonth, {
-      fileName: "不同标签作品数统计",
+      fileName: "发布作品统计||不同标签作品数统计",
+    }).then((r) => {
+      uris.push(r);
+      setRate(25);
     });
     await exportComponentAsPNG(PhotoTypeByMonthRefMonth, {
-      fileName: "发布作品类型月度对比",
+      fileName: "发布作品统计||发布作品类型月度对比",
+    }).then((r) => {
+      uris.push(r);
+      setRate(29);
     });
     await exportComponentAsPNG(PhotoEquipmentRefMonth, {
-      fileName: "作品拍摄器材分布",
+      fileName: "发布作品统计||作品拍摄器材分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(35);
     });
+
+    // 活动比赛
+
     // @ts-ignore
     PhotoCompetitionTotalRefMonth.current.childNodes[0].childNodes.forEach(
       // @ts-ignore
       (value) => {
         // @ts-ignore
-        value.childNodes.forEach((card) => {
-          exportComponentAsPNG(
-            {
-              current: card,
-            },
-            { fileName: card.childNodes[0].innerHTML }
-          ).then();
+        value.childNodes.forEach((card, index) => {
+          if (index !== 0) {
+            exportComponentAsPNG(
+              {
+                current: card,
+              },
+              { fileName: "活动比赛||" + card.childNodes[0].innerHTML }
+            ).then((r) => {
+              uris.push(r);
+              setRate(37);
+            });
+          }
         });
       }
     );
 
+    // 积分商城相关数据
+
     await exportComponentAsPNG(GiftRelatedDataRefMonth, {
-      fileName: "礼品相关数据",
+      fileName: "积分商城相关数据||礼品相关数据",
+    }).then((r) => {
+      uris.push(r);
+      setRate(40);
     });
     await exportComponentAsPNG(FreeCourseAccessRefMonth, {
-      fileName: "免费课程访问数Top10",
+      fileName: "积分商城相关数据||免费课程访问数Top10",
+    }).then((r) => {
+      uris.push(r);
+      setRate(43);
     });
     await exportComponentAsPNG(CourseExchangeRefMonth, {
-      fileName: "精品课程兑换数Top10",
+      fileName: "积分商城相关数据||精品课程兑换数Top10",
+    }).then((r) => {
+      uris.push(r);
+      setRate(48);
     });
     await exportComponentAsPNG(AvatarExchangeRefMonth, {
-      fileName: "头像挂件兑换数Top10",
+      fileName: "积分商城相关数据||头像挂件兑换数Top10",
+    }).then((r) => {
+      uris.push(r);
+      setRate(54);
     });
+
+    // 用户来源渠道统计
 
     await exportComponentAsPNG(UserAccessByChannelRefMonth, {
-      fileName: "不同来源访问人数分布",
+      fileName: "用户来源渠道统计||不同来源访问次数分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(58);
     });
     await exportComponentAsPNG(MonthlyChannelRefMonth, {
-      fileName: "不同渠道来源用户访问月度对比",
+      fileName: "用户来源渠道统计||不同渠道来源用户访问月度对比",
+    }).then((r) => {
+      uris.push(r);
+      setRate(63);
     });
     await exportComponentAsPNG(FromInviterRefMonth, {
-      fileName: "来自特邀影家渠道访问详情",
+      fileName: "用户来源渠道统计||来自特邀影家渠道访问详情",
+    }).then((r) => {
+      uris.push(r);
+      setRate(67);
     });
+
+    // 用户画像分析
 
     await exportComponentAsPNG(ActiveUserGenderRefMonth, {
-      fileName: "访问用户性别分布",
+      fileName: "用户画像分析||访问用户性别分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(72);
     });
     await exportComponentAsPNG(ActiveUserAgeRefMonth, {
-      fileName: "访问用户年龄分布",
+      fileName: "用户画像分析||访问用户年龄分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(76);
     });
     await exportComponentAsPNG(ActiveUserDeviceRefMonth, {
-      fileName: "访问用户终端分布",
+      fileName: "用户画像分析||访问用户终端分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(81);
     });
     await exportComponentAsPNG(MonthActiveUserProvinceRefMonth, {
-      fileName: "访问用户地区分布",
+      fileName: "用户画像分析||访问用户地区分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(84);
     });
 
-    await exportComponentAsPNG(DataSummaryRefMonth, { fileName: "月报" });
+    // 用户留存行为分析
 
     // @ts-ignore
     ActiveDailyRetainRefMonth.current.childNodes.forEach(
@@ -178,21 +270,151 @@ export default function MonthlyReport(props: MonthlyReportProps) {
             current: value,
           },
           {
-            fileName: "访问用户留存数据",
+            fileName: "用户留存行为分析||访问用户留存数据",
           }
-        ).then();
+        ).then((r) => {
+          uris.push(r);
+          setRate(87);
+        });
       }
     );
-
     await exportComponentAsPNG(UserPhotosRefMonth, {
-      fileName: "用户发布作品数分布",
+      fileName: "用户留存行为分析||用户发布作品数分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(90);
     });
 
-    await exportComponentAsPNG(InvitedKPIRefMonth, {
-      fileName: "特邀影家KPI考核",
+    // 特邀影家
+
+    await exportComponentAsPNG(InvitedKPIMonthRefMonth, {
+      fileName: "特邀影家||特邀影家KPI考核",
+    }).then((r) => {
+      uris.push(r);
+      setRate(94);
     });
     await exportComponentAsPNG(InviterFocusedRefMonth, {
-      fileName: "特邀影家关注度统计",
+      fileName: "特邀影家||特邀影家关注度统计",
+    }).then((r) => {
+      uris.push(r);
+      setRate(100);
+    });
+
+    return uris;
+  }
+
+  // fileName: 文件夹名||文件名&&base64
+  async function exportByUris(uris: any[]) {
+    const zip = new JSZip();
+
+    // const img = zip.folder("images");
+    // // @ts-ignore
+    // img.file("lalal.png", uri.replace(/^data:image\/(png|jpg);base64,/, ""), {
+    //   base64: true,
+    // });
+
+    uris.forEach((value) => {
+      const uri = value.split("&&")[1];
+      const folderName = value.split("&&")[0].split("||")[0];
+      const fileName = value.split("&&")[0].split("||")[1];
+
+      const 用户访问总览 = zip.folder("用户访问总览");
+      const 发布作品统计 = zip.folder("发布作品统计");
+      const 活动比赛 = zip.folder("活动比赛");
+      const 积分商城相关数据 = zip.folder("积分商城相关数据");
+      const 用户来源渠道统计 = zip.folder("用户来源渠道统计");
+      const 用户画像分析 = zip.folder("用户画像分析");
+      const 用户留存行为分析 = zip.folder("用户留存行为分析");
+      const 特邀影家 = zip.folder("特邀影家");
+
+      if (folderName === "用户访问总览") {
+        // @ts-ignore
+        用户访问总览.file(
+          fileName + ".png",
+          uri.replace(/^data:image\/(png|jpg);base64,/, ""),
+          {
+            base64: true,
+          }
+        );
+      }
+      if (folderName === "发布作品统计") {
+        // @ts-ignore
+        发布作品统计.file(
+          fileName + ".png",
+          uri.replace(/^data:image\/(png|jpg);base64,/, ""),
+          {
+            base64: true,
+          }
+        );
+      }
+      if (folderName === "活动比赛") {
+        // @ts-ignore
+        活动比赛.file(
+          fileName + ".png",
+          uri.replace(/^data:image\/(png|jpg);base64,/, ""),
+          {
+            base64: true,
+          }
+        );
+      }
+      if (folderName === "积分商城相关数据") {
+        // @ts-ignore
+        积分商城相关数据.file(
+          fileName + ".png",
+          uri.replace(/^data:image\/(png|jpg);base64,/, ""),
+          {
+            base64: true,
+          }
+        );
+      }
+      if (folderName === "用户来源渠道统计") {
+        // @ts-ignore
+        用户来源渠道统计.file(
+          fileName + ".png",
+          uri.replace(/^data:image\/(png|jpg);base64,/, ""),
+          {
+            base64: true,
+          }
+        );
+      }
+      if (folderName === "用户画像分析") {
+        // @ts-ignore
+        用户画像分析.file(
+          fileName + ".png",
+          uri.replace(/^data:image\/(png|jpg);base64,/, ""),
+          {
+            base64: true,
+          }
+        );
+      }
+      if (folderName === "用户留存行为分析") {
+        // @ts-ignore
+        用户留存行为分析.file(
+          fileName + ".png",
+          uri.replace(/^data:image\/(png|jpg);base64,/, ""),
+          {
+            base64: true,
+          }
+        );
+      }
+      if (folderName === "特邀影家") {
+        // @ts-ignore
+        特邀影家.file(
+          fileName + ".png",
+          uri.replace(/^data:image\/(png|jpg);base64,/, ""),
+          {
+            base64: true,
+          }
+        );
+      }
+    });
+
+    zip.generateAsync({ type: "blob" }).then(function (content) {
+      // see FileSaver.js
+      FileSaver.saveAs(
+        content,
+        "大影家月报（" + date.StartTime + "至" + date.EndTime + "）.zip"
+      );
     });
   }
 
@@ -205,20 +427,40 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       <Button
         className="print"
         danger
-        icon={<DownloadOutlined />}
+        icon={<ExportOutlined />}
         onClick={() => {
           setPrint()
             .then(() => {
               return exportPNG();
             })
-            .then(() => {
+            .then((uris) => {
+              exportByUris(uris).then(() => openNotification);
               setIsPrint(false);
+            })
+            .then(() => {
+              setRate(0);
             });
         }}
       >
-        下载
+        导出
       </Button>
+      <Row
+        className={"print"}
+        style={{
+          width: "100%",
+          marginTop: "10px",
+          display: isPrint ? "" : "none",
+        }}
+      >
+        <Col flex={"70px"}>导出进度:</Col>
+        <Col flex={"auto"}>
+          <Progress strokeColor={"#f59898"} className="print" percent={rate} />
+        </Col>
+      </Row>
+
       <DateRangeMonthlyFilter Title={"月报"} setDateRange={setDateRange} />
+
+      <div style={{ height: "15px", display: isPrint ? "" : "none" }} />
 
       <div>
         <PPTCover
@@ -481,8 +723,8 @@ export default function MonthlyReport(props: MonthlyReportProps) {
         />
       </div>
 
-      <div ref={InvitedKPIRefMonth}>
-        <InvitedKPI
+      <div ref={InvitedKPIMonthRefMonth}>
+        <InvitedKPIMonth
           nowPage={isPrint}
           isMonthReport={true}
           begin={date.StartTime}

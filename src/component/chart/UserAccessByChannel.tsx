@@ -135,8 +135,11 @@ export default function UserAccessByChannel(props: UserAccessProps) {
   // @ts-ignore}
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        不同来源访问人数分布
+      <div
+        hidden={props.nowPage}
+        className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+      >
+        不同来源访问访问次数
       </div>
 
       {loading ? (

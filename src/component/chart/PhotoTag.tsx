@@ -37,7 +37,10 @@ export default function PhotoTag(props: PhotoTypeProps) {
 
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+      <div
+        hidden={props.nowPage}
+        className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+      >
         不同标签作品数统计
       </div>
 

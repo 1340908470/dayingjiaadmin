@@ -13,19 +13,28 @@ interface UserPhotosProps {
   end: string;
 }
 
+const defaultSplit = "40,30,20,10,1";
+const littleSplit = "10,7,5,3,1";
+
 export default function UserPhotos(props: UserPhotosProps) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [split, setSplit] = useState(defaultSplit);
+
   useEffect(() => {
     setLoading(true);
     asyncFetch();
+  }, [props.begin, split]);
+
+  useEffect(() => {
+    setSplit(defaultSplit);
   }, [props.begin]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.UserPhoto, {
         begin: props.begin,
         end: props.end,
-        split: "50,40,20,10",
+        split: split,
       }).then((r) => {
         // @ts-ignore
         let tmpData = [];
@@ -34,19 +43,35 @@ export default function UserPhotos(props: UserPhotosProps) {
 
         if (r) {
           r.forEach((value, index) => {
+            let str = "";
+            if (index == 0) {
+              str = value.作品数量 + "张以上";
+            } else if (index == r.length - 1) {
+              str = "1张";
+            } else {
+              str = value.作品数量 + 1 + "-" + r[index - 1].作品数量 + "张";
+            }
             tmpData.push({
               key: index,
-              type: value.作品数量 + "张以上",
+              type: str,
               value: value.用户数,
             });
 
             tmpDataTable.push({
               key: index,
-              work: value.作品数量 + "张以上",
+              work: str,
               num: value.用户数,
               percent: value.占比 + "%",
             });
           });
+          if (
+            r[0].占比 === 0 &&
+            r[1].占比 === 0 &&
+            r[2].占比 === 0 &&
+            split === defaultSplit
+          ) {
+            setSplit(littleSplit);
+          }
         }
 
         // @ts-ignore
@@ -128,7 +153,10 @@ export default function UserPhotos(props: UserPhotosProps) {
   // @ts-ignore}
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+      <div
+        hidden={props.nowPage}
+        className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+      >
         用户发布作品数分布
       </div>
       {loading ? (

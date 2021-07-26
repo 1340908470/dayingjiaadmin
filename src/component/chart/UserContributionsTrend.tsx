@@ -8,6 +8,7 @@ import style from "@/component/chart/default.css";
 import Loading from "@/component/layout/Loading";
 
 interface UserContributionsTrendProps {
+  nowPage: string;
   name?: string;
   isMonthReport?: boolean;
   id: number;
@@ -24,9 +25,10 @@ export default function UserContributionsTrend(
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin, props.id]);
+  }, [props.begin, props.id, props.category]);
+
   const asyncFetch = () => {
-    if (props.begin && props.end) {
+    if (props.begin) {
       call(analytics.CompetitionParticipate, {
         category: props.category,
         id: props.id,
@@ -63,7 +65,10 @@ export default function UserContributionsTrend(
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           {props.category === 1
             ? props.name
               ? `"${props.name}" 用户参与趋势`

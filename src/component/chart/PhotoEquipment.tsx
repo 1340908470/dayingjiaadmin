@@ -135,7 +135,10 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
   // @ts-ignore}
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+      <div
+        hidden={props.nowPage}
+        className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+      >
         作品拍摄器材分布
       </div>
       <br />

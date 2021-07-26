@@ -128,7 +128,10 @@ export default function ActiveUserAge(props: ActiveUserAgeProps) {
   // @ts-ignore}
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+      <div
+        hidden={props.nowPage}
+        className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+      >
         访问用户年龄分布
       </div>
       {loading ? (

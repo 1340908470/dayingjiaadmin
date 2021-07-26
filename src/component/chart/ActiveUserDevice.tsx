@@ -123,7 +123,10 @@ export default function ActiveUserDevice(props: ActiveUserDeviceProps) {
 
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-      <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+      <div
+        hidden={props.nowPage}
+        className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+      >
         访问用户终端分布
       </div>
       <br />

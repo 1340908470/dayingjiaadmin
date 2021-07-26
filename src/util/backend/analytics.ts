@@ -409,11 +409,14 @@ interface CompetitionDataReq {
   begin: string;
   end: string;
   id: number;
+  category: number;
 }
 
 interface CompetitionData {
   新投稿人数: number;
+  新参与人数: number;
   累计投稿人数: number;
+  累计参与人数: number;
   比赛推广新增注册人数: number;
   比赛推广累计注册人数: number;
   比赛推广新增访问次数: number;
@@ -503,6 +506,11 @@ interface InviteKPIReq {
   stage: string;
 }
 
+interface InviteKPIMonthReq {
+  month: string;
+  stage: string;
+}
+
 export interface InviteKPI {
   name: string;
   newphotos: number;
@@ -511,6 +519,15 @@ export interface InviteKPI {
   grouplikes: number;
   total: number;
   pass: boolean;
+}
+
+export interface InviteKPIMonth {
+  姓名: string;
+  发布作品数: number;
+  圈子作品数: number;
+  点赞和评论数: number;
+  周KPI未达标次数: number;
+  月度KPI是否达标: boolean;
 }
 
 interface StatisticMonth {
@@ -688,7 +705,7 @@ export default {
   GroupData: "analytics/groupdata" as EndPoint<DateRangeReq, GroupData>,
   ChallengeData: "analytics/challenge" as EndPoint<DateRangeReq, ChallengeData>,
   Shop: "analytics/shop" as EndPoint<DateRangeReq, Shop>,
-  Mine: "analytics/user" as EndPoint<MineReq, Mine>,
+  Mine: "analytics/user " as EndPoint<MineReq, Mine>,
   TotalCompetition: "analytics/totalcompetition" as EndPoint<
     DateRangeReq,
     Competition[]
@@ -730,6 +747,10 @@ export default {
     WeeklyCompetition
   >,
   InviteKPI: "analytics/invites" as EndPoint<InviteKPIReq, InviteKPI[]>,
+  InviteKPIMonth: "analytics/invitesbymonth" as EndPoint<
+    InviteKPIMonthReq,
+    InviteKPIMonth[]
+  >,
   DataSummaryByMonth: "analytics/datasummarybymonth" as EndPoint<
     DataSummaryByMonthReq,
     DataSummaryByMonth

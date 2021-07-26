@@ -8,6 +8,7 @@ import style from "./default.css";
 import Loading from "@/component/layout/Loading";
 
 interface CompetitionChannelProps {
+  nowPage: string;
   name?: string;
   isMonthReport?: boolean;
   id: number;
@@ -56,7 +57,7 @@ export default function CompetitionChannel(props: CompetitionChannelProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin, props.id]);
+  }, [props.begin, props.id, props.category]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {
@@ -75,7 +76,10 @@ export default function CompetitionChannel(props: CompetitionChannelProps) {
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           {props.name ? `"${props.name}" 各推广渠道数据` : "各推广渠道数据"}
         </div>
 

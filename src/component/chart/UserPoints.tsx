@@ -22,7 +22,7 @@ export default function UserPoints(props: UserPointsProps) {
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.Mine, {
-        point: "141,121,101,81,61,41,21,0",
+        point: "141,121,101,81,61,41,21",
         checkin: "7,6,5,4,3,2,1",
         begin: props.begin,
         end: props.end,

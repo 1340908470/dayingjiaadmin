@@ -23,6 +23,8 @@ const columns = [
 ];
 
 interface CompetitionRelatedDataProps {
+  category: number;
+  nowPage: string;
   name?: string;
   isMonthReport?: boolean;
   id: number;
@@ -53,6 +55,7 @@ export default function CompetitionRelatedData(
         id: props.id,
         begin: props.begin,
         end: props.end,
+        category: props.category,
       }).then((r) => {
         // @ts-ignore
         setData([
@@ -60,17 +63,17 @@ export default function CompetitionRelatedData(
             // @ts-ignore
             key: "1",
             // @ts-ignore
-            content: "新投稿人数",
+            content: props.category == 1 ? "新参与人数" : "新投稿人数",
             // @ts-ignore
-            num: r.新投稿人数,
+            num: props.category == 1 ? r.新参与人数 : r.新投稿人数,
           },
           {
             // @ts-ignore
             key: "2",
             // @ts-ignore
-            content: "累计投稿人数",
+            content: props.category == 1 ? "累计参与人数" : "累计投稿人数",
             // @ts-ignore
-            num: r.累计投稿人数,
+            num: props.category == 1 ? r.累计参与人数 : r.累计投稿人数,
           },
           {
             // @ts-ignore
@@ -114,7 +117,10 @@ export default function CompetitionRelatedData(
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
           {props.name ? `"${props.name}" 相关数据` : "比赛相关数据"}
         </div>
         {loading ? (
