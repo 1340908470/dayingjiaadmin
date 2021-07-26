@@ -77,7 +77,10 @@ export default function ActiveUserGender(props: ActiveUserGenderProps) {
         fontSize: 14,
       },
     },
-    interactions: [{ type: "element-selected" }, { type: "element-active" }],
+    interactions: [
+      { type: "element-selected" },
+      { type: "element-active", enable: false },
+    ],
     statistic: {
       title: false,
       content: {

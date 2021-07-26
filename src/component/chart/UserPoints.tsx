@@ -180,7 +180,10 @@ export default function UserPoints(props: UserPointsProps) {
         fontSize: 14,
       },
     },
-    interactions: [{ type: "element-selected" }, { type: "element-active" }],
+    interactions: [
+      { type: "element-selected" },
+      { type: "element-active", enable: false },
+    ],
     statistic: {
       title: false,
       content: {

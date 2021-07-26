@@ -45,6 +45,10 @@ export default function InviteGroupComments(props: InviteGroupCommentsProps) {
         <Loading />
       ) : (
         <Bar
+          label={{
+            position: "right",
+            offset: 4,
+          }}
           height={320}
           data={data}
           yField={"name"}

@@ -45,6 +45,10 @@ export default function InviteGroupLikes(props: InviteGroupLikesProps) {
         <Loading />
       ) : (
         <Bar
+          label={{
+            position: "right",
+            offset: 4,
+          }}
           height={320}
           data={data}
           yField={"name"}

@@ -42,6 +42,10 @@ export default function ChallengeJoinMember(props: ChallengeJoinMemberProps) {
         <Loading />
       ) : (
         <Bar
+          label={{
+            position: "right",
+            offset: 4,
+          }}
           height={240}
           data={data}
           yField={"name"}

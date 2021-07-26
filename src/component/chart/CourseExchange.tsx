@@ -49,6 +49,10 @@ export default function CourseExchange(props: CourseExchangeProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            label={{
+              position: "right",
+              offset: 4,
+            }}
             height={40 * data.length}
             data={data}
             yField={"name"}

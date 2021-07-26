@@ -61,6 +61,10 @@ export default function PageVisitPV(props: PageVisitPVProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            label={{
+              position: "right",
+              offset: 4,
+            }}
             data={data}
             yField={"name"}
             xField={"pv"}

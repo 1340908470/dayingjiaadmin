@@ -44,6 +44,10 @@ export default function ChallengeSuccessWorks(
         <Loading />
       ) : (
         <Bar
+          label={{
+            position: "right",
+            offset: 4,
+          }}
           height={240}
           data={data}
           yField={"name"}

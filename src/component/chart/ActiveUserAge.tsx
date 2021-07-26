@@ -83,7 +83,10 @@ export default function ActiveUserAge(props: ActiveUserAgeProps) {
         fontSize: 14,
       },
     },
-    interactions: [{ type: "element-selected" }, { type: "element-active" }],
+    interactions: [
+      { type: "element-selected" },
+      { type: "element-active", enable: false },
+    ],
     statistic: {
       title: false,
       content: {

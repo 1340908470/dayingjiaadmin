@@ -42,6 +42,10 @@ export default function ChallengeHonor(props: ChallengeHonorProps) {
         <Loading />
       ) : (
         <Bar
+          label={{
+            position: "right",
+            offset: 4,
+          }}
           height={240}
           data={data}
           yField={"name"}

@@ -60,6 +60,10 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
         <Loading />
       ) : (
         <Bar
+          label={{
+            position: "right",
+            offset: 4,
+          }}
           height={400}
           data={data}
           yField={"name"}

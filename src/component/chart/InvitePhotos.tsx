@@ -43,6 +43,10 @@ export default function InvitePhotos(props: InvitePhotosProps) {
         <Loading />
       ) : (
         <Bar
+          label={{
+            position: "right",
+            offset: 4,
+          }}
           height={320}
           data={data}
           yField={"name"}

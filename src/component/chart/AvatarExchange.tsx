@@ -48,6 +48,10 @@ export default function AvatarExchange(props: AvatarExchangeProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            label={{
+              position: "right",
+              offset: 4,
+            }}
             height={400}
             data={data}
             yField={"name"}

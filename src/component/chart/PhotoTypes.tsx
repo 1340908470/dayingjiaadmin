@@ -58,6 +58,10 @@ export default function PhotoTypes(props: PhotoTypeProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            label={{
+              position: "right",
+              offset: 4,
+            }}
             height={160}
             color={() => {
               return "#FF7474";

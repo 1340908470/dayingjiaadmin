@@ -82,7 +82,10 @@ export default function UserAccessByChannel(props: UserAccessProps) {
         fontSize: 14,
       },
     },
-    interactions: [{ type: "element-selected" }, { type: "element-active" }],
+    interactions: [
+      { type: "element-selected" },
+      { type: "element-active", enable: false },
+    ],
     statistic: {
       title: false,
       content: {

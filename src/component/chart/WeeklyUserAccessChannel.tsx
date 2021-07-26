@@ -45,6 +45,10 @@ export default function WeeklyUserAccessChannel(
         <Loading />
       ) : (
         <Bar
+          label={{
+            position: "right",
+            offset: 4,
+          }}
           data={data}
           yField={"来源"}
           xField={"访问次数"}

@@ -44,6 +44,10 @@ export default function CircleMember(props: CircleWorksProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            label={{
+              position: "right",
+              offset: 4,
+            }}
             height={400}
             data={data}
             yField={"name"}
