@@ -8,6 +8,8 @@ import style from "@/component/chart/default.css";
 import Loading from "@/component/layout/Loading";
 
 interface NewUserRegisterProps {
+  nowPage: string;
+  category: number;
   name?: string;
   isMonthReport?: boolean;
   id: number;
@@ -25,6 +27,7 @@ export default function NewUserRegister(props: NewUserRegisterProps) {
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.CompetitionRegister, {
+        category: props.category,
         id: props.id,
         begin: props.begin,
         end: props.end,
@@ -74,8 +77,17 @@ export default function NewUserRegister(props: NewUserRegisterProps) {
   return (
     <>
       <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
-        <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-          {props.name ? `"${props.name}" 新增注册用户` : "新增注册用户"}
+        <div
+          hidden={props.nowPage}
+          className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
+        >
+          {props.category === 1
+            ? props.name
+              ? `"${props.name}" 新增注册用户`
+              : "新增注册用户"
+            : props.name
+            ? `"${props.name}" 新增注册用户`
+            : "新增注册用户"}
         </div>
         {loading ? (
           <Loading />

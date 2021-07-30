@@ -14,6 +14,7 @@ import UserContributionsTrend from "@/component/chart/UserContributionsTrend";
 import CompetitionChannel from "@/component/chart/CompetitionChannel";
 import PPTCover from "@/component/ppt/PPTCover";
 import { data } from "browserslist";
+import NewUserRegister from "@/component/chart/NewUserRegister";
 
 interface PhotoCompetitionTotalProps {
   nowPage: string;
@@ -83,6 +84,15 @@ export default function PhotoCompetitionTotal(
               end={props.end}
             />
             <UserContributionsTrend
+              nowPage={props.nowPage}
+              category={value.category}
+              isMonthReport={true}
+              name={value.name}
+              id={value.id}
+              begin={props.begin}
+              end={props.end}
+            />
+            <NewUserRegister
               nowPage={props.nowPage}
               category={value.category}
               isMonthReport={true}
