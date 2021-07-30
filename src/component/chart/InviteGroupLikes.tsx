@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
@@ -48,6 +49,23 @@ export default function InviteGroupLikes(props: InviteGroupLikesProps) {
           label={{
             position: "right",
             offset: 4,
+          }}
+          xAxis={{
+            tickCount: 5,
+            max:
+              data.length == 0
+                ? 0
+                : data.slice(0).sort((a, b) => b.data - a.data)[0].data +
+                  Math.pow(
+                    10,
+                    Number.parseInt(
+                      String(
+                        Math.log10(
+                          data?.slice(0).sort((a, b) => b.data - a.data)[0].data
+                        )
+                      )
+                    ) - 1
+                  ),
           }}
           height={320}
           data={data}

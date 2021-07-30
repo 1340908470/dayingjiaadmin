@@ -18,14 +18,12 @@ export default function UserJoinCompetition(props: UserJoinCompetitionProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (data.length === 0 && props.begin) {
-      setLoading(true);
-      asyncFetch();
-    }
-  }, [props.begin, data]);
+    setLoading(true);
+    asyncFetch();
+  }, [props.begin]);
 
   const asyncFetch = () => {
-    call(analytics.TotalCompetition, {
+    call(analytics.CompetitionList, {
       begin: props.begin,
       end: props.end,
     }).then((r) => {

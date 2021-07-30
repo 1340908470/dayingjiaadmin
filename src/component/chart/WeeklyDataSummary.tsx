@@ -33,7 +33,8 @@ export default function WeeklyDataSummary(props: WeeklyDataSummaryProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (data.length === 0 && props.begin) asyncFetch();
+    setLoading(true);
+    asyncFetch();
   }, [props.begin]);
 
   const getRowClassName = (record: any, index: number) => {

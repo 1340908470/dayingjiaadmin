@@ -54,7 +54,7 @@ export default function PageSharePV(props: PageSharePVProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        页面分享人数Top10对比
+        页面分享次数Top10对比
       </div>
 
       {loading ? (
@@ -65,6 +65,21 @@ export default function PageSharePV(props: PageSharePVProps) {
             label={{
               position: "right",
               offset: 4,
+            }}
+            xAxis={{
+              tickCount: 5,
+              max:
+                data?.slice(0).sort((a, b) => b.pv - a.pv)[0].pv +
+                Math.pow(
+                  10,
+                  Number.parseInt(
+                    String(
+                      Math.log10(
+                        data?.slice(0).sort((a, b) => b.pv - a.pv)[0].pv
+                      )
+                    )
+                  ) - 1
+                ),
             }}
             height={400}
             data={data}

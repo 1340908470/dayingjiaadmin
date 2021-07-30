@@ -22,6 +22,7 @@ export default function UserContributionsTrend(
 ) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+
   useEffect(() => {
     setLoading(true);
     asyncFetch();
@@ -40,6 +41,7 @@ export default function UserContributionsTrend(
       });
     }
   };
+
   let config = {
     point: {
       size: 4,
@@ -59,7 +61,21 @@ export default function UserContributionsTrend(
     data: data,
     xField: "日期",
     yField: "amount",
-    yAxis: { tickCount: 5 },
+    yAxis: {
+      tickCount: 5,
+      max:
+        data.length == 0
+          ? 0
+          : data?.slice(0).sort((a, b) => b.amount - a.amount)[0].amount +
+            Math.pow(
+              10,
+              Number.parseInt(
+                Math.log10(
+                  data?.slice(0).sort((a, b) => b.amount - a.amount)[0].amount
+                )
+              ) - 1
+            ),
+    },
     xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
   return (

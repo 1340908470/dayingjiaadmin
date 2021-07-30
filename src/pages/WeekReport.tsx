@@ -59,7 +59,7 @@ export default function WeekReport(props: WeekReportProps) {
       }}
     >
       <DateRangeWeeklyFilter Title={"周报"} setDateRange={setDateRange} />
-      {/*<WeeklyDataSummary begin={date.StartTime} end={date.EndTime} />*/}
+      <WeeklyDataSummary begin={date.StartTime} end={date.EndTime} />
       <UserJoinCompetition begin={date.StartTime} end={date.EndTime} />
       <WeeklyUserAccessChannel begin={date.StartTime} end={date.EndTime} />
       <InvitedKPI begin={date.StartTime} end={date.EndTime} />

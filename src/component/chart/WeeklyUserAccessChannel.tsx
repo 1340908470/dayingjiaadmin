@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
@@ -54,6 +55,26 @@ export default function WeeklyUserAccessChannel(
           xField={"访问次数"}
           yAxis={{
             label: { autoRotate: false },
+          }}
+          xAxis={{
+            tickCount: 5,
+            max:
+              data.length == 0
+                ? 0
+                : data.slice(0).sort((a, b) => b.访问次数 - a.访问次数)[0]
+                    .访问次数 +
+                  Math.pow(
+                    10,
+                    Number.parseInt(
+                      String(
+                        Math.log10(
+                          data
+                            ?.slice(0)
+                            .sort((a, b) => b.访问次数 - a.访问次数)[0].访问次数
+                        )
+                      )
+                    ) - 1
+                  ),
           }}
           color={() => {
             return "#FF7474";

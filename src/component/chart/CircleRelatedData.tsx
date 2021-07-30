@@ -89,7 +89,7 @@ export default function CircleRelatedData(props: DataSummaryProps) {
             // @ts-ignore
             content: "新增加入圈子的人数",
             // @ts-ignore
-            num: r.累计加入圈子的人数,
+            num: r.新增加入圈子的人数,
           },
           {
             // @ts-ignore

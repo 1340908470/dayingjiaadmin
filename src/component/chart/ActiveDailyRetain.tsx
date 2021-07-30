@@ -380,7 +380,7 @@ export default function ActiveDailyRetain(props: ActiveDailyRetainProps) {
       })
         .then(async (r) => {
           if (props.begin === props.end) {
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 6; i++) {
               r = await updateStack(r);
             }
           } else {

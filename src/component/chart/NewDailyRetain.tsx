@@ -294,6 +294,7 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
         .then(updateStack)
         .then(updateStack)
         .then(updateStack)
+        .then(updateStack)
         .then((r) => {
           if (r.visit_uv_new) {
             visit_uv_news.push(r.visit_uv_new);

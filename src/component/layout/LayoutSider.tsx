@@ -22,8 +22,20 @@ interface LayoutSiderProps {
   SiderNav: string;
 }
 
+const rootSubmenuKeys = ["用户", "页面", "周期报告"];
+
 export default function LayoutSider(props: LayoutSiderProps) {
+  const [openKeys, setOpenKeys] = useState(["用户"]);
   const [siderNav, setSiderNav] = useState(props.SiderNav);
+
+  const onOpenChange = (keys: any[]) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
 
   return (
     <Layout hasSider style={{ backgroundColor: "red" }}>
@@ -38,6 +50,8 @@ export default function LayoutSider(props: LayoutSiderProps) {
         width={200}
       >
         <Menu
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
           hidden={props.HeaderNav !== "数据统计"}
           mode="inline"
           defaultSelectedKeys={["总览"]}

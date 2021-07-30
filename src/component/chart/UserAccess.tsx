@@ -32,11 +32,13 @@ export default function UserAccess(props: UserAccessProps) {
       });
     }
   };
+
   let config = {
     point: {
       size: 4,
       color: "#FF3E3E",
     },
+
     label: {
       style: {
         fill: "black",
@@ -51,6 +53,20 @@ export default function UserAccess(props: UserAccessProps) {
     data: data,
     xField: "日期",
     yField: "amount",
+    yAxis: {
+      max:
+        data.length == 0
+          ? 0
+          : data.slice(0).sort((a, b) => b.amount - a.amount)[0].amount +
+            Math.pow(
+              10,
+              Number.parseInt(
+                Math.log10(
+                  data?.slice(0).sort((a, b) => b.amount - a.amount)[0].amount
+                )
+              ) - 1
+            ),
+    },
     xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
   return (

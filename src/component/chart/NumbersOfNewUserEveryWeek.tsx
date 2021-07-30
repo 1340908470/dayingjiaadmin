@@ -53,7 +53,21 @@ export default function NumbersOfNewUserEveryWeek(
     data: data,
     xField: "周数",
     yField: "amount",
-    yAxis: { tickCount: 5 },
+    yAxis: {
+      tickCount: 5,
+      max:
+        data.length == 0
+          ? 0
+          : data?.slice(0).sort((a, b) => b.amount - a.amount)[0].amount +
+            Math.pow(
+              10,
+              Number.parseInt(
+                Math.log10(
+                  data?.slice(0).sort((a, b) => b.amount - a.amount)[0].amount
+                )
+              ) - 1
+            ),
+    },
     xAxis: { tickCount: data.length > 12 ? 12 : 7 },
   };
   return (

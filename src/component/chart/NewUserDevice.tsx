@@ -76,10 +76,7 @@ export default function NewUserDevice(props: NewUserDeviceProps) {
         fontSize: 14,
       },
     },
-    interactions: [
-      { type: "element-selected" },
-      { type: "element-active", enable: false },
-    ],
+    interactions: [{ type: "element-selected" }, { type: "element-active" }],
     statistic: {
       title: false,
       content: {

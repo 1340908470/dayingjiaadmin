@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Bar } from "@ant-design/charts";
 import pandect from "@/util/backend/analytics";
@@ -53,12 +54,29 @@ export default function PhotoTag(props: PhotoTypeProps) {
               position: "right",
               offset: 4,
             }}
+            padding={[16, 30, 25, 40]}
             height={400}
             data={data}
             yField={"tag"}
             xField={"amount"}
             yAxis={{
               label: { autoRotate: false },
+            }}
+            xAxis={{
+              tickCount: 5,
+              max:
+                data?.slice(0).sort((a, b) => b.amount - a.amount)[0].amount +
+                Math.pow(
+                  10,
+                  Number.parseInt(
+                    String(
+                      Math.log10(
+                        data?.slice(0).sort((a, b) => b.amount - a.amount)[0]
+                          .amount
+                      )
+                    )
+                  ) - 1
+                ),
             }}
             color={() => {
               return "#FF7474";

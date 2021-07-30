@@ -54,7 +54,7 @@ export default function PageVisitPV(props: PageVisitPVProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        页面访问人数Top10对比
+        页面访问次数Top10对比
       </div>
       {loading ? (
         <Loading />
@@ -70,6 +70,21 @@ export default function PageVisitPV(props: PageVisitPVProps) {
             xField={"pv"}
             yAxis={{
               label: { autoRotate: false },
+            }}
+            xAxis={{
+              tickCount: 5,
+              max:
+                data?.slice(0).sort((a, b) => b.pv - a.pv)[0].pv +
+                Math.pow(
+                  10,
+                  Number.parseInt(
+                    String(
+                      Math.log10(
+                        data?.slice(0).sort((a, b) => b.pv - a.pv)[0].pv
+                      )
+                    )
+                  ) - 1
+                ),
             }}
             color={() => {
               return "#FF7474";

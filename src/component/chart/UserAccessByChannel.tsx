@@ -82,10 +82,7 @@ export default function UserAccessByChannel(props: UserAccessProps) {
         fontSize: 14,
       },
     },
-    interactions: [
-      { type: "element-selected" },
-      { type: "element-active", enable: false },
-    ],
+    interactions: [{ type: "element-selected" }, { type: "element-active" }],
     statistic: {
       title: false,
       content: {
@@ -142,7 +139,7 @@ export default function UserAccessByChannel(props: UserAccessProps) {
         hidden={props.nowPage}
         className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
       >
-        不同来源访问访问次数
+        不同来源访问次数
       </div>
 
       {loading ? (

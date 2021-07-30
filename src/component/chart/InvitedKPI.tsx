@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+import { Col, Row, Table } from "antd";
 import { call } from "@/util/client";
 import analytics, { InviteKPI } from "@/util/backend/analytics";
 import "./default.css";
@@ -46,7 +46,11 @@ export default function InvitedKPI(props: InvitedKPIProps) {
       );
     }
     if (row.list === "是否达标") {
-      return <div>{text}</div>;
+      return (
+        <div style={text === "达标" ? { color: "red" } : { color: "green" }}>
+          {text}
+        </div>
+      );
     }
   };
 
@@ -186,6 +190,21 @@ export default function InvitedKPI(props: InvitedKPIProps) {
               （每周考核指标：发布作品数≥2，圈子内新作品数≥20，评论或点赞数≥20）
             </div>
             <Table pagination={false} dataSource={data} columns={columns} />
+            <Row style={{ marginTop: "15px", fontSize: 16 }}>
+              <Col style={{ color: "#FF3E3E" }} flex={"17px"}>
+                ■
+              </Col>
+              <Col style={{ color: "grey", fontSize: 14, marginTop: "2px" }}>
+                活跃度达标
+              </Col>
+              <Col flex={"45px"} />
+              <Col style={{ color: "#48A578" }} flex={"17px"}>
+                ■
+              </Col>
+              <Col style={{ color: "grey", fontSize: 14, marginTop: "2px" }}>
+                活跃度未达标
+              </Col>
+            </Row>
           </div>
         )}
       </div>

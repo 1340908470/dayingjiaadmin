@@ -54,7 +54,7 @@ export default function PageShareUV(props: PageShareUVProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        页面分享次数Top10对比
+        页面分享人数Top10对比
       </div>
 
       {loading ? (
@@ -71,6 +71,21 @@ export default function PageShareUV(props: PageShareUVProps) {
             xField={"uv"}
             yAxis={{
               label: { autoRotate: false },
+            }}
+            xAxis={{
+              tickCount: 5,
+              max:
+                data?.slice(0).sort((a, b) => b.uv - a.uv)[0].uv +
+                Math.pow(
+                  10,
+                  Number.parseInt(
+                    String(
+                      Math.log10(
+                        data?.slice(0).sort((a, b) => b.uv - a.uv)[0].uv
+                      )
+                    )
+                  ) - 1
+                ),
             }}
             color={() => {
               return "#FF7474";
