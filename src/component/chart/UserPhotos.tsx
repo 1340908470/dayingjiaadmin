@@ -13,7 +13,7 @@ interface UserPhotosProps {
   end: string;
 }
 
-const defaultSplit = "40,30,20,10,1";
+const defaultSplit = "30,25,20,15,10,5,1";
 const littleSplit = "10,7,5,3,1";
 
 export default function UserPhotos(props: UserPhotosProps) {
