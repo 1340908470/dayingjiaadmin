@@ -78,6 +78,6 @@ export async function call<P, Q>(
     return Promise.resolve(resp.json());
   } else {
     message.error(resp.statusText);
-    return Promise.reject(resp.status);
+    return Promise.resolve(resp.json());
   }
 }

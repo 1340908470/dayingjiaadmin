@@ -8,6 +8,7 @@ interface LoginRes {
     tokenType: string;
     expiresIn: string;
   };
+  statusCode: number;
 }
 
 export default {

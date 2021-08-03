@@ -24,14 +24,15 @@ export default function LayoutLogin() {
       }
     )
       .then((r) => {
-        setIsLoading(false);
-        setJwt(r.data.jwt).then();
+        if (!r.statusCode) setJwt(r.data.jwt).then();
         return r;
       })
       .then((r) => {
-        setExpiresTime(r.data.expiresIn).then(() => {
-          history.go();
-        });
+        if (!r.statusCode)
+          setExpiresTime(r.data.expiresIn).then(() => {
+            history.go();
+          });
+        setIsLoading(false);
       });
   };
 
