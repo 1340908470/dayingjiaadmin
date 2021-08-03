@@ -8,6 +8,8 @@ export default defineConfig({
   targets: {
     ie: 9,
   },
+  history: { type: "hash" },
+  publicPath: "./",
   routes: [{ exact: true, path: "/", component: "@/index" }],
   proxy: {
     "/api": {

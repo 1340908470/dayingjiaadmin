@@ -1,6 +1,6 @@
 import { Row, Col, Form, Input, Button, Checkbox, Image, Spin } from "antd";
 import "./default.css";
-import logo from "@/wwwroot/img/logo.png";
+import logo from "../wwwroot/img/logo.png";
 import { call, setExpiresTime, setJwt } from "@/util/client";
 import auth from "../util/backend/auth";
 import Base64 from "base-64";
