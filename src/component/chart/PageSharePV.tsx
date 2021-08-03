@@ -62,6 +62,7 @@ export default function PageSharePV(props: PageSharePVProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            animation={false}
             label={{
               position: "right",
               offset: 4,

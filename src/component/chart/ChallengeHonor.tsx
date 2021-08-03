@@ -43,6 +43,7 @@ export default function ChallengeHonor(props: ChallengeHonorProps) {
         <Loading />
       ) : (
         <Bar
+          animation={false}
           label={{
             position: "right",
             offset: 4,

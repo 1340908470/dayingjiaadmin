@@ -74,6 +74,7 @@ const exportComponent = (
   return html2canvas(element, {
     scrollY: -window.scrollY,
     useCORS: true,
+    scale: 2,
     ...html2CanvasOptions,
   }).then((canvas) => {
     if (type === fileType.PDF) {

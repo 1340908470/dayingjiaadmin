@@ -43,6 +43,7 @@ export default function ChallengeJoinWorks(props: ChallengeJoinWorksProps) {
         <Loading />
       ) : (
         <Bar
+          animation={false}
           label={{
             position: "right",
             offset: 4,

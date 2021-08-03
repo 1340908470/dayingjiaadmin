@@ -61,6 +61,7 @@ export default function PageVisitPV(props: PageVisitPVProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            animation={false}
             label={{
               position: "right",
               offset: 4,

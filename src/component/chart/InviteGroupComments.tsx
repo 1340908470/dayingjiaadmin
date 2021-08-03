@@ -46,6 +46,7 @@ export default function InviteGroupComments(props: InviteGroupCommentsProps) {
         <Loading />
       ) : (
         <Bar
+          animation={false}
           label={{
             position: "right",
             offset: 4,

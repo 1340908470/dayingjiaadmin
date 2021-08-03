@@ -46,6 +46,7 @@ export default function WeeklyUserAccessChannel(
         <Loading />
       ) : (
         <Bar
+          animation={false}
           label={{
             position: "right",
             offset: 4,

@@ -479,7 +479,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div>
         <PPTCover
-          nowPage={props.nowPage}
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           title={"用户访问总览"}
@@ -536,7 +536,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div>
         <PPTCover
-          nowPage={props.nowPage}
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           title={"发布作品统计"}
@@ -587,7 +587,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div>
         <PPTCover
-          nowPage={props.nowPage}
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           title={"积分商城相关数据"}
@@ -629,7 +629,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div>
         <PPTCover
-          nowPage={props.nowPage}
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           title={"用户来源渠道统计"}
@@ -663,7 +663,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div>
         <PPTCover
-          nowPage={props.nowPage}
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           title={"用户画像分析"}
@@ -705,7 +705,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div>
         <PPTCover
-          nowPage={props.nowPage}
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           title={"用户留存/行为分析"}
@@ -731,7 +731,7 @@ export default function MonthlyReport(props: MonthlyReportProps) {
 
       <div>
         <PPTCover
-          nowPage={props.nowPage}
+          nowPage={isPrint}
           begin={date.StartTime}
           end={date.EndTime}
           title={"特邀影家"}

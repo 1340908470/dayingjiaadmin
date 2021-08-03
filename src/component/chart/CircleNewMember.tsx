@@ -45,6 +45,7 @@ export default function CircleNewMember(props: CircleNewMemberProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            animation={false}
             label={{
               position: "right",
               offset: 4,

@@ -46,6 +46,7 @@ export default function InviteGroupLikes(props: InviteGroupLikesProps) {
         <Loading />
       ) : (
         <Bar
+          animation={false}
           label={{
             position: "right",
             offset: 4,

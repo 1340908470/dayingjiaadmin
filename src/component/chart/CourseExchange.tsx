@@ -50,6 +50,7 @@ export default function CourseExchange(props: CourseExchangeProps) {
       ) : (
         <div className={props.isMonthReport ? "inside-chart-ppt" : ""}>
           <Bar
+            animation={false}
             label={{
               position: "right",
               offset: 4,

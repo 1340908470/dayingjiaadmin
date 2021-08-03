@@ -60,6 +60,7 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
         <Loading />
       ) : (
         <Bar
+          animation={false}
           label={{
             position: "right",
             offset: 4,
