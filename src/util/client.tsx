@@ -1,5 +1,6 @@
 import { EndPoint, jsToFormData } from "./backend";
 import { message } from "antd";
+import cacheStorage from "@/util/storage/cacheStorage";
 
 export async function setJwt(jwt: string) {
   localStorage.setItem("jwt", jwt);
@@ -72,12 +73,25 @@ export async function call<P, Q>(
   fetchOptions.headers["Accept"] = "application/vnd.dyjapi.v1+json";
 
   // @ts-ignore
-  const resp = await fetch(`/api/` + endpoint, fetchOptions);
+  const storage = new cacheStorage();
 
-  if (resp.ok) {
-    return Promise.resolve(resp.json());
+  // @ts-ignore
+  let body = storage.get(endpoint + JSON.stringify(para).toString());
+
+  if (body == null || body == {} || body == undefined) {
+    const resp = await fetch(`/api/` + endpoint, fetchOptions);
+
+    let val = await resp.clone().json();
+    // @ts-ignore
+    storage.set(endpoint + JSON.stringify(para).toString(), val, 43200); // 12h
+
+    if (resp.ok) {
+      return Promise.resolve(resp.json());
+    } else {
+      message.error(resp.statusText);
+      return Promise.resolve(resp.json());
+    }
   } else {
-    message.error(resp.statusText);
-    return Promise.resolve(resp.json());
+    return Promise.resolve(body);
   }
 }
