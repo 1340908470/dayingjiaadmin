@@ -84,6 +84,7 @@ export default function DateRangeWeeklyFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col>
           <DatePicker
+            allowClear={false}
             disabledDate={(current: Moment) => {
               let startMoment = moment();
               startMoment.set("year", 2021);

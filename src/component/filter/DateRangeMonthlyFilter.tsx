@@ -86,6 +86,7 @@ export default function DateRangeMonthlyFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col>
           <DatePicker
+            allowClear={false}
             defaultValue={moment().month(moment().month() - 1)}
             picker="month"
             disabledDate={(current: Moment) => {

@@ -113,6 +113,7 @@ export default function DateRangeFilter(props: FilterProps) {
         <Col flex={"20px"} />
         <Col hidden={rangeMod !== "自定义"}>
           <RangePicker
+            allowClear={false}
             key={keyVal}
             disabledDate={(current: Moment) => {
               let startMoment = moment();

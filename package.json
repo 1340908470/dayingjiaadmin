@@ -36,11 +36,13 @@
   "dependencies": {
     "@ant-design/charts": "^1.1.20",
     "@ant-design/pro-layout": "^6.5.0",
+    "@buzuosheng/use-localstorage": "^2.2.1",
     "@react-pdf/renderer": "^2.0.15",
     "@types/base-64": "^1.0.0",
     "@types/file-saver": "^2.0.3",
     "@types/lodash": "^4.14.170",
     "@umijs/preset-react": "1.x",
+    "@zhangwj0520/localstorage-expires": "^0.0.4",
     "FileSaver": "^0.10.0",
     "ant-design": "^1.0.0",
     "axios": "^0.21.1",
