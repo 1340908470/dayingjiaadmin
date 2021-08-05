@@ -37,7 +37,7 @@ export default function LayoutLogin() {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    setIsLoading(false);
   };
 
   return (
