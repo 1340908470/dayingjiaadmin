@@ -8,6 +8,10 @@
     margin: auto;
 }
 
+.foot-a {
+    color: #000c17;
+}
+
 @media screen and (max-width: 1400px) {
     .sider-content {
         width: 980px;

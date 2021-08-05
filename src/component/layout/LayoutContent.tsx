@@ -121,7 +121,14 @@ export default function LayoutContent(props: LayoutContentProps) {
           </div>
         </Content>
         <div className={"footer"}>
-          ©️2021水滴云科技（北京）有限公司 版权所有 京公网安备 11010502037570号
+          ©️2021水滴云科技（北京）有限公司 版权所有
+          <a
+            style={{ marginLeft: "10px" }}
+            className={"foot-a"}
+            href={"https://beian.miit.gov.cn/"}
+          >
+            京ICP备 11010502037570号
+          </a>
         </div>
       </Layout>
     </>
