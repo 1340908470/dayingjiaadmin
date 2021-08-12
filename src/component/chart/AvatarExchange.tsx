@@ -19,7 +19,7 @@ export default function AvatarExchange(props: AvatarExchangeProps) {
 
   useEffect(() => {
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

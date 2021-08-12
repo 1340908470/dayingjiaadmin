@@ -102,10 +102,10 @@ export default function DateRangeFilter(props: FilterProps) {
             <Option key={1} value="上周">
               上周
             </Option>
-            <Option key={1} value="上个月">
+            <Option key={2} value="上个月">
               上个月
             </Option>
-            <Option key={1} value="自定义">
+            <Option key={3} value="自定义">
               自定义
             </Option>
           </Select>

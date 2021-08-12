@@ -20,7 +20,7 @@ export default function FreeCourseAccess(props: FreeCourseAccessProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

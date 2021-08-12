@@ -26,7 +26,7 @@ export default function UserContributionsTrend(
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin, props.id, props.category]);
+  }, [props.begin, props.end, props.id, props.category]);
 
   const asyncFetch = () => {
     if (props.begin) {

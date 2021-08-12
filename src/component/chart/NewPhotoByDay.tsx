@@ -35,7 +35,7 @@ export default function NewPhotoByDay(props: NewPhotoByDayProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.NewPhotoByDay, {

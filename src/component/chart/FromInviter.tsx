@@ -22,7 +22,7 @@ export default function FromInviter(props: FromInviterProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
 
   const asyncFetch = () => {
     if (props.begin && props.end) {

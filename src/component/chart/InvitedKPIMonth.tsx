@@ -20,7 +20,7 @@ export default function InvitedKPIMonth(props: InvitedKPIMonthProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
 
   const renderCol = (text: any, row: any, index: number) => {
     const base = props.isMonthReport ? 4 : 1;

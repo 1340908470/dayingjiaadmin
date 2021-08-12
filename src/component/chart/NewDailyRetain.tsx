@@ -241,7 +241,7 @@ export default function NewDailyRetain(props: NewDailyRetainProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
 
   const convertTime = (date: Date) => {
     return (

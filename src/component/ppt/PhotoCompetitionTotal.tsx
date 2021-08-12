@@ -57,7 +57,7 @@ export default function PhotoCompetitionTotal(
     }).then((r) => {
       setTotalCompetition(r);
     });
-  }, [props.begin]);
+  }, [props.begin, props.end]);
 
   return (
     <div style={{}}>

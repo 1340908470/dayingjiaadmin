@@ -20,7 +20,7 @@ export default function UserJoinCompetition(props: UserJoinCompetitionProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
 
   const asyncFetch = () => {
     call(analytics.CompetitionList, {

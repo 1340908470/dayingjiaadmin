@@ -19,7 +19,7 @@ export default function PhotoEquipment(props: ActiveUserAgeProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.PhotoEquipment, {

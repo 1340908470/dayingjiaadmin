@@ -24,11 +24,11 @@ export default function UserPhotos(props: UserPhotosProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin, split]);
+  }, [props.begin, props.end, split]);
 
   useEffect(() => {
     setSplit(defaultSplit);
-  }, [props.begin]);
+  }, [props.begin, props.end]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.UserPhoto, {

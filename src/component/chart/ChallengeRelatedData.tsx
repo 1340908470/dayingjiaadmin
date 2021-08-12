@@ -35,7 +35,7 @@ export default function ChallengeRelatedData(props: ChallengeRelatedDataProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin]);
+  }, [props.begin, props.end]);
 
   const getRowClassName = (record: any, index: number) => {
     let className = "";
