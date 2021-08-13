@@ -1,6 +1,8 @@
 import { EndPoint, jsToFormData } from "./backend";
-import { message } from "antd";
+import { message, notification } from "antd";
 import cacheStorage from "@/util/storage/cacheStorage";
+import auth from "@/util/backend/auth";
+import { CalendarOutlined } from "@ant-design/icons";
 
 export async function setJwt(jwt: string) {
   localStorage.setItem("jwt", jwt);
@@ -32,6 +34,15 @@ export function logout() {
   history.go();
 }
 
+function isEmpty(a: any) {
+  if (a === "") return true;
+  if (a === "null") return true;
+  if (a === "undefined") return true;
+  if (!a && a !== 0 && a !== "") return true;
+  if (Array.prototype.isPrototypeOf(a) && a.length === 0) return true;
+  return Object.prototype.isPrototypeOf(a) && Object.keys(a).length === 0;
+}
+
 interface CallOptions {
   get?: boolean;
   authorization?: string;
@@ -47,6 +58,10 @@ export async function call<P, Q>(
   para: P,
   Options?: CallOptions
 ): Promise<Q> {
+  if (endpoint != auth.Login && !hasLogged()) {
+    history.go();
+  }
+
   let fetchOptions = {
     method: "",
     headers: {} as Record<string, string>,
@@ -78,7 +93,7 @@ export async function call<P, Q>(
   // @ts-ignore
   let body = storage.get(endpoint + JSON.stringify(para).toString());
 
-  if (body == null || body == {} || body == undefined) {
+  if (isEmpty(body) || !hasLogged()) {
     const resp = await fetch(`/api/` + endpoint, fetchOptions);
 
     let val = await resp.clone().json();
