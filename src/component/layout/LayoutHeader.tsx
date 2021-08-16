@@ -12,7 +12,7 @@ interface LayoutHeaderProps {
 export default function LayoutHeader(props: LayoutHeaderProps) {
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key={0}>
         <div style={{ cursor: "pointer" }} onClick={logout}>
           退出登陆
         </div>

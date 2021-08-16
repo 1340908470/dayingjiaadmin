@@ -87,19 +87,8 @@ export async function call<P, Q>(
 
   fetchOptions.headers["Accept"] = "application/vnd.dyjapi.v1+json";
 
-  // @ts-ignore
-  const storage = new cacheStorage();
-
-  // @ts-ignore
-  let body = storage.get(endpoint + JSON.stringify(para).toString());
-
-  if (isEmpty(body) || !hasLogged()) {
+  if (!hasLogged() || isEmpty(para)) {
     const resp = await fetch(`/api/` + endpoint, fetchOptions);
-
-    let val = await resp.clone().json();
-    // @ts-ignore
-    storage.set(endpoint + JSON.stringify(para).toString(), val, 43200); // 12h
-
     if (resp.ok) {
       return Promise.resolve(resp.json());
     } else {
@@ -107,6 +96,27 @@ export async function call<P, Q>(
       return Promise.resolve(resp.json());
     }
   } else {
-    return Promise.resolve(body);
+    // @ts-ignore
+    const storage = new cacheStorage();
+
+    // @ts-ignore
+    let body = storage.get(endpoint + JSON.stringify(para).toString());
+
+    if (isEmpty(body)) {
+      const resp = await fetch(`/api/` + endpoint, fetchOptions);
+
+      let val = await resp.clone().json();
+      // @ts-ignore
+      storage.set(endpoint + JSON.stringify(para).toString(), val, 43200); // 12h
+
+      if (resp.ok) {
+        return Promise.resolve(resp.json());
+      } else {
+        message.error(resp.statusText);
+        return Promise.resolve(resp.json());
+      }
+    } else {
+      return Promise.resolve(body);
+    }
   }
 }
