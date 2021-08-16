@@ -4,7 +4,7 @@ import logo from "../wwwroot/img/logo.png";
 import { call, setExpiresTime, setJwt } from "@/util/client";
 import auth from "../util/backend/auth";
 import Base64 from "base-64";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 interface LoginForm {
   phoneID: string;
@@ -35,6 +35,8 @@ export default function LayoutLogin() {
         setIsLoading(false);
       });
   };
+
+  const [password, setPassWord] = useState("");
 
   const onFinishFailed = (errorInfo: any) => {
     setIsLoading(false);

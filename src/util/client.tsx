@@ -34,7 +34,7 @@ export function logout() {
   history.go();
 }
 
-function isEmpty(a: any) {
+export function isEmpty(a: any) {
   if (a === "") return true;
   if (a === "null") return true;
   if (a === "undefined") return true;

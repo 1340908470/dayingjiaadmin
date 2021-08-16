@@ -23,7 +23,7 @@ export default function NewUserRegister(props: NewUserRegisterProps) {
   useEffect(() => {
     setLoading(true);
     asyncFetch();
-  }, [props.begin, props.end, props.id]);
+  }, [props.begin, props.end, props.id, props.category]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
       call(analytics.CompetitionRegister, {

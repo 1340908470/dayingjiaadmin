@@ -6,7 +6,7 @@ import "./Default.css";
 import { useEffect, useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import { exportComponentAsPNG } from "react-component-export-image";
-import { call } from "@/util/client";
+import { call, isEmpty } from "@/util/client";
 import analytics, { CompetitionSimple } from "@/util/backend/analytics";
 import PhotoCompetitionNavigationButton from "@/component/navigation/PhotoCompetitionNavigationButton";
 import CompetitionRelatedData from "@/component/chart/CompetitionRelatedData";
@@ -60,8 +60,7 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
       begin: date.StartTime,
       end: date.EndTime,
     }).then((r) => {
-      setTotalCompetition(r);
-      if (r && r[0]) {
+      if (r && r[0] && !isEmpty(r)) {
         setCompetitionName(r[0].name);
         setCompetitionID(r[0].id);
         setCompetitionCategory(r[0].category);
@@ -75,14 +74,17 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
     });
   }, [date.StartTime]);
 
-  const setNowCompetitionName = (name: string) => {
-    setCompetitionName(name);
+  useEffect(() => {
     totalCompetition.forEach((value) => {
-      if (value.name == name) {
+      if (value.name == competitionName) {
         setCompetitionID(value.id);
         setCompetitionCategory(value.category);
       }
     });
+  }, [competitionName, totalCompetition]);
+
+  const setNowCompetitionName = (name: string) => {
+    setCompetitionName(name);
   };
 
   function setDateRange(startTime: string, endTime: string) {
@@ -144,6 +146,8 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
             id={competitionID}
             begin={date.StartTime}
             end={date.EndTime}
+            category={competitionCategory}
+            nowPage={props.nowPage}
           />
           <CompetitionChannel
             nowPage={props.nowPage}
