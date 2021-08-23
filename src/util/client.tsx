@@ -107,7 +107,7 @@ export async function call<P, Q>(
 
       let val = await resp.clone().json();
       // @ts-ignore
-      storage.set(endpoint + JSON.stringify(para).toString(), val, 43200); // 12h
+      storage.set(endpoint + JSON.stringify(para).toString(), val, 3600); // 12h
 
       if (resp.ok) {
         return Promise.resolve(resp.json());
