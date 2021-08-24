@@ -60,7 +60,7 @@ export default function InvitedKPI(props: InvitedKPIProps) {
         props.begin.split("-")[0] + props.begin.split("-")[1] + "";
 
       call(analytics.InviteKPI, {
-        stage: "202104",
+        stage: "",
       }).then((r) => {
         setKpi(r);
         let tmpData = [
