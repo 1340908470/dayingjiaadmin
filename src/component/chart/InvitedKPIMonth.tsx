@@ -57,7 +57,7 @@ export default function InvitedKPIMonth(props: InvitedKPIMonthProps) {
 
       call(analytics.InviteKPIMonth, {
         month: props.begin.split("-")[0] + "-" + props.begin.split("-")[1],
-        stage: "202104",
+        stage: "202108",
       }).then((r) => {
         setKpi(r);
         let tmpData = [

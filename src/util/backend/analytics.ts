@@ -624,7 +624,7 @@ interface InviterFocused {
 interface InviterFocusedReq {
   begin: string;
   end: string;
-  stage: "202104";
+  stage: "202108";
 }
 
 interface Platform {

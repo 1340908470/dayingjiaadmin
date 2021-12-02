@@ -186,6 +186,7 @@ exportAllMembers?: {
 
 }
 chunks?: string[]
+ignoreNodeBuiltInModules?: boolean
 }
 mountElementId?: ""
 mpa?: {
@@ -264,6 +265,8 @@ exclude?: string[]
 antd?: {
 dark?: boolean
 compact?: boolean
+mobile?: boolean
+disableBabelPluginImport?: boolean
 config?: {
 
 }

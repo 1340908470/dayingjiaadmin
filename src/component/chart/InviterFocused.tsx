@@ -60,7 +60,7 @@ export default function InviterFocused(props: InviterFocusedProps) {
       call(analytics.InviterFocused, {
         begin: props.begin,
         end: props.end,
-        stage: "202104",
+        stage: "202108",
       }).then((r) => {
         // @ts-ignore
         setData(r);

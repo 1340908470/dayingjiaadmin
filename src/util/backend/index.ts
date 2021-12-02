@@ -1,5 +1,3 @@
-import isArray from "lodash/isArray";
-
 /*
  * 端点
  * P：req
@@ -15,7 +13,7 @@ export function jsToFormData(config: any) {
   let obj = config;
   let arrayKey = config.arrayKey;
   for (const i in obj) {
-    if (isArray(obj[i])) {
+    if (Array.isArray(obj[i])) {
       obj[i].map((item: string | Blob) => {
         if (!arrayKey) {
           formData.append(i, item);

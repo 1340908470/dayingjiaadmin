@@ -1,6 +1,6 @@
 // @ts-nocheck
 /**
- * Base on https://github.com/umijs/D:/Project/dayingjiaadmin/node_modules/umi-request
+ * Base on https://github.com/umijs//Users/cwh/code/dayingjiaadmin/node_modules/.pnpm/registry.npmmirror.com+umi-request@1.4.0/node_modules/umi-request
  */
 import {
   extend,
@@ -13,7 +13,7 @@ import {
   RequestResponse,
   RequestInterceptor,
   ResponseInterceptor,
-} from 'D:/Project/dayingjiaadmin/node_modules/umi-request';
+} from '/Users/cwh/code/dayingjiaadmin/node_modules/.pnpm/registry.npmmirror.com+umi-request@1.4.0/node_modules/umi-request';
 // @ts-ignore
 
 import { ApplyPluginsType } from 'umi';
@@ -22,7 +22,7 @@ import { history, plugin } from '../core/umiExports';
 // decoupling with antd UI library, you can using `alias` modify the ui methods
 // @ts-ignore
 import { message, notification } from '@umijs/plugin-request/lib/ui';
-import useUmiRequest, { UseRequestProvider } from 'D:/Project/dayingjiaadmin/node_modules/@ahooksjs/use-request';
+import useUmiRequest, { UseRequestProvider } from '/Users/cwh/code/dayingjiaadmin/node_modules/.pnpm/registry.npmmirror.com+@ahooksjs+use-request@2.8.13_react@17.0.2/node_modules/@ahooksjs/use-request';
 import {
   BaseOptions,
   BasePaginatedOptions,
@@ -38,7 +38,7 @@ import {
   PaginatedOptionsWithFormat,
   PaginatedParams,
   PaginatedResult,
-} from 'D:/Project/dayingjiaadmin/node_modules/@ahooksjs/use-request/lib/types';
+} from '/Users/cwh/code/dayingjiaadmin/node_modules/.pnpm/registry.npmmirror.com+@ahooksjs+use-request@2.8.13_react@17.0.2/node_modules/@ahooksjs/use-request/lib/types';
 
 type ResultWithData<T = any> = { data?: T; [key: string]: any };
 
@@ -188,7 +188,8 @@ const getRequestMethod = () => {
             break;
           case ErrorShowType.NOTIFICATION:
             notification.open({
-              message: errorMessage,
+              description: errorMessage,
+              message: errorCode,
             });
             break;
           case ErrorShowType.REDIRECT:
@@ -231,6 +232,7 @@ const getRequestMethod = () => {
       error.name = 'BizError';
       error.data = resData;
       error.info = errorInfo;
+      error.response = res;
       throw error;
     }
   });
