@@ -6,7 +6,7 @@ import "../chart/default.css";
 import { useEffect, useRef, useState } from "react";
 import DateRangeFilter, { DateRange } from "@/component/filter/DateRangeFilter";
 import { exportComponentAsPNG } from "react-component-export-image";
-import { call } from "@/util/client";
+import {call, isEmpty} from "@/util/client";
 import analytics, { CompetitionSimple } from "@/util/backend/analytics";
 import PhotoCompetitionNavigationButton from "@/component/navigation/PhotoCompetitionNavigationButton";
 import CompetitionRelatedData from "@/component/chart/CompetitionRelatedData";
@@ -51,7 +51,7 @@ export default function PhotoCompetitionTotal(
   );
 
   useEffect(() => {
-    call(analytics.CompetitionList, {
+    !isEmpty(props.begin) && !isEmpty(props.end) && call(analytics.CompetitionList, {
       begin: props.begin,
       end: props.end,
     }).then((r) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Tag, Space } from "antd";
-import { call } from "@/util/client";
+import {call, isEmpty} from "@/util/client";
 import analytics, { WeeklyCompetition } from "@/util/backend/analytics";
 import "./default.css";
 import style from "./default.css";
@@ -23,7 +23,7 @@ export default function UserJoinCompetition(props: UserJoinCompetitionProps) {
   }, [props.begin, props.end]);
 
   const asyncFetch = () => {
-    call(analytics.CompetitionList, {
+    !isEmpty(props.begin) && !isEmpty(props.end) && call(analytics.CompetitionList, {
       begin: props.begin,
       end: props.end,
     }).then((r) => {

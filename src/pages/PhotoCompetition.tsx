@@ -56,7 +56,7 @@ export default function PhotoCompetition(props: PhotoCompetitionProps) {
   );
 
   useEffect(() => {
-    call(analytics.CompetitionList, {
+    !isEmpty(date.StartTime) && !isEmpty(date.EndTime) && call(analytics.CompetitionList, {
       begin: date.StartTime,
       end: date.EndTime,
     }).then((r) => {
