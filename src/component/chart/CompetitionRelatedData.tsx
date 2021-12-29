@@ -57,57 +57,121 @@ export default function CompetitionRelatedData(
         end: props.end,
         category: props.category,
       }).then((r) => {
-        // @ts-ignore
-        setData([
-          {
-            // @ts-ignore
-            key: "1",
-            // @ts-ignore
-            content: props.category == 1 ? "新参与人数" : "新投稿人数",
-            // @ts-ignore
-            num: props.category == 1 ? r.新参与人数 : r.新投稿人数,
-          },
-          {
-            // @ts-ignore
-            key: "2",
-            // @ts-ignore
-            content: props.category == 1 ? "累计参与人数" : "累计投稿人数",
-            // @ts-ignore
-            num: props.category == 1 ? r.累计参与人数 : r.累计投稿人数,
-          },
-          {
-            // @ts-ignore
-            key: "3",
-            // @ts-ignore
-            content: "比赛推广新增注册人数",
-            // @ts-ignore
-            num: r.比赛推广新增注册人数,
-          },
-          {
-            // @ts-ignore
-            key: "4",
-            // @ts-ignore
-            content: "比赛推广累计注册人数",
-            // @ts-ignore
-            num: r.比赛推广累计注册人数,
-          },
-          {
-            // @ts-ignore
-            key: "5",
-            // @ts-ignore
-            content: "比赛推广新增访问次数",
-            // @ts-ignore
-            num: r.比赛推广新增访问次数,
-          },
-          {
-            // @ts-ignore
-            key: "6",
-            // @ts-ignore
-            content: "比赛推广累计访问次数",
-            // @ts-ignore
-            num: r.比赛推广累计访问次数,
-          },
-        ]);
+        if (props.category == 4) {
+          // @ts-ignore
+          setData([
+            {
+              // @ts-ignore
+              key: "1",
+              // @ts-ignore
+              content: props.category == 1 ? "新参与人数" : "新投稿人数",
+              // @ts-ignore
+              num: props.category == 1 ? r.新参与人数 : r.新投稿人数,
+            },
+            {
+              // @ts-ignore
+              key: "2",
+              // @ts-ignore
+              content: props.category == 1 ? "累计参与人数" : "累计投稿人数",
+              // @ts-ignore
+              num: props.category == 1 ? r.累计参与人数 : r.累计投稿人数,
+            },
+            {
+              // @ts-ignore
+              key: "3",
+              // @ts-ignore
+              content: "累计投稿作品数",
+              // @ts-ignore
+              num: r.累计投稿作品数,
+            },
+            {
+              // @ts-ignore
+              key: "4",
+              // @ts-ignore
+              content: "比赛推广新增注册人数",
+              // @ts-ignore
+              num: r.比赛推广新增注册人数,
+            },
+            {
+              // @ts-ignore
+              key: "5",
+              // @ts-ignore
+              content: "比赛推广累计注册人数",
+              // @ts-ignore
+              num: r.比赛推广累计注册人数,
+            },
+            {
+              // @ts-ignore
+              key: "6",
+              // @ts-ignore
+              content: "比赛推广新增访问次数",
+              // @ts-ignore
+              num: r.比赛推广新增访问次数,
+            },
+            {
+              // @ts-ignore
+              key: "7",
+              // @ts-ignore
+              content: "比赛推广累计访问次数",
+              // @ts-ignore
+              num: r.比赛推广累计访问次数,
+            },
+          ]);
+        }
+        else {
+          // @ts-ignore
+          setData([
+            {
+              // @ts-ignore
+              key: "1",
+              // @ts-ignore
+              content: props.category == 1 ? "新参与人数" : "新投稿人数",
+              // @ts-ignore
+              num: props.category == 1 ? r.新参与人数 : r.新投稿人数,
+            },
+            {
+              // @ts-ignore
+              key: "2",
+              // @ts-ignore
+              content: props.category == 1 ? "累计参与人数" : "累计投稿人数",
+              // @ts-ignore
+              num: props.category == 1 ? r.累计参与人数 : r.累计投稿人数,
+            },
+            {
+              // @ts-ignore
+              key: "3",
+              // @ts-ignore
+              content: "比赛推广新增注册人数",
+              // @ts-ignore
+              num: r.比赛推广新增注册人数,
+            },
+            {
+              // @ts-ignore
+              key: "4",
+              // @ts-ignore
+              content: "比赛推广累计注册人数",
+              // @ts-ignore
+              num: r.比赛推广累计注册人数,
+            },
+            {
+              // @ts-ignore
+              key: "5",
+              // @ts-ignore
+              content: "比赛推广新增访问次数",
+              // @ts-ignore
+              num: r.比赛推广新增访问次数,
+            },
+            {
+              // @ts-ignore
+              key: "6",
+              // @ts-ignore
+              content: "比赛推广累计访问次数",
+              // @ts-ignore
+              num: r.比赛推广累计访问次数,
+            },
+          ]);
+        }
+
 
         if (data) setLoading(false);
       });

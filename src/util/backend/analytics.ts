@@ -416,6 +416,7 @@ interface CompetitionData {
   新投稿人数: number;
   新参与人数: number;
   累计投稿人数: number;
+  累计投稿作品数: number;
   累计参与人数: number;
   比赛推广新增注册人数: number;
   比赛推广累计注册人数: number;
