@@ -18,7 +18,11 @@ export interface DateRange {
 }
 
 export const getMonthDate = (year: number, month: number) => {
-  //获取周开始日期
+  if (month == 0) {
+    year--
+    month=12
+  }
+  //获取月开始日期
   const getMonthStartDate = (year: number, month: number) => {
     return year + "-" + ("0" + month).slice(-2) + "-" + "01";
   };
@@ -31,7 +35,7 @@ export const getMonthDate = (year: number, month: number) => {
     return flag;
   };
 
-  //获取周结束日期
+  //获取月结束日期
   const getMonthEndDate = (year: number, month: number) => {
     if (
       month === 1 ||
