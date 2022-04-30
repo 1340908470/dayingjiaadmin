@@ -20,6 +20,9 @@ import Mine from "@/pages/Mine";
 import PhotoCompetition from "@/pages/PhotoCompetition";
 import WeekReport from "@/pages/WeekReport";
 import MonthlyReport from "@/pages/MonthlyReport";
+import CollegePandect from "@/pages/CollegePandect";
+import CollegeCourseRelated from "@/pages/CollegeCourseRelated";
+import CollegeOfflineCompetition from "@/pages/CollegeOfflineCompetition";
 
 interface LayoutContentProps {
   HeaderNav: string;
@@ -96,6 +99,15 @@ export default function LayoutContent(props: LayoutContentProps) {
             </div>
             <div hidden={props.SiderNav !== "分享"}>
               <Share nowPage={nowPage} resetPage={resetPage} />
+            </div>
+            <div hidden={props.SiderNav !== "学院总览"}>
+              <CollegePandect nowPage={nowPage} resetPage={resetPage} />
+            </div>
+            <div hidden={props.SiderNav !== "学院课程相关"}>
+              <CollegeCourseRelated nowPage={nowPage} resetPage={resetPage} />
+            </div>
+            <div hidden={props.SiderNav !== "学院线下活动"}>
+              <CollegeOfflineCompetition nowPage={nowPage} resetPage={resetPage} />
             </div>
             <div hidden={props.SiderNav !== "页面分析"}>
               <PageAnalysis nowPage={nowPage} resetPage={resetPage} />

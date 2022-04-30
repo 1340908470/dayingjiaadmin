@@ -5,6 +5,7 @@ import {
   NotificationOutlined,
   BarChartOutlined,
   ShareAltOutlined,
+  BankOutlined,
   UserOutlined,
   FileImageOutlined,
   UsergroupDeleteOutlined,
@@ -22,7 +23,7 @@ interface LayoutSiderProps {
   SiderNav: string;
 }
 
-const rootSubmenuKeys = ["用户", "页面", "周期报告"];
+const rootSubmenuKeys = ["用户", "页面", "周期报告", "青年学院"];
 
 export default function LayoutSider(props: LayoutSiderProps) {
   const [openKeys, setOpenKeys] = useState(["用户"]);
@@ -83,6 +84,11 @@ export default function LayoutSider(props: LayoutSiderProps) {
           <Menu.Item key="分享" icon={<ShareAltOutlined />}>
             分享
           </Menu.Item>
+          <SubMenu key="青年学院" icon={<BankOutlined />} title="青年学院">
+            <Menu.Item key="学院总览">总览</Menu.Item>
+            <Menu.Item key="学院课程相关">课程相关</Menu.Item>
+            <Menu.Item key="学院线下活动">线下活动</Menu.Item>
+          </SubMenu>
           <SubMenu key="页面" icon={<FileImageOutlined />} title="页面">
             <Menu.Item key="页面分析">页面分析</Menu.Item>
             <Menu.Item key="圈子">圈子</Menu.Item>
