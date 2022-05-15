@@ -5,6 +5,7 @@ import analytics from "@/util/backend/analytics";
 import { Area, Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 import Loading from "@/component/layout/Loading";
+import eosanalytics from "@/util/backend/eosanalytics";
 
 interface ActiveUserAgeProps {
   nowPage?: boolean;
@@ -22,7 +23,7 @@ export default function CollegeFinishStudy(props: ActiveUserAgeProps) {
   }, [props.begin, props.end]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      call(analytics.PhotoEquipment, {
+      call(eosanalytics.UserSection, {
         begin: props.begin,
         end: props.end,
       }).then((r) => {
@@ -31,29 +32,62 @@ export default function CollegeFinishStudy(props: ActiveUserAgeProps) {
         // @ts-ignore
         let tmpDataTable = [];
 
-        let sum = 0;
-        if (r) {
-          r.forEach((value) => {
-            sum += value.amount;
+        if (r.佳上院 != undefined) {
+          tmpData.push({
+            key: 0,
+            type: "佳上院",
+            value: r.佳上院.用户数,
+          });
+          tmpDataTable.push({
+            key: 0,
+            band: "佳上院",
+            num: r.佳上院.用户数,
+            percent: r.佳上院.占比.toFixed(2) + "%",
           });
         }
 
-        if (r) {
-          r.forEach((value, index) => {
-            tmpData.push({
-              key: index,
-              type: value.name,
-              value: value.amount,
-            });
-
-            tmpDataTable.push({
-              key: index,
-              band: value.name,
-              num: value.amount,
-              percent: ((value.amount / sum) * 100).toFixed(2) + "%",
-            });
+        if (r.佳御院 != undefined) {
+          tmpData.push({
+            key: 0,
+            type: "佳御院",
+            value: r.佳御院.用户数,
+          });
+          tmpDataTable.push({
+            key: 0,
+            band: "佳御院",
+            num: r.佳御院.用户数,
+            percent: r.佳御院.占比.toFixed(2) + "%",
           });
         }
+
+        if (r.实践 != undefined) {
+          tmpData.push({
+            key: 0,
+            type: "实践",
+            value: r.实践.用户数,
+          });
+          tmpDataTable.push({
+            key: 0,
+            band: "实践",
+            num: r.实践.用户数,
+            percent: r.实践.占比.toFixed(2) + "%",
+          });
+        }
+
+        if (r.活动 != undefined) {
+          tmpData.push({
+            key: 0,
+            type: "活动",
+            value: r.活动.用户数,
+          });
+          tmpDataTable.push({
+            key: 0,
+            band: "活动",
+            num: r.活动.用户数,
+            percent: r.活动.占比.toFixed(2) + "%",
+          });
+        }
+
         // @ts-ignore
         setData(tmpData);
         if (data) setLoading(false);

@@ -14,6 +14,7 @@ import CollegeDataSummary from "@/component/chart/CollegeDataSummary";
 import CollegeFinishStudy from "@/component/chart/CollegeFinishStudy";
 import CollegeOfflineJoin from "@/component/chart/CollegeOfflineJoin";
 import CollegeJoinUV from "@/component/chart/CollegeJoinUV";
+import CollegeHomeworkSubmitTrend from "@/component/chart/CollegeHomeworkSubmitTrend";
 
 interface PandectProps {
   nowPage: string;
@@ -38,6 +39,7 @@ export default function CollegePandect(props: PandectProps) {
 
   const CollegeDataSummaryRef = useRef(null);
   const CollegeFinishStudyRef = useRef(null);
+  const CollegeHomeworkSubmitTrendRef = useRef(null);
   const CollegeOfflineJoinRef = useRef(null);
   const CollegeJoinUVRef = useRef(null);
 
@@ -45,6 +47,9 @@ export default function CollegePandect(props: PandectProps) {
     exportComponentAsPNG(CollegeDataSummaryRef)
       .then(() => {
         return exportComponentAsPNG(CollegeFinishStudyRef);
+      })
+      .then(() => {
+        return exportComponentAsPNG(CollegeHomeworkSubmitTrendRef);
       })
       .then(() => {
         return exportComponentAsPNG(CollegeOfflineJoinRef);
@@ -81,6 +86,9 @@ export default function CollegePandect(props: PandectProps) {
             <CollegeFinishStudy begin={date.StartTime} end={date.EndTime} />
           </div>
           <div ref={CollegeOfflineJoinRef}>
+            <CollegeHomeworkSubmitTrend begin={date.StartTime} end={date.EndTime} />
+          </div>
+          <div ref={CollegeHomeworkSubmitTrendRef}>
             <CollegeOfflineJoin begin={date.StartTime} end={date.EndTime} />
           </div>
           <div ref={CollegeJoinUVRef}>

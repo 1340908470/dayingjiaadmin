@@ -40,6 +40,22 @@ import FileSaver from "file-saver";
 import { ExportOutlined } from "@ant-design/icons";
 import { Progress } from "antd";
 import InvitedKPIMonth from "@/component/chart/InvitedKPIMonth";
+import CollegeDataSummary from "@/component/chart/CollegeDataSummary";
+import CollegeDataByMonth from "@/component/chart/CollegeDataByMonth";
+import CollegeFinishStudy from "@/component/chart/CollegeFinishStudy";
+import CollegeCourseAccessTimes from "@/component/chart/CollegeCourseAccessTimes";
+import CollegeHomeworkSubmitTrend from "@/component/chart/CollegeHomeworkSubmitTrend";
+import CollegeUserJoinTrend from "@/component/chart/CollegeUserJoinTrend";
+import CollegeOfflineJoin from "@/component/chart/CollegeOfflineJoin";
+import CollegeAreaJoin from "@/component/chart/CollegeAreaJoin";
+import CollegeCourseSummary from "@/component/chart/CollegeCourseSummary";
+import CollegeCourseAccess from "@/component/chart/CollegeCourseAccess";
+import CollegeCourseHomework from "@/component/chart/CollegeCourseHomework";
+import CollegeCourseDiscuss from "@/component/chart/CollegeCourseDiscuss";
+import CollegeClickTrend from "@/component/chart/CollegeClickTrend";
+import CollegeRecommendClick from "@/component/chart/CollegeRecommendClick";
+import CollegeTeacher from "@/component/chart/CollegeTeacher";
+import CollegeOfflineCompetition from "@/pages/CollegeOfflineCompetition";
 
 interface MonthlyReportProps {
   nowPage: string;
@@ -69,6 +85,22 @@ export default function MonthlyReport(props: MonthlyReportProps) {
   const PhotoTypeByMonthRefMonth = useRef(null);
   const PhotoEquipmentRefMonth = useRef(null);
   const PhotoCompetitionTotalRefMonth = useRef(null);
+
+  const CollegeDataSummaryRefMonth = useRef(null);
+  const CollegeDataByMonthRefMonth = useRef(null);
+  const CollegeFinishStudyRefMonth = useRef(null);
+  const CollegeCourseAccessTimesRefMonth = useRef(null);
+  const CollegeHomeworkSubmitTrendRefMonth = useRef(null);
+  const CollegeOfflineJoinRefMonth = useRef(null);
+  const CollegeAreaJoinRefMonth = useRef(null);
+  const CollegeCourseSummaryRefMonth = useRef(null);
+  const CollegeCourseAccessRefMonth = useRef(null);
+  const CollegeCourseHomeworkRefMonth = useRef(null);
+  const CollegeCourseDiscussRefMonth = useRef(null);
+  const CollegeClickTrendRefMonth = useRef(null);
+  const CollegeRecommendClickRefMonth = useRef(null);
+  const CollegeTeacherRefMonth = useRef(null);
+  const CollegeOfflineCompetitionRefMonth = useRef(null);
 
   const GiftRelatedDataRefMonth = useRef(null);
   const FreeCourseAccessRefMonth = useRef(null);
@@ -244,6 +276,27 @@ export default function MonthlyReport(props: MonthlyReportProps) {
       uris.push(r);
       setRate(67);
     });
+
+    // 青年学院
+    await exportComponentAsPNG(CollegeDataSummaryRefMonth, {
+      fileName: "EOS青年影像学院总览||不同来源访问次数分布",
+    }).then((r) => {
+      uris.push(r);
+      setRate(58);
+    });
+    await exportComponentAsPNG(MonthlyChannelRefMonth, {
+      fileName: "用户来源渠道统计||不同渠道来源用户访问月度对比",
+    }).then((r) => {
+      uris.push(r);
+      setRate(63);
+    });
+    await exportComponentAsPNG(FromInviterRefMonth, {
+      fileName: "用户来源渠道统计||来自特邀影家渠道访问详情",
+    }).then((r) => {
+      uris.push(r);
+      setRate(67);
+    });
+
 
     // 用户画像分析
 
@@ -582,6 +635,145 @@ export default function MonthlyReport(props: MonthlyReportProps) {
           begin={date.StartTime}
           end={date.EndTime}
           isMonthReport={true}
+        />
+      </div>
+
+      <div>
+        <PPTCover
+            nowPage={isPrint}
+            begin={date.StartTime}
+            end={date.EndTime}
+            title={"EOS 青年影像学院总览"}
+        />
+      </div>
+      <div ref={CollegeDataSummaryRefMonth}>
+        <CollegeDataSummary
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeDataByMonthRefMonth}>
+        <CollegeDataByMonth
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeFinishStudyRefMonth}>
+        <CollegeFinishStudy
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeCourseAccessTimesRefMonth}>
+        <CollegeCourseAccessTimes
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeHomeworkSubmitTrendRefMonth}>
+        <CollegeHomeworkSubmitTrend
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeOfflineJoinRefMonth}>
+        <CollegeOfflineJoin
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeAreaJoinRefMonth}>
+        <CollegeAreaJoin
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+
+      <div>
+        <PPTCover
+            nowPage={isPrint}
+            begin={date.StartTime}
+            end={date.EndTime}
+            title={"EOS 青年影像学院课程"}
+        />
+      </div>
+      <div ref={CollegeCourseSummaryRefMonth}>
+        <CollegeCourseSummary
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeCourseAccessRefMonth}>
+        <CollegeCourseAccess
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeCourseHomeworkRefMonth}>
+        <CollegeCourseHomework
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeCourseDiscussRefMonth}>
+        <CollegeCourseDiscuss
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeClickTrendRefMonth}>
+        <CollegeClickTrend
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeRecommendClickRefMonth}>
+        <CollegeRecommendClick
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+      <div ref={CollegeTeacherRefMonth}>
+        <CollegeTeacher
+            nowPage={isPrint}
+            isMonthReport={true}
+            begin={date.StartTime}
+            end={date.EndTime}
+        />
+      </div>
+
+      <div ref={CollegeOfflineCompetitionRefMonth}>
+        <CollegeOfflineCompetition
+            nowPage={isPrint}
+            begin={date.StartTime}
+            end={date.EndTime}
+            isMonthReport={true}
         />
       </div>
 

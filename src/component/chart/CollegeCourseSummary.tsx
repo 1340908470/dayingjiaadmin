@@ -5,6 +5,7 @@ import { call } from "@/util/client";
 import analytics from "@/util/backend/analytics";
 import "./default.css";
 import Loading from "@/component/layout/Loading";
+import eosanalytics from "@/util/backend/eosanalytics";
 
 const columns = [
   {
@@ -45,7 +46,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
 
   const asyncFetch = () => {
     if (props.begin) {
-      call(analytics.DataSummary, {
+      call(eosanalytics.DataSummary, {
         begin: props.begin,
         end: props.end,
       }).then((r) => {
@@ -57,7 +58,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "学院课程总数",
             // @ts-ignore
-            num: r.访问人数,
+            num: r.学院课程总数,
           },
           {
             // @ts-ignore
@@ -65,7 +66,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "课程访问人数",
             // @ts-ignore
-            num: r.访问次数,
+            num: r.课程访问人数,
           },
           {
             // @ts-ignore
@@ -73,7 +74,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "用户提交作业数",
             // @ts-ignore
-            num: r.新注册用户数,
+            num: r.用户提交作业数,
           },
           {
             // @ts-ignore
@@ -81,7 +82,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "待评分作业数",
             // @ts-ignore
-            num: r.老用户回归数,
+            num: r.待评分作业数,
           },
           {
             // @ts-ignore
@@ -89,7 +90,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "基础知识课程测试人数",
             // @ts-ignore
-            num: r.新作品数,
+            num: r.基础知识课程测试人数,
           },
           {
             // @ts-ignore
@@ -97,7 +98,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "推荐器材点击次数",
             // @ts-ignore
-            num: r.本年度新增注册用户数,
+            num: r.推荐器材点击次数,
           },
           {
             // @ts-ignore
@@ -105,7 +106,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "用户累计提交作业数",
             // @ts-ignore
-            num: r.本年度新增作品数,
+            num: r.用户累计提交作业数,
           },
           {
             // @ts-ignore
@@ -113,7 +114,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "已评分作业累计合格率",
             // @ts-ignore
-            num: r.累计注册用户数,
+            num: r.已评分作业累计合格率,
           },
           {
             // @ts-ignore
@@ -121,7 +122,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
             // @ts-ignore
             content: "基础知识课程累计测试人数",
             // @ts-ignore
-            num: r.累计注册用户数,
+            num: r.基础知识课程累计测试人数,
           },
         ]);
         if (data) setLoading(false);
@@ -136,7 +137,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
           hidden={props.nowPage}
           className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
         >
-          课程概况
+          学院课程概况
         </div>
         {loading ? (
           <Loading />

@@ -6,7 +6,6 @@ import auth from "@/util/backend/auth";
 import analytics from "@/util/backend/analytics";
 import style from "@/component/chart/default.css";
 import Loading from "@/component/layout/Loading";
-import eosanalytics from "@/util/backend/eosanalytics";
 
 interface RegisteredUserByDayProps {
   nowPage?: boolean;
@@ -15,7 +14,7 @@ interface RegisteredUserByDayProps {
   end: string;
 }
 
-export default function CollegeOfflineJoin(props: RegisteredUserByDayProps) {
+export default function CollegeCourseAccessTimes(props: RegisteredUserByDayProps) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -24,7 +23,7 @@ export default function CollegeOfflineJoin(props: RegisteredUserByDayProps) {
   }, [props.begin, props.end]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      call(eosanalytics.Activityin, {
+      call(analytics.RegisteredUserByDay, {
         begin: props.begin,
         end: props.end,
       }).then((r) => {
@@ -80,7 +79,7 @@ export default function CollegeOfflineJoin(props: RegisteredUserByDayProps) {
           hidden={props.nowPage}
           className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
         >
-          线下活动用户参与趋势
+          课程访问次数
         </div>
 
         {loading ? <Loading /> : <Area {...config} />}

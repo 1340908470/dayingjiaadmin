@@ -54,7 +54,7 @@ export default function CollegeRecommendClick(props: PageShareUVProps) {
   return (
     <div className={props.isMonthReport ? "chart-card-ppt" : "chart-card"}>
       <div className={props.isMonthReport ? "chart-title-ppt" : "card-title"}>
-        推荐器材用户点击数Top10对比
+        推荐器材用户点击数Top10
       </div>
 
       {loading ? (
