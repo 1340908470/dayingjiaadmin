@@ -5,6 +5,7 @@ import pandect from "@/util/backend/analytics";
 import { call } from "@/util/client";
 import style from "@/component/chart/default.css";
 import Loading from "@/component/layout/Loading";
+import eosanalytics from "@/util/backend/eosanalytics";
 
 interface PageShareUVProps {
   isMonthReport?: boolean;
@@ -23,25 +24,17 @@ export default function CollegeJoinUV(props: PageShareUVProps) {
 
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      call(pandect.PageShare, {
-        begin:
-          props.begin.split("-")[0] +
-          props.begin.split("-")[1] +
-          props.begin.split("-")[2] +
-          "",
-        end:
-          props.end.split("-")[0] +
-          props.end.split("-")[1] +
-          props.end.split("-")[2] +
-          "",
+      call(eosanalytics.Rcamplocation, {
+        begin: props.begin,
+        end: props.end,
       }).then((r) => {
         // @ts-ignore
         setData(
-          r.uv.map((value) => {
-            let { name, uv } = value;
+          r.map((value) => {
+            let { city, amount } = value;
             return {
-              name: name,
-              uv: Number.parseInt(uv),
+              name: city,
+              uv: amount,
             };
           })
         );

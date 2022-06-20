@@ -5,6 +5,7 @@ import analytics from "@/util/backend/analytics";
 import { Area, Pie } from "@ant-design/charts";
 import { Row, Col, Table } from "antd";
 import Loading from "@/component/layout/Loading";
+import eosanalytics from "@/util/backend/eosanalytics";
 
 interface ActiveUserAgeProps {
   nowPage?: boolean;
@@ -22,7 +23,7 @@ export default function CollegeCourseAccess(props: ActiveUserAgeProps) {
   }, [props.begin, props.end]);
   const asyncFetch = () => {
     if (props.begin && props.end) {
-      call(analytics.PhotoEquipment, {
+      call(eosanalytics.CourseVisit, {
         begin: props.begin,
         end: props.end,
       }).then((r) => {
@@ -31,29 +32,59 @@ export default function CollegeCourseAccess(props: ActiveUserAgeProps) {
         // @ts-ignore
         let tmpDataTable = [];
 
-        let sum = 0;
-        if (r) {
-          r.forEach((value) => {
-            sum += value.amount;
+        if (r.佳上院 != undefined) {
+          tmpData.push({
+            key: 0,
+            type: "佳上院",
+            value: r.佳上院.访问人数,
+          });
+          tmpDataTable.push({
+            key: 0,
+            band: "佳上院",
+            num: r.佳上院.访问人数,
+            percent: r.佳上院.占比.toFixed(2) + "%",
+          });
+        }
+        if (r.佳御院 != undefined) {
+          tmpData.push({
+            key: 1,
+            type: "佳御院",
+            value: r.佳御院.访问人数,
+          });
+          tmpDataTable.push({
+            key: 1,
+            band: "佳御院",
+            num: r.佳御院.访问人数,
+            percent: r.佳御院.占比.toFixed(2) + "%",
+          });
+        }
+        if (r.实践 != undefined) {
+          tmpData.push({
+            key: 2,
+            type: "实践",
+            value: r.实践.访问人数,
+          });
+          tmpDataTable.push({
+            key: 2,
+            band: "实践",
+            num: r.实践.访问人数,
+            percent: r.实践.占比.toFixed(2) + "%",
+          });
+        }
+        if (r.书院 != undefined) {
+          tmpData.push({
+            key: 3,
+            type: "书院",
+            value: r.书院.访问人数,
+          });
+          tmpDataTable.push({
+            key: 3,
+            band: "书院",
+            num: r.书院.访问人数,
+            percent: r.书院.占比.toFixed(2) + "%",
           });
         }
 
-        if (r) {
-          r.forEach((value, index) => {
-            tmpData.push({
-              key: index,
-              type: value.name,
-              value: value.amount,
-            });
-
-            tmpDataTable.push({
-              key: index,
-              band: value.name,
-              num: value.amount,
-              percent: ((value.amount / sum) * 100).toFixed(2) + "%",
-            });
-          });
-        }
         // @ts-ignore
         setData(tmpData);
         if (data) setLoading(false);

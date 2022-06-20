@@ -46,7 +46,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
 
   const asyncFetch = () => {
     if (props.begin) {
-      call(eosanalytics.DataSummary, {
+      call(eosanalytics.CourseDataSummary, {
         begin: props.begin,
         end: props.end,
       }).then((r) => {
@@ -137,7 +137,7 @@ export default function CollegeCourseSummary(props: DataSummaryProps) {
           hidden={props.nowPage}
           className={props.isMonthReport ? "chart-title-ppt" : "card-title"}
         >
-          学院课程概况
+          课程概况
         </div>
         {loading ? (
           <Loading />

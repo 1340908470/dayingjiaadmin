@@ -48,12 +48,12 @@ export default function CollegeFinishStudy(props: ActiveUserAgeProps) {
 
         if (r.佳御院 != undefined) {
           tmpData.push({
-            key: 0,
+            key: 1,
             type: "佳御院",
             value: r.佳御院.用户数,
           });
           tmpDataTable.push({
-            key: 0,
+            key: 1,
             band: "佳御院",
             num: r.佳御院.用户数,
             percent: r.佳御院.占比.toFixed(2) + "%",
@@ -62,12 +62,12 @@ export default function CollegeFinishStudy(props: ActiveUserAgeProps) {
 
         if (r.实践 != undefined) {
           tmpData.push({
-            key: 0,
+            key: 2,
             type: "实践",
             value: r.实践.用户数,
           });
           tmpDataTable.push({
-            key: 0,
+            key: 2,
             band: "实践",
             num: r.实践.用户数,
             percent: r.实践.占比.toFixed(2) + "%",
@@ -76,12 +76,12 @@ export default function CollegeFinishStudy(props: ActiveUserAgeProps) {
 
         if (r.活动 != undefined) {
           tmpData.push({
-            key: 0,
+            key: 3,
             type: "活动",
             value: r.活动.用户数,
           });
           tmpDataTable.push({
-            key: 0,
+            key: 3,
             band: "活动",
             num: r.活动.用户数,
             percent: r.活动.占比.toFixed(2) + "%",
