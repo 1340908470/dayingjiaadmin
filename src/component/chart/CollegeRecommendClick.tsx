@@ -76,13 +76,13 @@ export default function CollegeRecommendClick(props: PageShareUVProps) {
             xAxis={{
               tickCount: 5,
               max:
-                data?.slice(0).sort((a, b) => b.uv - a.uv)[0].uv +
+                data?.slice(0).sort((a, b) => b.uv - a.uv)[0]?.uv +
                 Math.pow(
                   10,
                   Number.parseInt(
                     String(
                       Math.log10(
-                        data?.slice(0).sort((a, b) => b.uv - a.uv)[0].uv
+                        data?.slice(0).sort((a, b) => b.uv - a.uv)[0]?.uv
                       )
                     )
                   ) - 1

@@ -35,6 +35,7 @@ export default function PageSharePV(props: PageSharePVProps) {
           props.end.split("-")[2] +
           "",
       }).then((r) => {
+        console.log(r)
         // @ts-ignore
         setData(
           r.pv.map((value) => {
@@ -70,13 +71,13 @@ export default function PageSharePV(props: PageSharePVProps) {
             xAxis={{
               tickCount: 5,
               max:
-                data?.slice(0).sort((a, b) => b.pv - a.pv)[0].pv +
+                data?.slice(0).sort((a, b) => b.pv - a.pv)[0]?.pv +
                 Math.pow(
                   10,
                   Number.parseInt(
                     String(
                       Math.log10(
-                        data?.slice(0).sort((a, b) => b.pv - a.pv)[0].pv
+                        data?.slice(0).sort((a, b) => b.pv - a.pv)[0]?.pv
                       )
                     )
                   ) - 1

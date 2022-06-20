@@ -75,13 +75,13 @@ export default function PageVisitPV(props: PageVisitPVProps) {
             xAxis={{
               tickCount: 5,
               max:
-                data?.slice(0).sort((a, b) => b.pv - a.pv)[0].pv +
+                data?.slice(0).sort((a, b) => b.pv - a.pv)[0]?.pv +
                 Math.pow(
                   10,
                   Number.parseInt(
                     String(
                       Math.log10(
-                        data?.slice(0).sort((a, b) => b.pv - a.pv)[0].pv
+                        data?.slice(0).sort((a, b) => b.pv - a.pv)[0]?.pv
                       )
                     )
                   ) - 1

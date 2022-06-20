@@ -53,14 +53,14 @@ export default function CircleNewWorks(props: CircleNewWorksProps) {
             xAxis={{
               tickCount: 5,
               max:
-                data?.slice(0).sort((a, b) => b.amount - a.amount)[0].amount +
+                data?.slice(0).sort((a, b) => b.amount - a.amount)[0]?.amount +
                 Math.pow(
                   10,
                   Number.parseInt(
                     String(
                       Math.log10(
                         data?.slice(0).sort((a, b) => b.amount - a.amount)[0]
-                          .amount
+                          ?.amount
                       )
                     )
                   ) - 1
